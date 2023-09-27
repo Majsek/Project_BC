@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://82dthv0njejx"
+path="res://.godot/imported/racc.obj-7df7ab057dafc1acf2ea3b069ede8eaf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/racc.obj-7df7ab057dafc1acf2ea3b069ede8eaf.mesh"]
+
+source_file="res://objects/racc/racc.obj"
+dest_files=["res://.godot/imported/racc.obj-7df7ab057dafc1acf2ea3b069ede8eaf.mesh", "res://.godot/imported/racc.obj-7df7ab057dafc1acf2ea3b069ede8eaf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

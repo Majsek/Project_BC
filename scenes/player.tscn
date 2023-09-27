@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3donwdgn1s38"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
+[ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
+[ext_resource type="ArrayMesh" uid="uid://4ntirebve02y" path="res://objects/guns/pistol1.obj" id="4_iwe0f"]
+[ext_resource type="Script" path="res://scripts/left_hand.gd" id="4_m5svs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqfx8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryo2e"]
+
+[sub_resource type="Gradient" id="Gradient_h8aib"]
+offsets = PackedFloat32Array(0, 0.167, 0.333, 0.5, 0.667, 0.833, 1)
+colors = PackedColorArray(128.498, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_24yuu"]
+gradient = SubResource("Gradient_h8aib")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1305j"]
+diffuse_mode = 3
+albedo_texture = SubResource("GradientTexture1D_24yuu")
+heightmap_scale = 5.57
+
+[sub_resource type="TorusMesh" id="TorusMesh_pdqx8"]
+lightmap_size_hint = Vector2i(33, 9)
+material = SubResource("StandardMaterial3D_1305j")
+rings = 6
+ring_segments = 4
+
+[node name="player" type="Node3D"]
+script = ExtResource("1_87gty")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="right_hand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+pose = &"aim"
+script = ExtResource("2_5nyhh")
+
+[node name="gun" type="MeshInstance3D" parent="XROrigin3D/right_hand"]
+transform = Transform3D(-6.55671e-09, -2.66225e-15, -0.15, 0, 0.15, -2.66225e-15, 0.15, -1.1637e-22, -6.55671e-09, 0, 0, 0)
+mesh = ExtResource("4_iwe0f")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_mqfx8")
+
+[node name="left_hand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+pose = &"aim"
+script = ExtResource("4_m5svs")
+
+[node name="gun" type="MeshInstance3D" parent="XROrigin3D/left_hand"]
+transform = Transform3D(-6.55671e-09, -2.66225e-15, -0.15, 0, 0.15, -2.66225e-15, 0.15, -1.1637e-22, -6.55671e-09, 0, 0, 0)
+mesh = ExtResource("4_iwe0f")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ryo2e")
+
+[node name="hue_ring" type="MeshInstance3D" parent="XROrigin3D/left_hand"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.00765693, 0.075, 0.037)
+mesh = SubResource("TorusMesh_pdqx8")
+skeleton = NodePath("../../right_hand")
+
+[connection signal="button_pressed" from="XROrigin3D/right_hand" to="XROrigin3D/right_hand" method="_on_button_pressed"]
+[connection signal="button_pressed" from="XROrigin3D/left_hand" to="XROrigin3D/left_hand" method="_on_button_pressed"]
+[connection signal="input_vector2_changed" from="XROrigin3D/left_hand" to="XROrigin3D/left_hand" method="_on_input_vector_2_changed"]

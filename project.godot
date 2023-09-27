@@ -1,0 +1,34 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Project_BC"
+run/main_scene="res://scenes/world.tscn"
+config/features=PackedStringArray("4.1", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="enemy"
+3d_physics/layer_3="projectile"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.00392157, 0.176471, 0.211765, 1)
+
+[xr]
+
+openxr/enabled=true
+openxr/default_action_map="res://text_resources/openxr_action_map.tres"
+shaders/enabled=true

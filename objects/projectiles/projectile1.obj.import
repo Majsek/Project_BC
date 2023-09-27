@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjtm4mt6paiev"
+path="res://.godot/imported/projectile1.obj-9808b03ed131e1008d816169b286c14c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/projectile1.obj-9808b03ed131e1008d816169b286c14c.mesh"]
+
+source_file="res://objects/projectiles/projectile1.obj"
+dest_files=["res://.godot/imported/projectile1.obj-9808b03ed131e1008d816169b286c14c.mesh", "res://.godot/imported/projectile1.obj-9808b03ed131e1008d816169b286c14c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

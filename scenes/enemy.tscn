@@ -9,11 +9,11 @@ height = 3.4715
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2fva"]
 resource_local_to_scene = true
-transparency = 1
-blend_mode = 1
-albedo_color = Color(0.501961, 1, 1, 1)
+cull_mode = 2
+albedo_color = Color(0.501961, 1, 1, 0.196078)
 
 [node name="enemy" type="CharacterBody3D"]
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
 collision_layer = 2
 script = ExtResource("1_h4n54")
 

@@ -33,10 +33,10 @@ func decrease_light() -> void:
 func _on_body_entered(body : Node) -> void:
 	if body is CharacterBody3D:
 		if body.who() == "enemy":
-			print("-------------")
-			print(body.color_.h)
-			print(color_.h)
-			print(color_.h - body.color_.h)
+#			print("-------------")
+#			print(body.color_.h)
+#			print(color_.h)
+#			print(color_.h - body.color_.h)
 			if (abs(color_.h - body.color_.h) < 0.10) or (abs((color_.h+1) - body.color_.h)  < 0.10):
 				body.queue_free()
 				self.queue_free()

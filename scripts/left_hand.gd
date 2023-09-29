@@ -1,7 +1,10 @@
 extends XRController3D
 
-@onready var main_ : Node = get_parent().get_parent().get_parent()
 var color_ : Color
+var grab_ : bool = false
+
+@onready var main_ : Node3D = get_parent().get_parent().get_parent()
+@onready var player_ : Node3D = get_parent().get_parent()
 
 func _ready():
 #jen na test
@@ -49,4 +52,15 @@ func _on_button_pressed(name):
 #	print(name)
 	match name:
 		"by_button":
-			get_tree().quit()
+			get_tree().reload_current_scene()
+		
+		"grip_click":
+			grab_ = true
+			player_.check_grab()
+
+
+func _on_button_released(name):
+	match name:
+		"grip_click":
+				grab_ = false
+				player_.check_grab()

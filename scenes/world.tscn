@@ -34,4 +34,4 @@ light_energy = 0.497
 directional_shadow_mode = 0
 
 [node name="enemy" parent="." instance=ExtResource("3_fpd47")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.898)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, -14.898)

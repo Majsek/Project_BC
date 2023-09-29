@@ -62,5 +62,7 @@ mesh = SubResource("TorusMesh_pdqx8")
 skeleton = NodePath("../../right_hand")
 
 [connection signal="button_pressed" from="XROrigin3D/right_hand" to="XROrigin3D/right_hand" method="_on_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/right_hand" to="XROrigin3D/right_hand" method="_on_button_released"]
 [connection signal="button_pressed" from="XROrigin3D/left_hand" to="XROrigin3D/left_hand" method="_on_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/left_hand" to="XROrigin3D/left_hand" method="_on_button_released"]
 [connection signal="input_vector2_changed" from="XROrigin3D/left_hand" to="XROrigin3D/left_hand" method="_on_input_vector_2_changed"]

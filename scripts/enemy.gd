@@ -37,7 +37,7 @@ func followPlayer() -> void:
 		angle = 360 - angle
 	self.set_rotation_degrees(Vector3(0,angle+90,0))
 	
-	print(follow_direction)
+#	print(follow_direction)
 	follow_direction.y = 0
 	set_velocity(follow_direction)
 	if follow_direction != Vector3(0,0,0):

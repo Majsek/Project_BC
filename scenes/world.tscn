@@ -29,8 +29,17 @@ shape = SubResource("BoxShape3D_me078")
 [node name="player" parent="." instance=ExtResource("2_q6nst")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.599405, 0.768461, -0.224012, -0.216626, 0.425151, 0.878817, 0.770576, -0.47824, 0.421306, -0.0838289, 28.593, 9.15886)
-light_energy = 0.497
+transform = Transform3D(0.206396, 0.871552, -0.444745, -0.325722, 0.489807, 0.808699, 0.922662, -0.0220493, 0.384978, -4.77542, 6.91891, 9.15886)
+light_angular_distance = 2.18
+shadow_enabled = true
 
 [node name="enemy" parent="." instance=ExtResource("3_fpd47")]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, -14.898)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -14.898)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.282743, 0.959196, 1.57952e-07, 0.361291, -0.106498, 0.926351, 0.888552, -0.261919, -0.376661, 0, 10.3364, -6.55472)
+light_energy = 0.262
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.889631, -0.113367, 0.442386, 0.454906, -0.305297, 0.836573, 0.0402193, 0.945485, 0.323173, 13.1349, 8.21034, 4.09577)
+light_energy = 0.262

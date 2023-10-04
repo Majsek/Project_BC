@@ -19,8 +19,10 @@ func _physics_process(delta):
 	if grab_:
 		detect_pull()
 
+#tohle taky nebude potřeba
 func set_color(color:Color) -> void:
 	color_ = color
+#	tohle si nebude potřeba už
 	$XROrigin3D/right_hand/gun.get_surface_override_material(0).set_albedo(color_)
 	
 func get_color() -> Color:

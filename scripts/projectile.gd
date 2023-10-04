@@ -21,6 +21,11 @@ func init(direction, rotation, color) -> void:
 func decrease_light() -> void:
 	if $OmniLight3D.light_energy < 0.1:
 		$OmniLight3D.queue_free()
+		await get_tree().create_timer(0.2).timeout
+		$MeshInstance3D.queue_free()
+		$CollisionShape3D.queue_free()
+		await get_tree().create_timer(0.9).timeout
+		self.queue_free()
 		return
 	$OmniLight3D.light_energy -= 0.1
 	await get_tree().create_timer(0.1).timeout

@@ -1,16 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://crves8cf8ukat"]
+[gd_scene load_steps=6 format=3 uid="uid://crves8cf8ukat"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_h4n54"]
 [ext_resource type="ArrayMesh" uid="uid://82dthv0njejx" path="res://objects/racc/racc.obj" id="2_806bi"]
+[ext_resource type="Texture2D" uid="uid://u34jg6j8xglp" path="res://objects/racc/racc.png" id="3_gytna"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nu88l"]
 radius = 0.875385
 height = 3.4715
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2fva"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_phhk3"]
 resource_local_to_scene = true
-cull_mode = 2
-albedo_color = Color(0.501961, 1, 1, 0.196078)
+albedo_texture = ExtResource("3_gytna")
 
 [node name="enemy" type="CharacterBody3D"]
 transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
@@ -24,4 +24,4 @@ shape = SubResource("CapsuleShape3D_nu88l")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.1, -2.5, -1)
 mesh = ExtResource("2_806bi")
-surface_material_override/0 = SubResource("StandardMaterial3D_a2fva")
+surface_material_override/0 = SubResource("StandardMaterial3D_phhk3")

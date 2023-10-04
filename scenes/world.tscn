@@ -31,7 +31,6 @@ shape = SubResource("BoxShape3D_me078")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.599405, 0.768461, -0.224012, -0.216626, 0.425151, 0.878817, 0.770576, -0.47824, 0.421306, -0.0838289, 28.593, 9.15886)
 light_energy = 0.497
-directional_shadow_mode = 0
 
 [node name="enemy" parent="." instance=ExtResource("3_fpd47")]
 transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, -14.898)

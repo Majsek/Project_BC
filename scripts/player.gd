@@ -38,24 +38,41 @@ func check_grab() -> void:
 		grab_ = false
 		
 func detect_pull():
-		if !pull_:
-			pull_ = true
-			right_initial_grab = right_hand_.position
-			left_initial_grab = left_hand_.position
-			player_initial_pos = self.position
+	var angle : float
+	if !pull_:
+		pull_ = true
+		right_initial_grab = right_hand_.position
+		left_initial_grab = left_hand_.position
+		player_initial_pos = self.position
+#tadyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+		angle = $XROrigin3D/XRCamera3D.rotation.y
 
-		if (right_hand_.position.distance_to(right_initial_grab) < 0.3) and (left_hand_.position.distance_to(left_initial_grab) < 0.3):
-#			self.translate(Vector3(player_initial_pos.x+right_hand_.position.distance_to(right_initial_grab), player_initial_pos.y, player_initial_pos.z))
-			var angel = $XROrigin3D/XRCamera3D.rotation
-			var move_direction : Vector3 = Vector3(-1,0,0)
-			self.translate(Vector3(
-				move_direction.z*right_hand_.position.distance_to(right_initial_grab)*2, 
-				0,
-				move_direction.x*right_hand_.position.distance_to(right_initial_grab)*2).rotated(Vector3(0,1,0),angel.y))
-			if player_initial_pos.distance_to(self.position) > 5:
-				grab_ = false
-				pull_ = false
-		
-		else:
+	if (right_hand_.position.distance_to(right_initial_grab) < 0.3) and (left_hand_.position.distance_to(left_initial_grab) < 0.3):
+		var phase_direction : Vector3 = Vector3(-1,0,0)
+		angle = $XROrigin3D/XRCamera3D.rotation.y
+		var speed = 0.01 + right_hand_.position.distance_to(right_initial_grab)+left_hand_.position.distance_to(left_initial_grab)*3
+		self.translate(Vector3(
+			phase_direction.z*speed, 
+			0,
+			#tadyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+			phase_direction.x*speed).rotated(Vector3(0,1,0),angle))
+		if player_initial_pos.distance_to(self.position) > 8:
 			grab_ = false
 			pull_ = false
+#
+
+#	if (right_hand_.position.distance_to(right_initial_grab) < 0.3) and (left_hand_.position.distance_to(left_initial_grab) < 0.3):
+#		var phase_direction : Vector3 = $XROrigin3D/XRCamera3D.rotation
+#		var speed = right_hand_.position.distance_to(right_initial_grab)*left_hand_.position.distance_to(left_initial_grab)*4
+#		self.translate(Vector3(
+#			phase_direction.z*speed, 
+#			0,
+#			#tadyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+#			phase_direction.x*speed).rotated(Vector3(0,1,0),angle))
+#		if player_initial_pos.distance_to(self.position) > 8:
+#			grab_ = false
+#			pull_ = false
+	
+	else:
+		grab_ = false
+		pull_ = false

@@ -1,3 +1,4 @@
 extends "hand.gd"
 
-var is_right_hand = false
+func init() -> void:
+	is_right_hand_ = false

@@ -3,7 +3,7 @@ extends XRController3D
 
 var color_ : Color
 var grab_ : bool = false
-var is_right_hand :bool
+var is_right_hand_ : bool
 
 const projectile_ : Resource = preload("res://scenes/projectile.tscn")
 
@@ -11,11 +11,15 @@ const projectile_ : Resource = preload("res://scenes/projectile.tscn")
 @onready var player_ : Node3D = get_parent().get_parent()
 
 func _ready():
+	init()
 #TEST initial color
 	color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
 	$gun.get_surface_override_material(0).set_albedo(color_)
 	get_parent().get_parent().set_color(color_)
 	
+func init() -> void:
+	pass
+
 #TEST space shoot
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") != false:

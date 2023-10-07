@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var lives_ : int
+var lives_ : int = 100
 
 var follow_player_ : bool = true
 var color_ : Color:

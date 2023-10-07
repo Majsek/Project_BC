@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-var alive_ : bool = true
 var lives_ : int
 
 var follow_player_ : bool = true

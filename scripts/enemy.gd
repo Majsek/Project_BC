@@ -5,6 +5,9 @@ var lives_ : int = 100
 var follow_player_ : bool = true
 var color_ : Color:
 	set(value):
+		if value.s < 0.4:
+			value.s = 0.4
+		print(value.s)
 		color_ = value
 		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 
@@ -56,8 +59,8 @@ func hit_by_projectile(projectile_color : Color) -> void:
 		lives_ -= 20
 		if lives_ <= 0:
 			self.queue_free()
-		color_ = Color.from_hsv(color_.h,lives_/100,color_.v,color_.a)
-	elif (delta_color1 < 0.90) or (delta_color2  < 0.90):
+		color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
+	elif (delta_color1 < 0.50) or (delta_color2  < 0.50):
 		lives_ -= 5
 		if lives_ <= 0:
 			self.queue_free()

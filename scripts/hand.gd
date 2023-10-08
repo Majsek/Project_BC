@@ -36,7 +36,7 @@ func _on_button_pressed(name):
 			player_.check_grab()
 		
 		"by_button":
-			if !is_right_hand:
+			if !is_right_hand_:
 				get_tree().reload_current_scene()
 
 func _on_button_released(name):

@@ -20,11 +20,15 @@ func _ready():
 func init() -> void:
 	pass
 
-#TEST space shoot
 func _process(_delta: float) -> void:
+	#TEST space shoot
 	if Input.is_action_just_pressed("ui_accept") != false:
-		shoot()
+		if is_right_hand_:
+			shoot()
 	
+	#TEST R restart
+	if Input.is_action_just_pressed("restart") != false:
+		get_tree().reload_current_scene()
 #INPUTS
 func _on_button_pressed(name):
 	match name:

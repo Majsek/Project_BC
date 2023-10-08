@@ -6,6 +6,7 @@ var follow_player_ : bool = true
 var color_ : Color:
 	set(value):
 		color_ = value
+		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 
 const SPEED = 10.0
 
@@ -18,7 +19,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
 #	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
-	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
+#	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 	
 func _physics_process(delta):
 	# Add the gravity.
@@ -27,7 +28,6 @@ func _physics_process(delta):
 #
 	if follow_player_ == true:
 		followPlayer()
-	
 	
 func followPlayer() -> void:
 	var follow_direction : Vector3 = get_global_position().direction_to(player_.get_global_position())
@@ -44,4 +44,28 @@ func followPlayer() -> void:
 		
 func who() -> String:
 	return "enemy"
-
+	
+func hit_by_projectile(projectile_color : Color) -> void:
+	var delta_color1 = abs(projectile_color.h - color_.h)
+	var delta_color2 = abs((projectile_color.h+1) - color_.h)
+	
+	if (delta_color1 < 0.10) or (delta_color2  < 0.10):
+		self.queue_free()
+		print("perfect")
+	elif (delta_color1 < 0.30) or (delta_color2  < 0.30):
+		lives_ -= 20
+		if lives_ <= 0:
+			self.queue_free()
+		color_ = Color.from_hsv(color_.h,lives_/100,color_.v,color_.a)
+	elif (delta_color1 < 0.90) or (delta_color2  < 0.90):
+		lives_ -= 5
+		if lives_ <= 0:
+			self.queue_free()
+		color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
+	else:
+		lives_ -= 1
+		if lives_ <= 0:
+			self.queue_free()
+		color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
+		
+	print(lives_)

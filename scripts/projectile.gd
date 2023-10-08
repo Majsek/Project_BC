@@ -42,8 +42,8 @@ func _on_body_entered(body : Node) -> void:
 #			print(body.color_.h)
 #			print(color_.h)
 #			print(color_.h - body.color_.h)
-			if (abs(color_.h - body.color_.h) < 0.10) or (abs((color_.h+1) - body.color_.h)  < 0.10):
-				body.queue_free()
-				self.queue_free()
+#			if (abs(color_.h - body.color_.h) < 0.10) or (abs((color_.h+1) - body.color_.h)  < 0.10):
+			body.hit_by_projectile(color_)
+			self.queue_free()
 			
 

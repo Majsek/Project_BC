@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Project_BC"
 run/main_scene="res://scenes/world.tscn"
-config/features=PackedStringArray("4.1", "GL Compatibility")
+config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [input]
@@ -31,6 +31,7 @@ restart={
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.00392157, 0.176471, 0.211765, 1)
 

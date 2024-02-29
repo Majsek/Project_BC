@@ -34,7 +34,7 @@ light_angular_distance = 2.18
 shadow_enabled = true
 
 [node name="enemy" parent="." instance=ExtResource("3_fpd47")]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -14.898)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -4.56208)
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.282743, 0.959196, 1.57952e-07, 0.361291, -0.106498, 0.926351, 0.888552, -0.261919, -0.376661, 0, 10.3364, -6.55472)

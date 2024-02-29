@@ -1,8 +1,10 @@
 extends CharacterBody3D
 
 var lives_ : int = 100
+const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
 var follow_player_ : bool = true
+var initial_color_ : Color
 var color_ : Color:
 	set(value):
 		if value.s < 0.4:
@@ -20,7 +22,8 @@ const SPEED = 10.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
+	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
+	color_ = initial_color_
 #	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
 #	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 	
@@ -48,27 +51,33 @@ func followPlayer() -> void:
 func who() -> String:
 	return "enemy"
 	
-func hit_by_projectile(projectile_color : Color) -> void:
+func hit_by_projectile(projectile_color : Color) -> Array:
 	var delta_color1 = abs(projectile_color.h - color_.h)
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
 	
+	var dmg : int
+	
 	if (delta_color1 < 0.10) or (delta_color2  < 0.10):
-		self.queue_free()
+		dmg = 150
 		print("perfect")
 	elif (delta_color1 < 0.30) or (delta_color2  < 0.30):
-		lives_ -= 20
-		if lives_ <= 0:
-			self.queue_free()
-		color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
+		dmg = 20
 	elif (delta_color1 < 0.50) or (delta_color2  < 0.50):
-		lives_ -= 5
-		if lives_ <= 0:
-			self.queue_free()
-		color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
+		dmg = 3
 	else:
-		lives_ -= 1
-		if lives_ <= 0:
-			self.queue_free()
-		color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
+		dmg = 1
 		
-	print(lives_)
+	lives_ -= dmg
+	color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
+	if lives_ <= 0:
+		die(dmg)
+		
+	return [dmg,initial_color_]
+
+func die(dmg) -> void:
+	follow_player_ = false
+	if dmg >= 100:
+		var hit_particle : Node = HIT_PARTICLE.instantiate()
+		hit_particle.init(dmg, initial_color_, position)
+		main_.add_child(hit_particle)
+	self.queue_free()

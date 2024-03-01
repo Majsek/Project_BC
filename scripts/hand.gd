@@ -80,7 +80,7 @@ func _on_input_vector_2_changed(name, value):
 #				print(angle_degrees)
 #				print(mapped_value)
 				
-#tohle přesunout do setteru
+#TODO: tohle přesunout do setteru
 				color_ = Color.from_hsv(mapped_value, 1.0, 1.0, 1.0)
 				$gun.get_surface_override_material(0).set_albedo(color_)
 #				get_parent().get_parent().set_color(color_)

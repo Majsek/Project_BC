@@ -15,8 +15,25 @@ material = SubResource("StandardMaterial3D_cd5c2")
 size = Vector3(1, 0.500783, 1)
 
 [sub_resource type="Environment" id="Environment_aqajr"]
+reflected_light_source = 2
+glow_levels/1 = 1.7
+glow_levels/2 = 7.1
+glow_levels/3 = 16.0
+glow_levels/4 = 10.95
+glow_levels/5 = 13.33
+glow_levels/6 = 4.85
+glow_levels/7 = 6.85
+glow_normalized = true
+glow_intensity = 3.8
+glow_bloom = 0.13
+glow_hdr_threshold = 2.3
+glow_hdr_scale = 2.93
 fog_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
 fog_light_energy = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+adjustment_enabled = true
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_q1cpw")

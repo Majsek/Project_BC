@@ -20,6 +20,7 @@ size = Vector3(0.05, 0.05, 0.05)
 [node name="hit_particle" type="GPUParticles3D"]
 emitting = false
 amount = 10
+lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_gik86")

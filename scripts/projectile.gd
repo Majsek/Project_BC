@@ -3,7 +3,7 @@ extends RigidBody3D
 var direction_ : Vector3
 var color_ : Color
 
-@onready var main_ : Node3D = get_parent()
+@onready var main_ : Node3D = $"/root/world"
 
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 

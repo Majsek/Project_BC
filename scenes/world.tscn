@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl7g3g38rg3gv"]
+[gd_scene load_steps=13 format=3 uid="uid://dl7g3g38rg3gv"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_q1cpw"]
 [ext_resource type="PackedScene" uid="uid://c3donwdgn1s38" path="res://scenes/player.tscn" id="2_q6nst"]
 [ext_resource type="PackedScene" uid="uid://crves8cf8ukat" path="res://scenes/enemy.tscn" id="3_fpd47"]
 [ext_resource type="ArrayMesh" uid="uid://qyjx0rspamqq" path="res://objects/buildings/skyscraper1.obj" id="4_8dpod"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="5_iybog"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cd5c2"]
 albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
@@ -35,6 +36,12 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 adjustment_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_88i1i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xmt4h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bc172"]
+
 [node name="world" type="Node3D"]
 script = ExtResource("1_q1cpw")
 
@@ -56,7 +63,10 @@ light_angular_distance = 2.18
 shadow_enabled = true
 
 [node name="enemy" parent="." instance=ExtResource("3_fpd47")]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -4.56208)
+unique_name_in_owner = true
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -11.2311)
+visible = false
+follow_player_ = false
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.282743, 0.959196, 1.57952e-07, 0.361291, -0.106498, 0.926351, 0.888552, -0.261919, -0.376661, 0, 10.3364, -6.55472)
@@ -82,3 +92,18 @@ skeleton = NodePath("../Skyscraper1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aqajr")
+
+[node name="start_cube" type="CharacterBody3D" parent="."]
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.131603, -2.15442)
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("5_iybog")
+follow_player_ = false
+is_start_cube_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="start_cube"]
+shape = SubResource("BoxShape3D_88i1i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="start_cube"]
+mesh = SubResource("BoxMesh_xmt4h")
+surface_material_override/0 = SubResource("StandardMaterial3D_bc172")

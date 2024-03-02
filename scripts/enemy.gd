@@ -3,7 +3,8 @@ extends CharacterBody3D
 var lives_ : int = 100
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
-var follow_player_ : bool = true
+@export var follow_player_ : bool = true
+@export var is_start_cube_ : bool = false
 var initial_color_ : Color
 var color_ : Color:
 	set(value):
@@ -80,4 +81,6 @@ func die(dmg) -> void:
 		var hit_particle : Node = HIT_PARTICLE.instantiate()
 		hit_particle.init(dmg, initial_color_, position)
 		main_.add_child(hit_particle)
+	if is_start_cube_:
+		main_.running_ = true
 	self.queue_free()

@@ -3,16 +3,20 @@ extends Node3D
 var interface_ : XRInterface
 var player_ : Node3D
 var enemy_ : Resource = preload("res://scenes/enemy.tscn")
-var running_ : bool = true
+var running_ : bool = false:
+	set(value):
+		running_ = value
+#START TODO: do samostatný start funkce by to bylo lepší
+		if value:
+			%enemy.follow_player_ = true
+			%enemy.visible = true
+			await get_tree().create_timer(1).timeout
+			spawnEnemy()
 
 func _ready():
 	interface_ = XRServer.find_interface("OpenXR")
 	if interface_ and interface_.is_initialized():
 		get_viewport().use_xr = true
-
-	#tady to pak spustit přes grab
-	await get_tree().create_timer(1).timeout
-	spawnEnemy()
 
 func setPlayer(player:Node3D) -> void:
 	player_ = player

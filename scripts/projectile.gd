@@ -47,6 +47,8 @@ func _on_body_entered(body : Node) -> void:
 #			print(color_.h)
 #			print(color_.h - body.color_.h)
 #			if (abs(color_.h - body.color_.h) < 0.10) or (abs((color_.h+1) - body.color_.h)  < 0.10):
+
+#TOHLE HODIT ČISTĚ JEN DO ENEMY.GD
 			var info : Array = body.hit_by_projectile(color_)
 			var dmg_dealt : int = info[0]
 			var enemy_color : Color = info[1]

@@ -16,6 +16,7 @@ var running_ : bool = false:
 func _ready():
 	interface_ = XRServer.find_interface("OpenXR")
 	if interface_ and interface_.is_initialized():
+		breakpoint
 		get_viewport().use_xr = true
 
 func setPlayer(player:Node3D) -> void:

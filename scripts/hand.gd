@@ -1,7 +1,11 @@
 extends XRController3D
 
 
-var color_ : Color
+var color_ : Color:
+	set(value):
+		color_ = value
+		$gun.get_surface_override_material(0).set_albedo(color_)
+
 var grab_ : bool = false
 var is_right_hand_ : bool
 
@@ -14,8 +18,6 @@ func _ready():
 	init()
 #TEST initial color
 	color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
-	$gun.get_surface_override_material(0).set_albedo(color_)
-	get_parent().get_parent().set_color(color_)
 	
 func init() -> void:
 	pass
@@ -49,6 +51,8 @@ func _on_button_released(name):
 				grab_ = false
 				player_.check_grab()
 				
+
+#color selection
 func _on_input_vector_2_changed(name, value):
 #	print(value)
 	match name:
@@ -79,11 +83,8 @@ func _on_input_vector_2_changed(name, value):
 #				print("--------------")
 #				print(angle_degrees)
 #				print(mapped_value)
-				
-#TODO: tohle přesunout do setteru
+
 				color_ = Color.from_hsv(mapped_value, 1.0, 1.0, 1.0)
-				$gun.get_surface_override_material(0).set_albedo(color_)
-#				get_parent().get_parent().set_color(color_)
 
 #SHOOT from a gun
 func shoot() -> void:

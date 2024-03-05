@@ -1,6 +1,6 @@
 extends Node3D
 
-var color_ : Color
+#var color_ : Color
 var right_initial_grab : Vector3
 var left_initial_grab : Vector3
 var player_initial_pos : Vector3
@@ -20,13 +20,13 @@ func _physics_process(delta):
 		detect_pull()
 
 #tohle taky nebude potřeba
-func set_color(color:Color) -> void:
-	color_ = color
-#	tohle si nebude potřeba už
-	$XROrigin3D/right_hand/gun.get_surface_override_material(0).set_albedo(color_)
-	
-func get_color() -> Color:
-	return color_
+#func set_color(color:Color) -> void:
+	#color_ = color
+##	tohle si nebude potřeba už
+	##$XROrigin3D/right_hand/gun.get_surface_override_material(0).set_albedo(color_)
+	#
+#func get_color() -> Color:
+	#return color_
 	
 func check_grab() -> void:
 	print("------------------")

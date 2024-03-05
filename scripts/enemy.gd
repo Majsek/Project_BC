@@ -1,11 +1,11 @@
 extends CharacterBody3D
 
-var lives_ : int = 100
+var lives_ :int = 100
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
-@export var follow_player_ : bool = true
-@export var is_start_cube_ : bool = false
-var initial_color_ : Color
+@export var follow_player_ :bool = true
+@export var is_start_cube_ :bool = false
+var initial_color_ :Color
 var color_ : Color:
 	set(value):
 		if value.s < 0.4:
@@ -52,11 +52,10 @@ func followPlayer() -> void:
 func who() -> String:
 	return "enemy"
 	
-func hit_by_projectile(projectile_color : Color) -> Array:
+func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
-	
-	var dmg : int
+	var dmg :int
 	
 	if (delta_color1 < 0.10) or (delta_color2  < 0.10):
 		dmg = 150
@@ -72,15 +71,16 @@ func hit_by_projectile(projectile_color : Color) -> Array:
 	color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
 	if lives_ <= 0:
 		die(dmg)
-		
-	return [dmg,initial_color_]
+	else:
+		var hit_particle : Node = HIT_PARTICLE.instantiate()
+		hit_particle.init(dmg, initial_color_, projectile_pos)
+		main_.add_child(hit_particle)
 
 func die(dmg) -> void:
 	follow_player_ = false
-	if dmg >= 100:
-		var hit_particle : Node = HIT_PARTICLE.instantiate()
-		hit_particle.init(dmg, initial_color_, position)
-		main_.add_child(hit_particle)
+	var hit_particle : Node = HIT_PARTICLE.instantiate()
+	hit_particle.init(dmg, initial_color_, position)
+	main_.add_child(hit_particle)
 	if is_start_cube_:
 		main_.running_ = true
 	self.queue_free()

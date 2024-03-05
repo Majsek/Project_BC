@@ -21,7 +21,7 @@ func init(direction, rotation, color) -> void:
 	$OmniLight3D.set_color(color)
 	$CPUParticles3D.get_mesh().get_material().set_albedo(color)
 	
-
+#decreases light of the projectile
 func decrease_light() -> void:
 	if $OmniLight3D.light_energy < 0.1:
 		$OmniLight3D.queue_free()
@@ -35,28 +35,13 @@ func decrease_light() -> void:
 	await get_tree().create_timer(0.1).timeout
 	decrease_light()
 
-
-
-
 #contact with enemy
 func _on_body_entered(body : Node) -> void:
 	if body is CharacterBody3D:
 		if body.who() == "enemy":
-#			print("-------------")
-#			print(body.color_.h)
-#			print(color_.h)
-#			print(color_.h - body.color_.h)
+#TEST
 #			if (abs(color_.h - body.color_.h) < 0.10) or (abs((color_.h+1) - body.color_.h)  < 0.10):
-
-#TOHLE HODIT ČISTĚ JEN DO ENEMY.GD
-			var info : Array = body.hit_by_projectile(color_)
-			var dmg_dealt : int = info[0]
-			var enemy_color : Color = info[1]
-			
-			var hit_particle : Node = HIT_PARTICLE.instantiate()
-			hit_particle.init(dmg_dealt, enemy_color, position)
-			main_.add_child(hit_particle)
-			
+			body.hit_by_projectile(color_, position)
 			self.queue_free()
 			
 

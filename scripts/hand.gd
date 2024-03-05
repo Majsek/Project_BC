@@ -6,7 +6,7 @@ var color_ : Color:
 		color_ = value
 		$gun.get_surface_override_material(0).set_albedo(color_)
 
-var grab_ : bool = false
+var grabbing_ : bool = false
 var is_right_hand_ : bool
 
 const projectile_ : Resource = preload("res://scenes/projectile.tscn")
@@ -38,7 +38,7 @@ func _on_button_pressed(name):
 			shoot()
 			
 		"grip_click":
-			grab_ = true
+			grabbing_ = true
 			player_.check_grab()
 		
 		"by_button":
@@ -48,7 +48,7 @@ func _on_button_pressed(name):
 func _on_button_released(name):
 	match name:
 		"grip_click":
-				grab_ = false
+				grabbing_ = false
 				player_.check_grab()
 				
 

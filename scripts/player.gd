@@ -25,7 +25,7 @@ func check_grab() -> void:
 	print("check")
 	
 	#if right_hand_.grabbing_ and left_hand_.grabbing_:
-	if right_hand_.grabbing_:
+	if right_hand_.grabbing_ or left_hand_.grabbing_:
 		print("grabuju")
 		grabbing_ = true
 	else:
@@ -37,13 +37,20 @@ func detect_pull():
 	if !pulling_:
 		pulling_ = true
 		player_initial_pos_ = self.position
+		
 		right_initial_grab_pos_ = right_hand_.position
+		left_initial_grab_pos_ = left_hand_.position
 
 	#if (right_hand_.position.distance_to(right_initial_grab_pos_) < 0.3):
 	self.position = Vector3(
 		player_initial_pos_.x+(right_initial_grab_pos_.x-right_hand_.position.x)*10, 
 		0,
 		player_initial_pos_.z+(right_initial_grab_pos_.z-right_hand_.position.z)*10)
+		
+	self.position = Vector3(
+		player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
+		0,
+		player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
 		#if player_initial_pos_.distance_to(self.position) > 8:
 			#grabbing_ = false
 			#pulling_ = false

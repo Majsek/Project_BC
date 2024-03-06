@@ -7,6 +7,7 @@ var left_initial_grab_pos_ : Vector3
 var player_initial_pos_ : Vector3
 var pulling_ : bool = false
 var grabbing_ : bool = false
+var first_grabbing_hand_ : XRController3D
 
 @onready var main_ : Node3D = get_parent()
 @onready var right_hand_ : XRController3D = $XROrigin3D/right_hand
@@ -24,15 +25,31 @@ func check_grab() -> void:
 	print("------------------")
 	print("check")
 	
-	#if right_hand_.grabbing_ and left_hand_.grabbing_:
 	if right_hand_.grabbing_ or left_hand_.grabbing_:
 		print("grabuju")
 		grabbing_ = true
+		
+		if first_grabbing_hand_ == null:
+			if right_hand_.grabbing_:
+				first_grabbing_hand_ = right_hand_
+			elif left_hand_.grabbing_:
+				first_grabbing_hand_ = left_hand_
+				
+		elif !first_grabbing_hand_.grabbing_:
+			if first_grabbing_hand_ == right_hand_:
+				first_grabbing_hand_ = left_hand_
+				pulling_ = false
+			else:
+				first_grabbing_hand_ = right_hand_
+				pulling_ = false
 	else:
 		print("negrabuju")
 		grabbing_ = false
 		pulling_ = false
+		first_grabbing_hand_ = null
 		
+		
+#TODO: refactoring => nějaký ify a řádky jsou zbytečný
 func detect_pull():
 	if !pulling_:
 		pulling_ = true
@@ -42,15 +59,21 @@ func detect_pull():
 		left_initial_grab_pos_ = left_hand_.position
 
 	#if (right_hand_.position.distance_to(right_initial_grab_pos_) < 0.3):
-	self.position = Vector3(
-		player_initial_pos_.x+(right_initial_grab_pos_.x-right_hand_.position.x)*10, 
-		0,
-		player_initial_pos_.z+(right_initial_grab_pos_.z-right_hand_.position.z)*10)
-		
-	self.position = Vector3(
-		player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
-		0,
-		player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
+	if first_grabbing_hand_ == right_hand_:
+		#TODO: tenhle if je možná zbytečnej
+		if right_hand_.grabbing_:
+			self.position = Vector3(
+				player_initial_pos_.x+(right_initial_grab_pos_.x-right_hand_.position.x)*10, 
+				0,
+				player_initial_pos_.z+(right_initial_grab_pos_.z-right_hand_.position.z)*10)
+	
+	if first_grabbing_hand_ == left_hand_:
+		#TODO: tenhle if je možná zbytečnej
+		if left_hand_.grabbing_:
+			self.position = Vector3(
+				player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
+				0,
+				player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
 		#if player_initial_pos_.distance_to(self.position) > 8:
 			#grabbing_ = false
 			#pulling_ = false

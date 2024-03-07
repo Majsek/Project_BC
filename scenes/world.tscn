@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dl7g3g38rg3gv"]
+[gd_scene load_steps=14 format=3 uid="uid://dl7g3g38rg3gv"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_q1cpw"]
 [ext_resource type="PackedScene" uid="uid://c3donwdgn1s38" path="res://scenes/player.tscn" id="2_q6nst"]
 [ext_resource type="PackedScene" uid="uid://crves8cf8ukat" path="res://scenes/enemy.tscn" id="3_fpd47"]
 [ext_resource type="ArrayMesh" uid="uid://qyjx0rspamqq" path="res://objects/buildings/skyscraper1.obj" id="4_8dpod"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="5_iybog"]
+[ext_resource type="ArrayMesh" uid="uid://b6gsnbei42q8" path="res://objects/cubes/play_cube.obj" id="6_7lwx6"]
+[ext_resource type="Texture2D" uid="uid://ckck2beflrki2" path="res://objects/cubes/play_cube.png" id="7_2mood"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cd5c2"]
 albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
@@ -37,10 +39,10 @@ volumetric_fog_density = 0.01
 adjustment_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_88i1i"]
+size = Vector3(1, 1, 1.07)
 
-[sub_resource type="BoxMesh" id="BoxMesh_xmt4h"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bc172"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5nxhl"]
+albedo_texture = ExtResource("7_2mood")
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_q1cpw")
@@ -108,19 +110,21 @@ skeleton = NodePath("../Skyscraper1")
 environment = SubResource("Environment_aqajr")
 
 [node name="start_cube" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.131603, -2.15442)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.0680073, -2.15442)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("5_iybog")
+lives_ = 100
 follow_player_ = false
 is_start_cube_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="start_cube"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.05, -0.0467187, 0)
 shape = SubResource("BoxShape3D_88i1i")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="start_cube"]
-mesh = SubResource("BoxMesh_xmt4h")
-surface_material_override/0 = SubResource("StandardMaterial3D_bc172")
+mesh = ExtResource("6_7lwx6")
+surface_material_override/0 = SubResource("StandardMaterial3D_5nxhl")
 
 [node name="Skyscraper7" type="MeshInstance3D" parent="."]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, 166.293, -13.9861, 55.1995)

@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var lives_ :int = 100
+@export var lives_ :int = randi_range(90,150)
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
 @export var follow_player_ :bool = true
@@ -25,6 +25,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
 	color_ = initial_color_
+	self.scale *= lives_/100
 #	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
 #	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 	

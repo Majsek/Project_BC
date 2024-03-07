@@ -13,9 +13,8 @@ var first_grabbing_hand_ : XRController3D
 @onready var right_hand_ : XRController3D = $XROrigin3D/right_hand
 @onready var left_hand_ : XRController3D = $XROrigin3D/left_hand
 
-
 func _ready():
-	main_.setPlayer(self)
+	main_.player_ = self
 
 func _physics_process(delta):
 	if grabbing_:

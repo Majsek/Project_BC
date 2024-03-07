@@ -1,7 +1,8 @@
 extends Node3D
 
+@onready var player_
+
 var interface_ : XRInterface
-var player_ : Node3D
 var enemy_ : Resource = preload("res://scenes/enemy.tscn")
 var running_ : bool = false:
 	set(value):
@@ -17,12 +18,6 @@ func _ready():
 	interface_ = XRServer.find_interface("OpenXR")
 	if interface_ and interface_.is_initialized():
 		get_viewport().use_xr = true
-
-func setPlayer(player:Node3D) -> void:
-	player_ = player
-	
-func getPlayer() -> Node3D:
-	return player_
 
 func spawnEnemy() -> void:
 	if running_ == false:

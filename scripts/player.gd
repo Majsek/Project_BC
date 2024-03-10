@@ -4,6 +4,12 @@ extends Node3D
 var right_initial_grab_pos_ : Vector3
 var left_initial_grab_pos_ : Vector3
 
+var lives_ : int = 3:
+	set(value):
+		lives_ = value
+		if lives_ <= 0:
+			main_.end_game()
+
 var player_initial_pos_ : Vector3
 var pulling_ : bool = false
 var grabbing_ : bool = false
@@ -21,11 +27,11 @@ func _physics_process(delta):
 		detect_pull()
 	
 func check_grab() -> void:
-	print("------------------")
-	print("check")
+	#print("------------------")
+	#print("check")
 	
 	if right_hand_.grabbing_ or left_hand_.grabbing_:
-		print("grabuju")
+		#print("grabuju")
 		grabbing_ = true
 		
 		if first_grabbing_hand_ == null:
@@ -42,7 +48,7 @@ func check_grab() -> void:
 				first_grabbing_hand_ = right_hand_
 				pulling_ = false
 	else:
-		print("negrabuju")
+		#print("negrabuju")
 		grabbing_ = false
 		pulling_ = false
 		first_grabbing_hand_ = null
@@ -105,3 +111,9 @@ func detect_pull():
 	#else:
 		#grabbing_ = false
 		#pulling_ = false
+
+
+func _on_body_entered(body):
+	body.die(999)
+	#lives_ -= 1
+	lives_ -= 1

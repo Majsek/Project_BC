@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var main_ : Node = get_parent()
 @onready var player_ : Node = main_.player_
 
-@export var lives_ :int = randi_range(90,150)
+@export var lives_ :int = randi_range(90,200)
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
 @export var follow_player_ :bool = true
@@ -13,7 +13,7 @@ var color_ : Color:
 	set(value):
 		if value.s < 0.4:
 			value.s = 0.4
-		print(value.s)
+		#print(value.s)
 		color_ = value
 		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 
@@ -23,8 +23,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
+	#initial_color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
 	color_ = initial_color_
-	self.scale *= lives_/100
+	self.scale *= lives_/80.0
 #	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
 #	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 	
@@ -46,8 +47,9 @@ func followPlayer() -> void:
 #	print(follow_direction)
 	follow_direction.y = 0
 	set_velocity(follow_direction)
-	if follow_direction != Vector3(0,0,0):
-		move_and_slide()
+	#if follow_direction != Vector3(0,0,0):
+		#move_and_slide()
+	move_and_slide()
 		
 func who() -> String:
 	return "enemy"
@@ -57,9 +59,11 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
 	var dmg :int
 	
-	if (delta_color1 < 0.10) or (delta_color2  < 0.10):
+	if (delta_color1 < 0.2) or (delta_color2  < 0.2):
+		dmg = 200
+		#print("perfect")
+	elif (delta_color1 < 0.10) or (delta_color2  < 0.10):
 		dmg = 150
-		print("perfect")
 	elif (delta_color1 < 0.30) or (delta_color2  < 0.30):
 		dmg = 20
 	elif (delta_color1 < 0.50) or (delta_color2  < 0.50):
@@ -82,5 +86,8 @@ func die(dmg) -> void:
 	hit_particle.init(dmg, initial_color_, position)
 	main_.add_child(hit_particle)
 	if is_start_cube_:
-		main_.running_ = true
+		main_.start_game()
+	else:
+		main_.enemies_killed_ += 1
+		main_.dmg_done_ += dmg
 	self.queue_free()

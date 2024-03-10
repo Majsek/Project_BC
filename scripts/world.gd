@@ -2,18 +2,31 @@ extends Node3D
 
 @onready var player_
 
+#SCORE
+var enemies_killed_ : int = 0
+var dmg_done_ : int = 0
+
+
 var interface_ : XRInterface
 var enemy_ : Resource = preload("res://scenes/enemy.tscn")
-var running_ : bool = false:
-	set(value):
-		running_ = value
-#START TODO: do samostatný start funkce by to bylo lepší
-		if value:
-			%enemy.follow_player_ = true
-			%enemy.visible = true
-			await get_tree().create_timer(1).timeout
-			spawnEnemy()
+var running_ : bool = false
 
+func start_game() -> void:
+	running_ = true
+	%enemy.follow_player_ = true
+	%enemy.visible = true
+	await get_tree().create_timer(1).timeout
+	spawnEnemy()
+	
+func end_game() -> void:
+	print("Enemies killed:")
+	print(enemies_killed_)
+	print("Damage done:")
+	print(dmg_done_)
+	
+	get_tree().reload_current_scene()
+	
+	
 func _ready():
 	interface_ = XRServer.find_interface("OpenXR")
 	if interface_ and interface_.is_initialized():

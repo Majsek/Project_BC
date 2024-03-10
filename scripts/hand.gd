@@ -30,6 +30,7 @@ func _process(_delta: float) -> void:
 	
 	#TEST R restart
 	if Input.is_action_just_pressed("restart") != false:
+#TODO: jedna restart funkce ve world.gd
 		get_tree().reload_current_scene()
 #INPUTS
 func _on_button_pressed(name):

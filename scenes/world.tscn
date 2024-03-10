@@ -18,6 +18,7 @@ material = SubResource("StandardMaterial3D_cd5c2")
 size = Vector3(1, 0.500783, 1)
 
 [sub_resource type="Environment" id="Environment_aqajr"]
+background_mode = 2
 reflected_light_source = 2
 glow_levels/1 = 1.7
 glow_levels/2 = 7.1
@@ -36,7 +37,6 @@ fog_light_color = Color(1, 1, 1, 1)
 fog_light_energy = 0.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
-adjustment_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_88i1i"]
 size = Vector3(1, 1, 1.07)
@@ -107,6 +107,7 @@ mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
 environment = SubResource("Environment_aqajr")
 
 [node name="start_cube" type="CharacterBody3D" parent="."]

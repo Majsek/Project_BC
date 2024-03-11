@@ -4,9 +4,35 @@ extends Node3D
 var right_initial_grab_pos_ : Vector3
 var left_initial_grab_pos_ : Vector3
 
-var lives_ : int = 3:
+var lives_ : int:
 	set(value):
 		lives_ = value
+		#%WorldEnvironment.environment.fog_density = 0.07 - float(lives_) * 0.02
+		var animation = %AnimationPlayer.get_animation("fog_density")
+		
+		print("před")
+		print(%WorldEnvironment.environment.volumetric_fog_density)
+		
+		var track_index1 = animation.add_track(Animation.TYPE_VALUE)
+		animation.track_set_path(track_index1, "%WorldEnvironment:environment:fog_density")
+		animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.fog_density)
+		#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
+		animation.track_insert_key(0, 0.5, 0.025 - float(lives_) * 0.005)
+		
+		#var track_index2 = animation.add_track(Animation.TYPE_VALUE)
+		#animation.track_set_path(track_index2, "%WorldEnvironment:environment:volumetric_fog_density")
+		#animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.volumetric_fog_density)
+		#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
+		
+		%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
+		
+		print("po")
+		print(%WorldEnvironment.environment.volumetric_fog_density)
+		
+		%AnimationPlayer.play("fog_density")
+		
+		print(lives_)
+		
 		if lives_ <= 0:
 			main_.end_game()
 
@@ -19,19 +45,24 @@ var first_grabbing_hand_ : XRController3D
 @onready var right_hand_ : XRController3D = $XROrigin3D/right_hand
 @onready var left_hand_ : XRController3D = $XROrigin3D/left_hand
 
+var anim_player_ : AnimationPlayer
+
 func _ready():
 	main_.player_ = self
+	lives_ = 3
 
 func _physics_process(delta):
 	if grabbing_:
 		detect_pull()
-	
+#TEST:
+	if Input.is_action_just_pressed("ui_up"):
+		lives_ +=1
+	if Input.is_action_just_pressed("ui_down"):
+		lives_ -=1
+
 func check_grab() -> void:
-	#print("------------------")
-	#print("check")
-	
+
 	if right_hand_.grabbing_ or left_hand_.grabbing_:
-		#print("grabuju")
 		grabbing_ = true
 		
 		if first_grabbing_hand_ == null:
@@ -48,7 +79,6 @@ func check_grab() -> void:
 				first_grabbing_hand_ = right_hand_
 				pulling_ = false
 	else:
-		#print("negrabuju")
 		grabbing_ = false
 		pulling_ = false
 		first_grabbing_hand_ = null
@@ -79,41 +109,8 @@ func detect_pull():
 				player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
 				0,
 				player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
-		#if player_initial_pos_.distance_to(self.position) > 8:
-			#grabbing_ = false
-			#pulling_ = false
-	#else:
-		#grabbing_ = false
-		#pulling_ = false
-		
-#old movement with both hands
-#func detect_pull():
-	#var angle : float
-	#if !pulling_:
-		#pulling_ = true
-		#right_initial_grab_pos_ = right_hand_.position
-		#left_initial_grab_pos_ = left_hand_.position
-		#player_initial_pos_ = self.position
-#
-		#angle = $XROrigin3D/XRCamera3D.rotation.y
-#
-	#if (right_hand_.position.distance_to(right_initial_grab_pos_) < 0.3) and (left_hand_.position.distance_to(left_initial_grab_pos_) < 0.3):
-		#var phase_direction : Vector3 = Vector3(-1,0,0)
-		#angle = $XROrigin3D/XRCamera3D.rotation.y
-		#var speed = 0.01 + right_hand_.position.distance_to(right_initial_grab_pos_)+left_hand_.position.distance_to(left_initial_grab_pos_)*3
-		#self.translate(Vector3(
-			#phase_direction.z*speed, 
-			#0,
-			#phase_direction.x*speed).rotated(Vector3(0,1,0),angle))
-		#if player_initial_pos_.distance_to(self.position) > 8:
-			#grabbing_ = false
-			#pulling_ = false
-	#else:
-		#grabbing_ = false
-		#pulling_ = false
 
 
 func _on_body_entered(body):
 	body.die(999)
-	#lives_ -= 1
 	lives_ -= 1

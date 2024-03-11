@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dl7g3g38rg3gv"]
+[gd_scene load_steps=18 format=3 uid="uid://dl7g3g38rg3gv"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_q1cpw"]
 [ext_resource type="PackedScene" uid="uid://c3donwdgn1s38" path="res://scenes/player.tscn" id="2_q6nst"]
@@ -37,6 +37,18 @@ fog_light_energy = 0.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 
+[sub_resource type="Animation" id="Animation_6b8ha"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_cw6xs"]
+resource_name = "fog_density"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xe5m"]
+_data = {
+"RESET": SubResource("Animation_6b8ha"),
+"fog_density": SubResource("Animation_cw6xs")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_88i1i"]
 size = Vector3(1, 1, 1.07)
 
@@ -72,7 +84,7 @@ shadow_enabled = true
 
 [node name="enemy" parent="." instance=ExtResource("3_fpd47")]
 unique_name_in_owner = true
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -11.2311)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -3.8006)
 visible = false
 follow_player_ = false
 
@@ -87,6 +99,12 @@ light_energy = 0.262
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true
 environment = SubResource("Environment_aqajr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldEnvironment"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_8xe5m")
+}
 
 [node name="start_cube" type="CharacterBody3D" parent="."]
 transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.0680073, -2.15442)

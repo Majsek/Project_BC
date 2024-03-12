@@ -3,12 +3,13 @@ extends CharacterBody3D
 @onready var main_ : Node = get_parent()
 @onready var player_ : Node = main_.player_
 
-@export var lives_ :int = randi_range(90,200)
+var initial_lives_ : int = randi_range(90,200)
+@export var lives_ : int
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
-@export var follow_player_ :bool = true
-@export var is_start_cube_ :bool = false
-var initial_color_ :Color
+@export var follow_player_ : bool = true
+@export var is_start_cube_ : bool = false
+var initial_color_ : Color
 var color_ : Color:
 	set(value):
 		if value.s < 0.4:
@@ -25,6 +26,7 @@ func _ready():
 	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
 	#initial_color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
 	color_ = initial_color_
+	lives_ = initial_lives_
 	self.scale *= lives_/80.0
 #	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
 #	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
@@ -46,7 +48,7 @@ func followPlayer() -> void:
 	
 #	print(follow_direction)
 	follow_direction.y = 0
-	set_velocity(follow_direction)
+	set_velocity(follow_direction * lives_/initial_lives_)
 	#if follow_direction != Vector3(0,0,0):
 		#move_and_slide()
 	move_and_slide()

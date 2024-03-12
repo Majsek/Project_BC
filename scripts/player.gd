@@ -7,6 +7,24 @@ var left_initial_grab_pos_ : Vector3
 var lives_ : int:
 	set(value):
 		lives_ = value
+		if lives_ <= 0:
+			print("111111111111111111111111")
+			print(%WorldEnvironment.environment.fog_density)
+			%WorldEnvironment.environment.fog_density = 6.0
+			print("222222222222222222222222")
+			print(%WorldEnvironment.environment.fog_density)
+			var animation = %AnimationPlayer.get_animation("fog_density")
+			
+			var track_index1 = animation.add_track(Animation.TYPE_VALUE)
+			animation.track_set_path(track_index1, "%WorldEnvironment:environment:fog_density")
+			animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.fog_density)
+			animation.track_insert_key(0, 3.0, 1.0)
+			
+			%AnimationPlayer.play("fog_density")
+			#%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
+			await get_tree().create_timer(3).timeout
+			main_.end_game()
+		
 		#%WorldEnvironment.environment.fog_density = 0.07 - float(lives_) * 0.02
 		var animation = %AnimationPlayer.get_animation("fog_density")
 		
@@ -33,8 +51,6 @@ var lives_ : int:
 		
 		print(lives_)
 		
-		if lives_ <= 0:
-			main_.end_game()
 
 var player_initial_pos_ : Vector3
 var pulling_ : bool = false

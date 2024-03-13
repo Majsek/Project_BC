@@ -32,7 +32,7 @@ func _ready():
 	self.scale *= lives_/80.0
 #	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
 #	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
-	
+	#await get_tree().create_timer(1).timeout
 	spawnAnim()
 	
 	
@@ -40,11 +40,17 @@ func _physics_process(delta):
 	# Add the gravity.
 #	if not is_on_floor():
 #		velocity.y -= gravity * delta
-#
-	if follow_player_ == true:
-		followPlayer()
+	followPlayer()
 
 func spawnAnim():
+	follow_player_ = true
+	#var animation = %AnimationPlayer.get_animation("enemy_spawn")
+	#var track_index1 = animation.add_track(Animation.TYPE_POSITION_3D)
+	#animation.track_set_path(track_index1, $".")
+	#animation.track_insert_key(0, 0.0, -1.0)
+	#animation.track_insert_key(0, 0.6, 0.2)
+	#animation.track_insert_key(0, 0.8, 0.0)
+	%AnimationPlayer.play("enemy_spawn")
 	pass
 	
 func followPlayer() -> void:
@@ -54,6 +60,8 @@ func followPlayer() -> void:
 		angle = 360 - angle
 	self.set_rotation_degrees(Vector3(0,angle+90,0))
 	
+	if !follow_player_:
+		return
 #	print(follow_direction)
 	follow_direction.y = 0
 	set_velocity(follow_direction * lives_/initial_lives_)
@@ -72,6 +80,7 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void
 	if (delta_color1 < 0.2) or (delta_color2  < 0.2):
 		dmg = 200
 		#print("perfect")
+		player_.lives_ += 1  
 	elif (delta_color1 < 0.10) or (delta_color2  < 0.10):
 		dmg = 150
 	elif (delta_color1 < 0.30) or (delta_color2  < 0.30):
@@ -100,5 +109,4 @@ func die(dmg) -> void:
 	else:
 		main_.enemies_killed_ += 1
 		main_.dmg_done_ += dmg
-		%player.lives_ += 1
 	self.queue_free()

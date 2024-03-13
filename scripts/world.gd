@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var player_
 
+var enemies_ : Array
+
 #SCORE
 var enemies_killed_ : int = 0
 var dmg_done_ : int = 0
@@ -9,7 +11,7 @@ var dmg_done_ : int = 0
 #ALLOWED SPAWN EDGES
 var edge_1_allowed_ = true
 var edge_2_allowed_ = false
-var edge_3_allowed_ = true
+var edge_3_allowed_ = false
 var edge_4_allowed_ = false
 
 var interface_ : XRInterface
@@ -18,16 +20,24 @@ var running_ : bool = false
 
 func start_game() -> void:
 	running_ = true
-	%enemy.follow_player_ = true
-	%enemy.visible = true
+	#%enemy.follow_player_ = true 
+	#%enemy.visible = true
 	await get_tree().create_timer(1).timeout
 	spawnEnemy()
 	
 func end_game() -> void:
+#end screen info
 	print("Enemies killed:")
 	print(enemies_killed_)
 	print("Damage done:")
 	print(dmg_done_)
+	
+	running_ = false
+	for e in enemies_:
+		if e != null:
+			e.follow_player_ = false
+	
+	await get_tree().create_timer(4).timeout
 	
 	get_tree().reload_current_scene()
 	
@@ -42,7 +52,7 @@ func spawnEnemy() -> void:
 		return
 	var enemy = enemy_.instantiate()
 	while true:
-		var enemy_position = Vector3(randf_range(-20,20), -0.35,randf_range(-20,20))
+		var enemy_position
 		
 		var random_on_edge = randf_range(0,0.25)
 		var progress
@@ -65,11 +75,13 @@ func spawnEnemy() -> void:
 		if progress != null:
 			%PathFollow3D.progress_ratio = progress
 			enemy.position = %PathFollow3D.position
+			enemy.position.y = -4.0
 			break
 		
 		#if enemy_position.distance_to(player_.position) > 5:
 			#enemy.position = enemy_position
 			#break
+	enemies_.append(enemy)
 	add_child(enemy)
 	await get_tree().create_timer(1).timeout
 	spawnEnemy()

@@ -15,7 +15,7 @@ albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
 material = SubResource("StandardMaterial3D_cd5c2")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_me078"]
-size = Vector3(1, 0.500783, 1)
+size = Vector3(1, 0.0770517, 1)
 
 [sub_resource type="Environment" id="Environment_aqajr"]
 reflected_light_source = 2
@@ -70,17 +70,20 @@ point_count = 5
 script = ExtResource("1_q1cpw")
 
 [node name="floor" type="StaticBody3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -0.0346622, -0.5, 0.00809669)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+collision_layer = 0
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
 mesh = SubResource("PlaneMesh_klbkj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.5, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.0762686, 0)
 shape = SubResource("BoxShape3D_me078")
 
 [node name="player" parent="." instance=ExtResource("2_q6nst")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522066, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.206396, 0.871552, -0.444745, -0.325722, 0.489807, 0.808699, 0.922662, -0.0220493, 0.384978, -4.77542, 6.91891, 9.15886)
@@ -89,7 +92,7 @@ shadow_enabled = true
 
 [node name="enemy" parent="." instance=ExtResource("3_fpd47")]
 unique_name_in_owner = true
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -3.8006)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.5, -3.8)
 visible = false
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
@@ -111,7 +114,7 @@ libraries = {
 }
 
 [node name="start_cube" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.0680073, -2.15442)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.5, -2.154)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("5_iybog")

@@ -42,4 +42,5 @@ environment/defaults/default_clear_color=Color(0.00392157, 0.176471, 0.211765, 1
 
 openxr/enabled=true
 openxr/default_action_map="res://text_resources/openxr_action_map.tres"
+openxr/startup_alert=false
 shaders/enabled=true

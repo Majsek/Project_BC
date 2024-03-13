@@ -10,6 +10,9 @@ var lives_ : int:
 		if lives_ > 3:
 			lives_ = 3
 		if lives_ <= 0:
+			right_hand_.visible = false
+			left_hand_.visible = false
+			
 			print(%WorldEnvironment.environment.fog_density)
 #NOTE: ono to asi neumí bejt interpolovaný a animovaný vůbec, jen po kouscích si to můžu vlastně jakoby animovat sám, musím to nějak vyladit, jestli vůbec chci mít emission, nebo nn
 			var animation = %AnimationPlayer.get_animation("volumetric_fog_density")
@@ -59,49 +62,12 @@ var lives_ : int:
 			animation.track_insert_key(0, 4.0, 0.42)
 			
 			%AnimationPlayer.play("volumetric_fog_density")
-			right_hand_.visible = false
-			left_hand_.visible = false
 			
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
-			print(%WorldEnvironment.environment.fog_density)
-			await get_tree().create_timer(0.1).timeout
 			%WorldEnvironment.environment.fog_density = 0.2
-			print(%WorldEnvironment.environment.fog_density)
+			#print(%WorldEnvironment.environment.fog_density)
 			
 			#%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
-			await get_tree().create_timer(4).timeout
+			#await get_tree().create_timer(4).timeout
 			main_.end_game()
 		else:
 			#%WorldEnvironment.environment.fog_density = 0.07 - float(lives_) * 0.02

@@ -14,7 +14,7 @@ albedo_texture = ExtResource("3_gytna")
 
 [sub_resource type="Animation" id="Animation_hu83i"]
 resource_name = "enemy_spawn"
-length = 4.0
+length = 3.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -22,10 +22,10 @@ tracks/0/path = NodePath(".:position:y")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.3, 3.1, 3.8, 4),
-"transitions": PackedFloat32Array(0.535887, 2.92817, 0.870551, 1.18921, 1),
+"times": PackedFloat32Array(0, 2.3, 3.1, 3.4, 3.6),
+"transitions": PackedFloat32Array(0.535887, 2.92817, 0.870551, 1.1487, 1),
 "update": 0,
-"values": [-8.0, -0.6, -0.6, 0.2, 0.0]
+"values": [-8.0, -0.9, -0.8, 0.2, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -34,7 +34,7 @@ tracks/1/path = NodePath(".:follow_player_")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 4),
+"times": PackedFloat32Array(0, 3.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dl7g3g38rg3gv"]
+[gd_scene load_steps=19 format=3 uid="uid://dl7g3g38rg3gv"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_q1cpw"]
 [ext_resource type="PackedScene" uid="uid://c3donwdgn1s38" path="res://scenes/player.tscn" id="2_q6nst"]
@@ -32,11 +32,10 @@ glow_bloom = 0.13
 glow_hdr_threshold = 2.3
 glow_hdr_scale = 2.93
 fog_enabled = true
-fog_light_color = Color(1, 1, 1, 1)
-fog_light_energy = 0.0
-fog_density = 0.0215
+fog_light_color = Color(0.396078, 0.396078, 0.396078, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
+volumetric_fog_emission = Color(0.32549, 0.32549, 0.32549, 1)
 
 [sub_resource type="Animation" id="Animation_6b8ha"]
 length = 0.001
@@ -44,10 +43,14 @@ length = 0.001
 [sub_resource type="Animation" id="Animation_cw6xs"]
 resource_name = "fog_density"
 
+[sub_resource type="Animation" id="Animation_enbhm"]
+resource_name = "volumetric_fog_density"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8xe5m"]
 _data = {
 "RESET": SubResource("Animation_6b8ha"),
-"fog_density": SubResource("Animation_cw6xs")
+"fog_density": SubResource("Animation_cw6xs"),
+"volumetric_fog_density": SubResource("Animation_enbhm")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_88i1i"]
@@ -77,6 +80,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_me078")
 
 [node name="player" parent="." instance=ExtResource("2_q6nst")]
+unique_name_in_owner = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.206396, 0.871552, -0.444745, -0.325722, 0.489807, 0.808699, 0.922662, -0.0220493, 0.384978, -4.77542, 6.91891, 9.15886)
@@ -87,7 +91,6 @@ shadow_enabled = true
 unique_name_in_owner = true
 transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.35, -3.8006)
 visible = false
-follow_player_ = false
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.282743, 0.959196, 1.57952e-07, 0.361291, -0.106498, 0.926351, 0.888552, -0.261919, -0.376661, 0, 10.3364, -6.55472)
@@ -113,7 +116,6 @@ collision_layer = 2
 motion_mode = 1
 script = ExtResource("5_iybog")
 lives_ = 100
-follow_player_ = false
 is_start_cube_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="start_cube"]

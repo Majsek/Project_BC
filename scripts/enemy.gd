@@ -7,7 +7,7 @@ var initial_lives_ : int = randi_range(90,200)
 @export var lives_ : int
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
-@export var follow_player_ : bool = true
+@export var follow_player_ : bool = false
 @export var is_start_cube_ : bool = false
 var initial_color_ : Color
 var color_ : Color:
@@ -27,9 +27,14 @@ func _ready():
 	#initial_color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
 	color_ = initial_color_
 	lives_ = initial_lives_
+	if is_start_cube_:
+		return
 	self.scale *= lives_/80.0
 #	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
 #	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
+	
+	spawnAnim()
+	
 	
 func _physics_process(delta):
 	# Add the gravity.
@@ -38,6 +43,9 @@ func _physics_process(delta):
 #
 	if follow_player_ == true:
 		followPlayer()
+
+func spawnAnim():
+	pass
 	
 func followPlayer() -> void:
 	var follow_direction : Vector3 = get_global_position().direction_to(player_.get_global_position())
@@ -92,4 +100,5 @@ func die(dmg) -> void:
 	else:
 		main_.enemies_killed_ += 1
 		main_.dmg_done_ += dmg
+		%player.lives_ += 1
 	self.queue_free()

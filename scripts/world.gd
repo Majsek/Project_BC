@@ -14,6 +14,8 @@ var edge_2_allowed_ = false
 var edge_3_allowed_ = false
 var edge_4_allowed_ = false
 
+var difficulty_multiplier_ : float = 1.0
+
 var interface_ : XRInterface
 var enemy_ : Resource = preload("res://scenes/enemy.tscn")
 var running_ : bool = false
@@ -51,6 +53,9 @@ func spawnEnemy() -> void:
 	if running_ == false:
 		return
 	var enemy = enemy_.instantiate()
+	enemy.init(difficulty_multiplier_)
+	
+	
 	while true:
 		var enemy_position
 		
@@ -84,4 +89,5 @@ func spawnEnemy() -> void:
 	enemies_.append(enemy)
 	add_child(enemy)
 	await get_tree().create_timer(1).timeout
+	difficulty_multiplier_ += 0.01
 	spawnEnemy()

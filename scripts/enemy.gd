@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var main_ : Node = get_parent()
 @onready var player_ : Node = main_.player_
 
-var initial_lives_ : int = randi_range(90,200)
+@export var initial_lives_ : int
 @export var lives_ : int
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
@@ -22,6 +22,9 @@ var speed = 10.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func init(difficulty_multiplier):
+	initial_lives_ = randi_range(90*difficulty_multiplier,100*difficulty_multiplier)
+
 func _ready():
 	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
 	#initial_color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
@@ -35,12 +38,12 @@ func _ready():
 	#await get_tree().create_timer(1).timeout
 	spawnAnim()
 	
-	
 func _physics_process(delta):
 	# Add the gravity.
 #	if not is_on_floor():
 #		velocity.y -= gravity * delta
 	followPlayer()
+
 
 func spawnAnim():
 	follow_player_ = true

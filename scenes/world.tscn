@@ -71,8 +71,6 @@ script = ExtResource("1_q1cpw")
 
 [node name="floor" type="StaticBody3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-collision_layer = 0
-collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
 mesh = SubResource("PlaneMesh_klbkj")

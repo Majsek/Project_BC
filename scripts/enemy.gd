@@ -67,6 +67,7 @@ func followPlayer() -> void:
 		return
 #	print(follow_direction)
 	follow_direction.y = 0
+#MOVEMENT SPEED
 	set_velocity(follow_direction * lives_/initial_lives_)
 	#if follow_direction != Vector3(0,0,0):
 		#move_and_slide()

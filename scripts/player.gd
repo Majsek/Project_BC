@@ -10,87 +10,9 @@ var lives_ : int:
 		if lives_ > 3:
 			lives_ = 3
 		if lives_ <= 0:
-			right_hand_.visible = false
-			left_hand_.visible = false
-			
-			print(%WorldEnvironment.environment.fog_density)
-#NOTE: ono to asi neumí bejt interpolovaný a animovaný vůbec, jen po kouscích si to můžu vlastně jakoby animovat sám, musím to nějak vyladit, jestli vůbec chci mít emission, nebo nn
-			var animation = %AnimationPlayer.get_animation("volumetric_fog_density")
-#TODO je to nějaký sus, asi by to chtělo předělat přímo na timery a nepoužívat animace vůbec v tomhle případě
-			var track_index1 = animation.add_track(Animation.TYPE_VALUE)
-			animation.track_set_path(track_index1, "%WorldEnvironment:environment:fog_density")
-			animation.track_insert_key(0, 0.0, 0.025)
-			animation.track_insert_key(0, 0.1, 0.03)
-			animation.track_insert_key(0, 0.2, 0.04)
-			animation.track_insert_key(0, 0.3, 0.05)
-			animation.track_insert_key(0, 0.4, 0.06)
-			animation.track_insert_key(0, 0.5, 0.07)
-			animation.track_insert_key(0, 0.6, 0.08)
-			animation.track_insert_key(0, 0.7, 0.09)
-			animation.track_insert_key(0, 0.8, 0.10)
-			animation.track_insert_key(0, 0.9, 0.11)
-			animation.track_insert_key(0, 1.0, 0.12)
-			animation.track_insert_key(0, 1.1, 0.13)
-			animation.track_insert_key(0, 1.2, 0.14)
-			animation.track_insert_key(0, 1.3, 0.15)
-			animation.track_insert_key(0, 1.4, 0.16)
-			animation.track_insert_key(0, 1.5, 0.17)
-			animation.track_insert_key(0, 1.6, 0.18)
-			animation.track_insert_key(0, 1.7, 0.19)
-			animation.track_insert_key(0, 1.8, 0.20)
-			animation.track_insert_key(0, 1.9, 0.21)
-			animation.track_insert_key(0, 2.0, 0.22)
-			animation.track_insert_key(0, 2.1, 0.23)
-			animation.track_insert_key(0, 2.2, 0.24)
-			animation.track_insert_key(0, 2.3, 0.25)
-			animation.track_insert_key(0, 2.4, 0.26)
-			animation.track_insert_key(0, 2.5, 0.27)
-			animation.track_insert_key(0, 2.6, 0.28)
-			animation.track_insert_key(0, 2.7, 0.29)
-			animation.track_insert_key(0, 2.8, 0.30)
-			animation.track_insert_key(0, 2.9, 0.31)
-			animation.track_insert_key(0, 3.0, 0.32)
-			animation.track_insert_key(0, 3.1, 0.33)
-			animation.track_insert_key(0, 3.2, 0.34)
-			animation.track_insert_key(0, 3.3, 0.35)
-			animation.track_insert_key(0, 3.4, 0.36)
-			animation.track_insert_key(0, 3.5, 0.37)
-			animation.track_insert_key(0, 3.6, 0.38)
-			animation.track_insert_key(0, 3.7, 0.39)
-			animation.track_insert_key(0, 3.8, 0.40)
-			animation.track_insert_key(0, 3.9, 0.41)
-			animation.track_insert_key(0, 4.0, 0.42)
-			
-			%AnimationPlayer.play("volumetric_fog_density")
-			
-			%WorldEnvironment.environment.fog_density = 0.2
-			#print(%WorldEnvironment.environment.fog_density)
-			
-			#%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
-			#await get_tree().create_timer(4).timeout
-			main_.end_game()
+			death_anim()
 		else:
-			#%WorldEnvironment.environment.fog_density = 0.07 - float(lives_) * 0.02
-			var animation = %AnimationPlayer.get_animation("fog_density")
-			
-			print("před")
-			print(%WorldEnvironment.environment.volumetric_fog_density)
-			
-			var track_index1 = animation.add_track(Animation.TYPE_VALUE)
-			animation.track_set_path(track_index1, "%WorldEnvironment:environment:fog_density")
-			animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.fog_density)
-			#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
-			animation.track_insert_key(0, 0.5, 0.025 - float(lives_) * 0.005)
-			
-			#var track_index2 = animation.add_track(Animation.TYPE_VALUE)
-			#animation.track_set_path(track_index2, "%WorldEnvironment:environment:volumetric_fog_density")
-			#animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.volumetric_fog_density)
-			#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
-			
-			%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
-			
-			%AnimationPlayer.play("fog_density")
-
+			decrease_lives_anim()
 var player_initial_pos_ : Vector3
 var pulling_ : bool = false
 var grabbing_ : bool = false
@@ -115,8 +37,89 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_down"):
 		lives_ -=1
 
-func check_grab() -> void:
+## animates environment:fog_density
+func decrease_lives_anim() -> void:
+	var animation = %AnimationPlayer.get_animation("fog_density")
+	
+	print("před")
+	print(%WorldEnvironment.environment.volumetric_fog_density)
+	
+	var track_index1 = animation.add_track(Animation.TYPE_VALUE)
+	animation.track_set_path(track_index1, "%WorldEnvironment:environment:fog_density")
+	animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.fog_density)
+	#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
+	animation.track_insert_key(0, 0.5, 0.025 - float(lives_) * 0.005)
+	
+	#var track_index2 = animation.add_track(Animation.TYPE_VALUE)
+	#animation.track_set_path(track_index2, "%WorldEnvironment:environment:volumetric_fog_density")
+	#animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.volumetric_fog_density)
+	#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
+	
+	%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
+	
+	%AnimationPlayer.play("fog_density")
+	
+func death_anim() -> void:
+	right_hand_.visible = false
+	left_hand_.visible = false
+	
+#NOTE: ono to asi neumí bejt interpolovaný a animovaný vůbec, jen po kouscích si to můžu vlastně jakoby animovat sám, musím to nějak vyladit, jestli vůbec chci mít emission, nebo nn
+	var animation = %AnimationPlayer.get_animation("volumetric_fog_density")
+#TODO je to nějaký sus, asi by to chtělo předělat přímo na timery a nepoužívat animace vůbec v tomhle případě
+	var track_index1 = animation.add_track(Animation.TYPE_VALUE)
+	animation.track_set_path(track_index1, "%WorldEnvironment:environment:fog_density")
+	animation.track_insert_key(0, 0.0, 0.025)
+	animation.track_insert_key(0, 0.1, 0.03)
+	animation.track_insert_key(0, 0.2, 0.04)
+	animation.track_insert_key(0, 0.3, 0.05)
+	animation.track_insert_key(0, 0.4, 0.06)
+	animation.track_insert_key(0, 0.5, 0.07)
+	animation.track_insert_key(0, 0.6, 0.08)
+	animation.track_insert_key(0, 0.7, 0.09)
+	animation.track_insert_key(0, 0.8, 0.10)
+	animation.track_insert_key(0, 0.9, 0.11)
+	animation.track_insert_key(0, 1.0, 0.12)
+	animation.track_insert_key(0, 1.1, 0.13)
+	animation.track_insert_key(0, 1.2, 0.14)
+	animation.track_insert_key(0, 1.3, 0.15)
+	animation.track_insert_key(0, 1.4, 0.16)
+	animation.track_insert_key(0, 1.5, 0.17)
+	animation.track_insert_key(0, 1.6, 0.18)
+	animation.track_insert_key(0, 1.7, 0.19)
+	animation.track_insert_key(0, 1.8, 0.20)
+	animation.track_insert_key(0, 1.9, 0.21)
+	animation.track_insert_key(0, 2.0, 0.22)
+	animation.track_insert_key(0, 2.1, 0.23)
+	animation.track_insert_key(0, 2.2, 0.24)
+	animation.track_insert_key(0, 2.3, 0.25)
+	animation.track_insert_key(0, 2.4, 0.26)
+	animation.track_insert_key(0, 2.5, 0.27)
+	animation.track_insert_key(0, 2.6, 0.28)
+	animation.track_insert_key(0, 2.7, 0.29)
+	animation.track_insert_key(0, 2.8, 0.30)
+	animation.track_insert_key(0, 2.9, 0.31)
+	animation.track_insert_key(0, 3.0, 0.32)
+	animation.track_insert_key(0, 3.1, 0.33)
+	animation.track_insert_key(0, 3.2, 0.34)
+	animation.track_insert_key(0, 3.3, 0.35)
+	animation.track_insert_key(0, 3.4, 0.36)
+	animation.track_insert_key(0, 3.5, 0.37)
+	animation.track_insert_key(0, 3.6, 0.38)
+	animation.track_insert_key(0, 3.7, 0.39)
+	animation.track_insert_key(0, 3.8, 0.40)
+	animation.track_insert_key(0, 3.9, 0.41)
+	animation.track_insert_key(0, 4.0, 0.42)
+	
+	%AnimationPlayer.play("volumetric_fog_density")
+	
+	%WorldEnvironment.environment.fog_density = 0.2
+	#print(%WorldEnvironment.environment.fog_density)
+	
+	#%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
+	#await get_tree().create_timer(4).timeout
+	main_.end_game()
 
+func check_grab() -> void:
 	if right_hand_.grabbing_ or left_hand_.grabbing_:
 		grabbing_ = true
 		

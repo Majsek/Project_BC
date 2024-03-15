@@ -35,12 +35,10 @@ func decrease_light() -> void:
 	await get_tree().create_timer(0.1).timeout
 	decrease_light()
 
-#contact with enemy
+#contact with shotable
 func _on_body_entered(body : Node) -> void:
-	if body is CharacterBody3D:
-		if body.who() == "enemy":
-#TEST
-#			if (abs(color_.h - body.color_.h) < 0.10) or (abs((color_.h+1) - body.color_.h)  < 0.10):
+	if body is CharacterBody3D or StaticBody3D:
+		if body.who() == "shotable":
 			body.hit_by_projectile(color_, position)
 			self.queue_free()
 			

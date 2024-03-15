@@ -1,12 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dl7g3g38rg3gv"]
+[gd_scene load_steps=16 format=3 uid="uid://dl7g3g38rg3gv"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_q1cpw"]
+[ext_resource type="Script" path="res://scripts/floor.gd" id="2_poosd"]
 [ext_resource type="PackedScene" uid="uid://c3donwdgn1s38" path="res://scenes/player.tscn" id="2_q6nst"]
 [ext_resource type="PackedScene" uid="uid://crves8cf8ukat" path="res://scenes/enemy.tscn" id="3_fpd47"]
 [ext_resource type="ArrayMesh" uid="uid://qyjx0rspamqq" path="res://objects/buildings/skyscraper1.obj" id="4_8dpod"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="5_iybog"]
-[ext_resource type="ArrayMesh" uid="uid://b6gsnbei42q8" path="res://objects/cubes/play_cube.obj" id="6_7lwx6"]
-[ext_resource type="Texture2D" uid="uid://ckck2beflrki2" path="res://objects/cubes/play_cube.png" id="7_2mood"]
+[ext_resource type="PackedScene" uid="uid://vd37jqwc1uth" path="res://scenes/control_cube.tscn" id="4_58r8i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cd5c2"]
 albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
@@ -53,12 +52,6 @@ _data = {
 "volumetric_fog_density": SubResource("Animation_enbhm")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_88i1i"]
-size = Vector3(1, 1, 1.07)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5nxhl"]
-albedo_texture = ExtResource("7_2mood")
-
 [sub_resource type="Curve3D" id="Curve3D_hixw0"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -20, 0, -20, 0, 0, 0, 0, 0, 0, 20, 0, -20, 0, 0, 0, 0, 0, 0, 20, 0, 20, 0, 0, 0, 0, 0, 0, -20, 0, 20, 0, 0, 0, 0, 0, 0, -20, 0, -20),
@@ -71,6 +64,7 @@ script = ExtResource("1_q1cpw")
 
 [node name="floor" type="StaticBody3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+script = ExtResource("2_poosd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
 mesh = SubResource("PlaneMesh_klbkj")
@@ -111,22 +105,9 @@ libraries = {
 "": SubResource("AnimationLibrary_8xe5m")
 }
 
-[node name="start_cube" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.5, -2.154)
-collision_layer = 2
-motion_mode = 1
-script = ExtResource("5_iybog")
-initial_lives_ = 100
-lives_ = 100
-is_start_cube_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="start_cube"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.05, -0.0467187, 0)
-shape = SubResource("BoxShape3D_88i1i")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="start_cube"]
-mesh = ExtResource("6_7lwx6")
-surface_material_override/0 = SubResource("StandardMaterial3D_5nxhl")
+[node name="start_cube" parent="." instance=ExtResource("4_58r8i")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.538361, -1.55081)
+class_ = &"start_cube"
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_hixw0")

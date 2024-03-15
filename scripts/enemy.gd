@@ -74,7 +74,7 @@ func followPlayer() -> void:
 	move_and_slide()
 		
 func who() -> String:
-	return "enemy"
+	return "shotable"
 	
 func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)

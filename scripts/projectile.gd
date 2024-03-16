@@ -37,8 +37,8 @@ func decrease_light() -> void:
 
 #contact with shotable
 func _on_body_entered(body : Node) -> void:
-	if body is CharacterBody3D or StaticBody3D:
-		if body.who() == "shotable":
+	if body is CharacterBody3D or body is StaticBody3D:
+		if body.who() == "enemy" or body.who() == "control_cube":
 			body.hit_by_projectile(color_, position)
 			self.queue_free()
 			

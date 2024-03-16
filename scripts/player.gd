@@ -18,7 +18,7 @@ var pulling_ : bool = false
 var grabbing_ : bool = false
 var first_grabbing_hand_ : XRController3D
 
-@onready var main_ : Node3D = get_parent()
+@onready var main_ : Node3D = $"/root/world"
 @onready var right_hand_ : XRController3D = $XROrigin3D/right_hand
 @onready var left_hand_ : XRController3D = $XROrigin3D/left_hand
 
@@ -170,7 +170,7 @@ func detect_pull():
 
 
 func _on_body_entered(body):
-	if body.is_start_cube_:
+	if body.who() == "control_cube":
 		return
 	body.die(999)
 	lives_ -= 1

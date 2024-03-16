@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var main_ : Node = get_parent()
+@onready var main_ : Node = $"/root/world"
 @onready var player_ : Node = main_.player_
 
 @export var initial_lives_ : int
@@ -74,7 +74,7 @@ func followPlayer() -> void:
 	move_and_slide()
 		
 func who() -> String:
-	return "shotable"
+	return "enemy"
 	
 func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)

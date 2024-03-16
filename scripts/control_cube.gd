@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-@onready var main_ : Node = get_parent()
+@onready var main_ : Node = $"/root/world"
 @onready var player_ : Node = main_.player_
 
 @export var initial_lives_ : int = 100
@@ -18,17 +18,19 @@ var color_ : Color:
 		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 
 func _ready():
-	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
-	#initial_color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
-	color_ = initial_color_
+	reset_color()
 	lives_ = initial_lives_
 
 #func spawnAnim():
 	#%AnimationPlayer.play("enemy_spawn")
 	#pass
-func who() -> String:
-	return "shotable"
 	
+func reset_color():
+	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
+	color_ = initial_color_
+	
+func who() -> String:
+	return "control_cube"
 func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
@@ -54,7 +56,6 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void
 		var hit_particle : Node = HIT_PARTICLE.instantiate()
 		hit_particle.init(dmg, initial_color_, projectile_pos)
 		main_.add_child(hit_particle)
-
 func destroy(dmg) -> void:
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
 	hit_particle.init(dmg, initial_color_, position)
@@ -64,3 +65,18 @@ func destroy(dmg) -> void:
 		"start_cube":
 			main_.start_game()
 			self.queue_free()
+		_:
+			match  class_:
+				"edge_2_allowed_cube":
+					main_.edge_2_allowed_ = !main_.edge_2_allowed_
+				"edge_3_allowed_cube":
+					main_.edge_3_allowed_ = !main_.edge_3_allowed_
+				"edge_4_allowed_cube":
+					main_.edge_4_allowed_ = !main_.edge_4_allowed_
+			lives_ += 100
+			reset_color()
+		
+			
+			
+			
+		

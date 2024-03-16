@@ -55,7 +55,8 @@ func decrease_lives_anim() -> void:
 	#animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.volumetric_fog_density)
 	#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
 	
-	%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
+	%WorldEnvironment.environment.volumetric_fog_density = 0.1 - float(lives_) * 0.03
+	#%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
 	
 	%AnimationPlayer.play("fog_density")
 	
@@ -69,16 +70,16 @@ func death_anim() -> void:
 #TODO je to nějaký sus, asi by to chtělo předělat přímo na timery a nepoužívat animace vůbec v tomhle případě
 #TODO: doladit přesný hodnoty
 	#%WorldEnvironment.environment.fog_density = 0.025
-	%WorldEnvironment.environment.volumetric_fog_density = 0.025
+	%WorldEnvironment.environment.volumetric_fog_density = 0.15
 	await get_tree().create_timer(0.1).timeout
 	#%WorldEnvironment.environment.fog_density = 0.2
-	%WorldEnvironment.environment.fog_density = 0.2
+	%WorldEnvironment.environment.volumetric_fog_density = 0.2
 	await get_tree().create_timer(0.1).timeout
 	#%WorldEnvironment.environment.fog_density = 0.25
-	%WorldEnvironment.environment.fog_density = 0.25
+	%WorldEnvironment.environment.volumetric_fog_density = 0.25
 	await get_tree().create_timer(0.1).timeout
 	#%WorldEnvironment.environment.fog_density = 0.30
-	%WorldEnvironment.environment.fog_density = 0.30
+	%WorldEnvironment.environment.volumetric_fog_density = 0.30
 	await get_tree().create_timer(0.1).timeout
 	#%WorldEnvironment.environment.fog_density = 0.35
 	%WorldEnvironment.environment.volumetric_fog_density = 0.35

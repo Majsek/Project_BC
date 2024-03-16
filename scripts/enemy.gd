@@ -8,7 +8,6 @@ extends CharacterBody3D
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
 @export var follow_player_ : bool = false
-@export var is_start_cube_ : bool = false
 var initial_color_ : Color
 var color_ : Color:
 	set(value):
@@ -30,8 +29,6 @@ func _ready():
 	#initial_color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
 	color_ = initial_color_
 	lives_ = initial_lives_
-	if is_start_cube_:
-		return
 	self.scale *= lives_/80.0
 #	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
 #	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
@@ -102,15 +99,13 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void
 		var hit_particle : Node = HIT_PARTICLE.instantiate()
 		hit_particle.init(dmg, initial_color_, projectile_pos)
 		main_.add_child(hit_particle)
+		main_.dmg_done_ += dmg
 
 func die(dmg) -> void:
 	follow_player_ = false
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
 	hit_particle.init(dmg, initial_color_, position)
 	main_.add_child(hit_particle)
-	if is_start_cube_:
-		main_.start_game()
-	else:
-		main_.enemies_killed_ += 1
-		main_.dmg_done_ += dmg
+	main_.enemies_killed_ += 1
+	main_.dmg_done_ += dmg
 	self.queue_free()

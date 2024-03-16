@@ -110,7 +110,37 @@ func death_anim() -> void:
 	await get_tree().create_timer(0.1).timeout
 	#%WorldEnvironment.environment.fog_density = 0.80
 	%WorldEnvironment.environment.volumetric_fog_density = 0.80
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 0.90
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 1.0
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 1.2
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 1.4
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 1.6
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 1.8
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 2.0
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 2.4
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 2.8
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 3.2
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 3.8
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 4.8
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 6.0
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 10.0
+	await get_tree().create_timer(0.1).timeout
+	%WorldEnvironment.environment.volumetric_fog_density = 20.0
+	await get_tree().create_timer(2.0).timeout
 
 	#print(%WorldEnvironment.environment.fog_density)
 	
@@ -171,5 +201,5 @@ func detect_pull():
 func _on_body_entered(body):
 	if body.who() == "control_cube":
 		return
-	body.die(999)
+	body.die(0)
 	lives_ -= 1

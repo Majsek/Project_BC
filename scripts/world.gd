@@ -29,9 +29,9 @@ func start_game() -> void:
 	
 func end_game() -> void:
 #end screen info
-	print("Enemies killed:")
+	print("Raccoons rescued:")
 	print(enemies_killed_)
-	print("Damage done:")
+	print("Cubes collected:")
 	print(dmg_done_)
 	
 	get_tree().reload_current_scene()

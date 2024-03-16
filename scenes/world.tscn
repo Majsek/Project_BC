@@ -112,82 +112,74 @@ curve = SubResource("Curve3D_hixw0")
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, -20)
 
-[node name="Skyscrapers" type="Node3D" parent="."]
-
-[node name="Skyscraper1" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper1" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 42.7665, -55.6956, -66.917)
 mesh = ExtResource("4_8dpod")
-skeleton = NodePath("../..")
 
-[node name="Skyscraper2" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper2" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, -25.3723, -37.8581, -284.353)
 mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
-[node name="Skyscraper3" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper3" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 11.2397, -72.719, -153.815)
 mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
-[node name="Skyscraper4" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper4" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, -206.656, -13.9861, 24.2603)
 mesh = ExtResource("4_8dpod")
-skeleton = NodePath("../..")
 
-[node name="Skyscraper5" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper5" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, -66.9853, -37.8581, -93.8508)
 mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
-[node name="Skyscraper6" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper6" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, -155.685, -72.719, -35.7335)
 mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
-[node name="Skyscraper7" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper7" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, 166.293, -13.9861, 55.1995)
 mesh = ExtResource("4_8dpod")
-skeleton = NodePath("../..")
 
-[node name="Skyscraper8" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper8" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, 168.095, -37.8581, -62.9116)
 mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
-[node name="Skyscraper9" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper9" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, 79.3953, -12.7565, -4.79429)
 mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
-[node name="Skyscraper10" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper10" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 42.7665, -55.6956, 166.012)
 mesh = ExtResource("4_8dpod")
-skeleton = NodePath("../..")
 
-[node name="Skyscraper11" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper11" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, -99.338, -37.8581, 96.4931)
 mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
-[node name="Skyscraper12" type="MeshInstance3D" parent="Skyscrapers"]
+[node name="Skyscraper12" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 11.2397, -72.719, 79.1137)
 mesh = ExtResource("4_8dpod")
 skeleton = NodePath("../Skyscraper1")
 
-[node name="control_cubes" type="Node" parent="."]
-
-[node name="start_cube" parent="control_cubes" instance=ExtResource("4_58r8i")]
+[node name="start_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.429389, -2)
 class_ = &"start_cube"
 
-[node name="edge_2_allowed_cube" parent="control_cubes" instance=ExtResource("4_58r8i")]
+[node name="edge_2_allowed_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
 transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 1, 0.5, 0.2)
 class_ = &"edge_2_allowed_cube"
 
-[node name="edge_3_allowed_cube" parent="control_cubes" instance=ExtResource("4_58r8i")]
+[node name="edge_3_allowed_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
 transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 1, 0.3, 0)
 class_ = &"edge_3_allowed_cube"
 
-[node name="edge_4_allowed_cube" parent="control_cubes" instance=ExtResource("4_58r8i")]
+[node name="edge_4_allowed_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
 transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 1, 0.5, -0.2)
 class_ = &"edge_4_allowed_cube"

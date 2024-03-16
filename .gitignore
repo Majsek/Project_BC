@@ -5,6 +5,7 @@
 .import/
 export.cfg
 export_presets.cfg
+godot_save_config_file.ini
 
 # Imported translations (automatically generated from CSV files)
 *.translation

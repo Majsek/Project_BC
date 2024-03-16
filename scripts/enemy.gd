@@ -99,13 +99,13 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void
 		var hit_particle : Node = HIT_PARTICLE.instantiate()
 		hit_particle.init(dmg, initial_color_, projectile_pos)
 		main_.add_child(hit_particle)
-		main_.dmg_done_ += dmg
+		main_.dmg_done_last_round_ += dmg
 
 func die(dmg) -> void:
 	follow_player_ = false
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
 	hit_particle.init(dmg, initial_color_, position)
 	main_.add_child(hit_particle)
-	main_.enemies_killed_ += 1
-	main_.dmg_done_ += dmg
+	main_.enemies_killed_last_round_ += 1
+	main_.dmg_done_last_round_ += dmg
 	self.queue_free()

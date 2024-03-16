@@ -5,8 +5,13 @@ extends Node3D
 var enemies_ : Array
 
 #SCORE
-var enemies_killed_ : int = 0
-var dmg_done_ : int = 0
+var enemies_killed_last_round_ : int = 0
+var enemies_killed_all_time_ : int = 0
+
+var dmg_done_last_round_ : int = 0
+var dmg_done_all_time_ : int = 0
+
+var money_ : int = 1000
 
 #ALLOWED SPAWN EDGES
 var edge_1_allowed_ = true
@@ -20,6 +25,8 @@ var interface_ : XRInterface
 var enemy_ : Resource = preload("res://scenes/enemy.tscn")
 var running_ : bool = false
 
+const SAVE_PATH = "res://godot_save_config_file.ini"
+
 func start_game() -> void:
 	running_ = true
 	#%enemy.follow_player_ = true 
@@ -30,10 +37,15 @@ func start_game() -> void:
 func end_game() -> void:
 #end screen info
 	print("Raccoons rescued:")
-	print(enemies_killed_)
+	print(enemies_killed_last_round_)
 	print("Cubes collected:")
-	print(dmg_done_)
+	print(dmg_done_last_round_)
 	
+	enemies_killed_all_time_ += enemies_killed_last_round_
+	dmg_done_all_time_ += dmg_done_last_round_
+	
+	money_ += dmg_done_last_round_
+	save_game()
 	get_tree().reload_current_scene()
 	
 func stop_game() -> void:
@@ -43,6 +55,7 @@ func stop_game() -> void:
 			e.follow_player_ = false
 	
 func _ready():
+	load_game()
 	interface_ = XRServer.find_interface("OpenXR")
 	if interface_ and interface_.is_initialized():
 		get_viewport().use_xr = true
@@ -91,3 +104,21 @@ func spawnEnemy() -> void:
 	await get_tree().create_timer(1).timeout
 	difficulty_multiplier_ += 0.01
 	spawnEnemy()
+
+func save_game():
+	var config := ConfigFile.new()
+
+	config.set_value("stats", "money", money_)
+	config.set_value("stats", "enemies_killed", enemies_killed_all_time_)
+	config.set_value("stats", "dmg_done", dmg_done_all_time_)
+
+	print(config.save(SAVE_PATH))
+
+func load_game():
+	var config := ConfigFile.new()
+	config.load(SAVE_PATH)
+
+	money_ = config.get_value("stats", "money")
+	enemies_killed_all_time_ = config.get_value("stats", "enemies_killed")
+	dmg_done_all_time_ = config.get_value("stats", "dmg_done")
+

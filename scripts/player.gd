@@ -41,9 +41,6 @@ func _physics_process(delta):
 func decrease_lives_anim() -> void:
 	var animation = %AnimationPlayer.get_animation("fog_density")
 	
-	print("před")
-	print(%WorldEnvironment.environment.volumetric_fog_density)
-	
 	var track_index1 = animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(track_index1, "%WorldEnvironment:environment:fog_density")
 	animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.fog_density)

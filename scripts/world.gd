@@ -34,20 +34,20 @@ func end_game() -> void:
 	print("Damage done:")
 	print(dmg_done_)
 	
+	get_tree().reload_current_scene()
+	
+func stop_game() -> void:
 	running_ = false
 	for e in enemies_:
 		if e != null:
 			e.follow_player_ = false
 	
-	await get_tree().create_timer(4).timeout
-	
-	get_tree().reload_current_scene()
-	
-	
 func _ready():
 	interface_ = XRServer.find_interface("OpenXR")
 	if interface_ and interface_.is_initialized():
 		get_viewport().use_xr = true
+#TEST
+	enemies_.append(%enemy)
 
 func spawnEnemy() -> void:
 	if running_ == false:

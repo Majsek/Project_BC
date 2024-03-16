@@ -32,6 +32,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("restart") != false:
 #TODO: jedna restart funkce ve world.gd
 		get_tree().reload_current_scene()
+		
 #INPUTS
 func _on_button_pressed(name):
 	match name:
@@ -53,7 +54,7 @@ func _on_button_released(name):
 				player_.check_grab()
 				
 
-#color selection
+#COLOR SELECTION
 func _on_input_vector_2_changed(name, value):
 #	print(value)
 	match name:
@@ -77,13 +78,6 @@ func _on_input_vector_2_changed(name, value):
 #				angle_radians -= PI/2
 				
 				var mapped_value = (angle_degrees / 360.0)
-				
-#				print("2 Směr joysticku ve stupních: ", rad_to_deg(angle_radians))
-#				print("2 Směr joysticku radianech: ", angle_radians)
-
-#				print("--------------")
-#				print(angle_degrees)
-#				print(mapped_value)
 
 				color_ = Color.from_hsv(mapped_value, 1.0, 1.0, 1.0)
 

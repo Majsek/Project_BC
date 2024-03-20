@@ -19,7 +19,7 @@ var edge_2_allowed_ = false
 var edge_3_allowed_ = false
 var edge_4_allowed_ = false
 
-var difficulty_multiplier_ : float = 1.0
+var difficulty_multiplier_ : float = 2.0
 
 var interface_ : XRInterface
 var enemy_ : Resource = preload("res://scenes/enemy.tscn")
@@ -102,7 +102,7 @@ func spawnEnemy() -> void:
 	enemies_.append(enemy)
 	add_child(enemy)
 	await get_tree().create_timer(1).timeout
-	difficulty_multiplier_ += 0.01
+	difficulty_multiplier_ += 0.02
 	spawnEnemy()
 
 func save_game():
@@ -118,6 +118,8 @@ func load_game():
 	var config := ConfigFile.new()
 	config.load(SAVE_PATH)
 
+	if config.get_value("stats", "money") == null:
+		return
 	money_ = config.get_value("stats", "money")
 	enemies_killed_all_time_ = config.get_value("stats", "enemies_killed")
 	dmg_done_all_time_ = config.get_value("stats", "dmg_done")

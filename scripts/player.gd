@@ -18,6 +18,7 @@ var pulling_ : bool = false
 var grabbing_ : bool = false
 var first_grabbing_hand_ : XRController3D
 
+
 @onready var main_ : Node3D = $"/root/world"
 @onready var right_hand_ : XRController3D = $XROrigin3D/right_hand
 @onready var left_hand_ : XRController3D = $XROrigin3D/left_hand
@@ -177,26 +178,58 @@ func detect_pull():
 		right_initial_grab_pos_ = right_hand_.position
 		left_initial_grab_pos_ = left_hand_.position
 
+	##if (right_hand_.position.distance_to(right_initial_grab_pos_) < 0.3):
+	#if first_grabbing_hand_ == right_hand_:
+		##TODO: tenhle if je možná zbytečnej
+		#if right_hand_.grabbing_:
+			#self.position = Vector3(
+				#player_initial_pos_.x+(right_initial_grab_pos_.x-right_hand_.position.x)*10, 
+				#0,
+				#player_initial_pos_.z+(right_initial_grab_pos_.z-right_hand_.position.z)*10)
+	#
+	#if first_grabbing_hand_ == left_hand_:
+		##TODO: tenhle if je možná zbytečnej
+		#if left_hand_.grabbing_:
+			#self.position = Vector3(
+				#player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
+				#0,
+				#player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
+
 	#if (right_hand_.position.distance_to(right_initial_grab_pos_) < 0.3):
 	if first_grabbing_hand_ == right_hand_:
 		#TODO: tenhle if je možná zbytečnej
 		if right_hand_.grabbing_:
-			self.position = Vector3(
+			changePos(Vector3(
 				player_initial_pos_.x+(right_initial_grab_pos_.x-right_hand_.position.x)*10, 
 				0,
 				player_initial_pos_.z+(right_initial_grab_pos_.z-right_hand_.position.z)*10)
+			)
 	
 	if first_grabbing_hand_ == left_hand_:
 		#TODO: tenhle if je možná zbytečnej
 		if left_hand_.grabbing_:
-			self.position = Vector3(
+			changePos(Vector3(
 				player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
 				0,
 				player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
+			)
 
-
+##changes position of player and limits it to playable area: <+20xz,-20xz>
+func changePos(newPos):
+	##X
+	if (newPos.x > 20):
+		newPos.x = 20
+	if (newPos.x < -20):
+		newPos.x = -20
+	##Z
+	if (newPos.z > 20):
+		newPos.z = 20
+	if (newPos.z < -20):
+		newPos.z = -20
+	position = newPos
+		
 func _on_body_entered(body):
-	if body.who() == "control_cube":
+	if body.who() == "control_cube" || body.who() == "floor":
 		return
 	body.die(0)
 	lives_ -= 1

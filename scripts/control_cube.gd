@@ -7,7 +7,7 @@ extends StaticBody3D
 @export var lives_ : int
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
-@export var class_ : StringName
+@export var label_text_ : String
 var initial_color_ : Color
 var color_ : Color:
 	set(value):
@@ -16,11 +16,15 @@ var color_ : Color:
 		#print(value.s)
 		color_ = value
 		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
+		$Label3D.outline_modulate = color_
 
 func _ready():
 	reset_color()
 	lives_ = initial_lives_
-
+	if label_text_ == "":
+		$Label3D.text = name
+	else:
+		$Label3D.text = label_text_
 #func spawnAnim():
 	#%AnimationPlayer.play("enemy_spawn")
 	#pass
@@ -31,6 +35,7 @@ func reset_color():
 	
 func who() -> String:
 	return "control_cube"
+
 func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
@@ -61,12 +66,12 @@ func destroy(dmg) -> void:
 	hit_particle.init(dmg, initial_color_, position)
 	main_.add_child(hit_particle)
 	
-	match class_:
+	match name:
 		"start_cube":
 			main_.start_game()
 			self.queue_free()
 		_:
-			match  class_:
+			match name:
 				"edge_2_allowed_cube":
 					main_.edge_2_allowed_ = !main_.edge_2_allowed_
 				"edge_3_allowed_cube":

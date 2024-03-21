@@ -1,0 +1,28 @@
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://c6tda7pp6345l"]
+
+[sub_resource type="AudioEffectEQ6" id="AudioEffectEQ6_mbft8"]
+resource_name = "EQ6"
+
+[sub_resource type="AudioEffectPanner" id="AudioEffectPanner_yf243"]
+resource_name = "Panner"
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_dsn0s"]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_wwwok"]
+resource_name = "Limiter"
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_nf6lj"]
+resource_name = "PitchShift"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectEQ6_mbft8")
+bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource("AudioEffectPanner_yf243")
+bus/0/effect/1/enabled = false
+bus/0/effect/2/effect = SubResource("AudioEffectDelay_dsn0s")
+bus/0/effect/2/enabled = false
+bus/0/effect/3/effect = SubResource("AudioEffectLimiter_wwwok")
+bus/0/effect/3/enabled = false
+bus/0/effect/4/effect = SubResource("AudioEffectPitchShift_nf6lj")
+bus/0/effect/4/enabled = true

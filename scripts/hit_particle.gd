@@ -1,11 +1,16 @@
 extends GPUParticles3D
 
+@onready var main_ : Node = $"/root/world"
+var hit_sound_audio_players_ : Resource = preload("res://scenes/hit_sound_audio_players.tscn")
+
 func _ready():
 	emitting = true
+	var hit_sound_audio_players = hit_sound_audio_players_.instantiate()
+	hit_sound_audio_players.init(amount, position)
+	main_.add_child(hit_sound_audio_players)
 
 func init(dmg_dealt, color, pos) -> void:
 	amount = dmg_dealt
 	position = pos
 	set_rotation(rotation)
 	get_draw_pass_mesh(0).get_material().set_albedo(color)
-	#print(amount)

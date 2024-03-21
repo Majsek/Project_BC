@@ -7,15 +7,6 @@
 [ext_resource type="ArrayMesh" uid="uid://qyjx0rspamqq" path="res://objects/buildings/skyscraper1.obj" id="4_8dpod"]
 [ext_resource type="PackedScene" uid="uid://vd37jqwc1uth" path="res://scenes/control_cube.tscn" id="4_58r8i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cd5c2"]
-albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_klbkj"]
-material = SubResource("StandardMaterial3D_cd5c2")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_me078"]
-size = Vector3(1, 0.0770517, 1)
-
 [sub_resource type="Environment" id="Environment_aqajr"]
 reflected_light_source = 2
 glow_levels/1 = 1.7
@@ -52,6 +43,15 @@ _data = {
 "volumetric_fog_density": SubResource("Animation_enbhm")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cd5c2"]
+albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_klbkj"]
+material = SubResource("StandardMaterial3D_cd5c2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_me078"]
+size = Vector3(1, 0.0770517, 1)
+
 [sub_resource type="Curve3D" id="Curve3D_hixw0"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -20, 0, -20, 0, 0, 0, 0, 0, 0, 20, 0, -20, 0, 0, 0, 0, 0, 0, 20, 0, 20, 0, 0, 0, 0, 0, 0, -20, 0, 20, 0, 0, 0, 0, 0, 0, -20, 0, -20),
@@ -61,6 +61,16 @@ point_count = 5
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_q1cpw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_aqajr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldEnvironment"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_8xe5m")
+}
 
 [node name="floor" type="StaticBody3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
@@ -73,19 +83,26 @@ mesh = SubResource("PlaneMesh_klbkj")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.0762686, 0)
 shape = SubResource("BoxShape3D_me078")
 
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_hixw0")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, -20)
+
 [node name="player" parent="." instance=ExtResource("2_q6nst")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522066, 0)
+
+[node name="stats" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.896894, 2.40807)
+text = "stats_placeholder"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.206396, 0.871552, -0.444745, -0.325722, 0.489807, 0.808699, 0.922662, -0.0220493, 0.384978, -4.77542, 6.91891, 9.15886)
 light_angular_distance = 2.18
 shadow_enabled = true
-
-[node name="enemy" parent="." instance=ExtResource("3_fpd47")]
-unique_name_in_owner = true
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.0194631, -3.8)
-initial_lives_ = 100
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.282743, 0.959196, 1.57952e-07, 0.361291, -0.106498, 0.926351, 0.888552, -0.261919, -0.376661, 0, 10.3364, -6.55472)
@@ -95,22 +112,10 @@ light_energy = 0.262
 transform = Transform3D(-0.889631, -0.113367, 0.442386, 0.454906, -0.305297, 0.836573, 0.0402193, 0.945485, 0.323173, 13.1349, 8.21034, 4.09577)
 light_energy = 0.262
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="enemy" parent="." instance=ExtResource("3_fpd47")]
 unique_name_in_owner = true
-environment = SubResource("Environment_aqajr")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="WorldEnvironment"]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_8xe5m")
-}
-
-[node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_hixw0")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, -20)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.0194631, -3.8)
+initial_lives_ = 100
 
 [node name="Skyscraper1" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 42.7665, -55.6956, -66.917)

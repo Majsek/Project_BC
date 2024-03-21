@@ -123,4 +123,11 @@ func load_game():
 	money_ = config.get_value("stats", "money")
 	enemies_killed_all_time_ = config.get_value("stats", "enemies_killed")
 	dmg_done_all_time_ = config.get_value("stats", "dmg_done")
+	update_stats_label()
+	
+func update_stats_label():
+	%stats.text = (
+		"Money: " + str(money_) + "\n" +
+		"Enemies killed: " + str(enemies_killed_all_time_) + "\n" +
+		"Damage done: " + str(dmg_done_all_time_))
 

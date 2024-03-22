@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://drrf8pk1yrd1f"
+path="res://.godot/imported/edge_out_cube.obj-069ff030fb8ecd948143ecdc386f1326.mesh"
+
+[deps]
+
+files=["res://.godot/imported/edge_out_cube.obj-069ff030fb8ecd948143ecdc386f1326.mesh"]
+
+source_file="res://objects/cubes/edge_out_cube.obj"
+dest_files=["res://.godot/imported/edge_out_cube.obj-069ff030fb8ecd948143ecdc386f1326.mesh", "res://.godot/imported/edge_out_cube.obj-069ff030fb8ecd948143ecdc386f1326.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

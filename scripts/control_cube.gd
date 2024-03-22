@@ -25,10 +25,34 @@ func _ready():
 		$Label3D.text = name
 	else:
 		$Label3D.text = label_text_
+		
+	reset_mesh()
+	match name:
+		"edge_2_allowed_cube":
+			$MeshInstance3D.scale.x *= -1.0
+		"edge_3_allowed_cube":
+			$MeshInstance3D.rotation.z = deg_to_rad(90.0)
 #func spawnAnim():
 	#%AnimationPlayer.play("enemy_spawn")
 	#pass
-	
+func reset_mesh():
+	match name:
+		"edge_2_allowed_cube":
+			if main_.edge_2_allowed_:
+				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
+			else:
+				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
+		"edge_3_allowed_cube":
+			if main_.edge_3_allowed_:
+				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
+			else:
+				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
+		"edge_4_allowed_cube":
+			if main_.edge_4_allowed_:
+				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
+			else:
+				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
+
 func reset_color():
 	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
 	color_ = initial_color_
@@ -80,6 +104,7 @@ func destroy(dmg) -> void:
 					main_.edge_4_allowed_ = !main_.edge_4_allowed_
 			lives_ += 100
 			reset_color()
+			reset_mesh()
 		
 			
 			

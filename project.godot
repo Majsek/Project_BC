@@ -35,6 +35,7 @@ restart={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.00392157, 0.176471, 0.211765, 1)
 

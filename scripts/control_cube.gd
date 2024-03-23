@@ -3,7 +3,7 @@ extends StaticBody3D
 @onready var main_ : Node = $"/root/world"
 @onready var player_ : Node = main_.player_
 
-@export var initial_lives_ : int = 100
+@export var initial_lives_ : int
 @export var lives_ : int
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
@@ -32,6 +32,9 @@ func _ready():
 			$MeshInstance3D.scale.x *= -1.0
 		"edge_3_allowed_cube":
 			$MeshInstance3D.rotation.z = deg_to_rad(90.0)
+		_:
+			initial_lives_ = 100
+			
 #func spawnAnim():
 	#%AnimationPlayer.play("enemy_spawn")
 	#pass

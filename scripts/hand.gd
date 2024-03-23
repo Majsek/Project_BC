@@ -91,7 +91,7 @@ func _on_input_vector_2_changed(name, value):
 #				angle_radians -= PI/2
 				
 				var mapped_value = (angle_degrees / 360.0)
-				$hue_ring/node_to_be_rotated.rotation_degrees.x = angle_degrees
+				$hue_ring/node_to_be_rotated.rotation_degrees.y = -angle_degrees
 				color_ = Color.from_hsv(mapped_value, 1.0, 1.0, 1.0)
 
 #SHOOT from a gun

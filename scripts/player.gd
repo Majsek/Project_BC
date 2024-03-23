@@ -9,7 +9,7 @@ var lives_ : int:
 		lives_ = value
 		if lives_ > 3:
 			lives_ = 3
-		if lives_ <= 0:
+		elif lives_ <= 0:
 			death_anim()
 		else:
 			decrease_lives_anim()
@@ -18,10 +18,10 @@ var pulling_ : bool = false
 var grabbing_ : bool = false
 var first_grabbing_hand_ : XRController3D
 
-
 @onready var main_ : Node3D = $"/root/world"
 @onready var right_hand_ : XRController3D = $XROrigin3D/right_hand
 @onready var left_hand_ : XRController3D = $XROrigin3D/left_hand
+@onready var tutorial_ : Label3D = $XROrigin3D/XRCamera3D/tutorial
 
 var anim_player_ : AnimationPlayer
 
@@ -62,6 +62,11 @@ func death_anim() -> void:
 	right_hand_.visible = false
 	left_hand_.visible = false
 	
+	right_hand_.grabbing_ = false
+	left_hand_.grabbing_ = false
+	
+	self.collision_layer = 0
+	self.collision_mask = 0
 	main_.stop_game()
 	
 #NOTE: ono to asi neumí bejt interpolovaný a animovaný vůbec, jen po kouscích si to můžu vlastně jakoby animovat sám, musím to nějak vyladit, jestli vůbec chci mít emission, nebo nn

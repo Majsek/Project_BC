@@ -28,11 +28,19 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") != false:
 		if is_right_hand_:
 			shoot()
-			
+		
+		
 	#TEST rapid fire
 	if Input.is_action_just_pressed("ui_left") != false:
 		if is_right_hand_:
-			rapid_fire()
+			player_.tutorial_.tutorial_ -= 1
+		#if is_right_hand_:
+			#rapid_fire()
+			
+	#TEST rapid fire
+	if Input.is_action_just_pressed("ui_right") != false:
+		if is_right_hand_:
+			player_.tutorial_.tutorial_ += 1
 	
 	#TEST R restart
 	if Input.is_action_just_pressed("restart") != false:
@@ -41,13 +49,19 @@ func _process(_delta: float) -> void:
 		
 #INPUTS
 func _on_button_pressed(name):
+	if !self.visible:
+		return
 	match name:
 		"trigger_click":
 			shoot()
+			if player_.tutorial_.tutorial_ == 1:
+				player_.tutorial_.tutorial_ = 2
 			
 		"grip_click":
 			grabbing_ = true
 			player_.check_grab()
+			if player_.tutorial_.tutorial_ == 2:
+				player_.tutorial_.tutorial_ = 3
 		
 		"by_button":
 			if !is_right_hand_:
@@ -63,9 +77,8 @@ func rapid_fire():
 func _on_button_released(name):
 	match name:
 		"grip_click":
-				grabbing_ = false
-				player_.check_grab()
-				
+			grabbing_ = false
+			player_.check_grab()
 
 #COLOR SELECTION
 func _on_input_vector_2_changed(name, value):
@@ -93,6 +106,9 @@ func _on_input_vector_2_changed(name, value):
 				var mapped_value = (angle_degrees / 360.0)
 				$hue_ring/node_to_be_rotated.rotation_degrees.y = -angle_degrees
 				color_ = Color.from_hsv(mapped_value, 1.0, 1.0, 1.0)
+				
+				if player_.tutorial_.tutorial_ == 0:
+						player_.tutorial_.tutorial_ = 1
 
 #SHOOT from a gun
 func shoot() -> void:
@@ -101,9 +117,9 @@ func shoot() -> void:
 	var angle = get_rotation().y
 	angle += deg_to_rad(90)
 	var shoot_direction = Vector3(cos(angle), get_rotation().x, sin(angle) * -1)
-	print("ddddddddddddddddddddddddddddddd")
-	print(get_rotation().x)
-	print(rad_to_deg(get_rotation().x))
+	#print("ddddddddddddddddddddddddddddddd")
+	#print(get_rotation().x)
+	#print(rad_to_deg(get_rotation().x))
 	projectile.init(shoot_direction, get_rotation(), color_)
 	projectile.set_position(get_position()+get_parent().get_parent().get_position())
 #	projectile.set_rotation_degrees(get_rotation_degrees())

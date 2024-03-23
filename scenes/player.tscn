@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://c3donwdgn1s38"]
+[gd_scene load_steps=23 format=3 uid="uid://c3donwdgn1s38"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
 [ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
 [ext_resource type="FontFile" uid="uid://xgy32fq5inad" path="res://DotGothic16-Regular.ttf" id="2_a336u"]
+[ext_resource type="Script" path="res://scenes/tutorial.gd" id="3_tal38"]
 [ext_resource type="Texture2D" uid="uid://biw4o68c30nvl" path="res://vr_prompts/Oculus/Oculus_Right_Stick.png" id="3_xt6ms"]
 [ext_resource type="Texture2D" uid="uid://ciqoolac1kv0c" path="res://vr_prompts/Oculus/Oculus_Left_Stick.png" id="4_hnhks"]
 [ext_resource type="Script" path="res://scripts/left_hand.gd" id="4_m5svs"]
@@ -88,19 +89,20 @@ script = ExtResource("1_87gty")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 
-[node name="Label3D" type="Label3D" parent="XROrigin3D/XRCamera3D"]
+[node name="tutorial" type="Label3D" parent="XROrigin3D/XRCamera3D"]
 transform = Transform3D(0.745, 0, 0, 0, 0.745, 0, 0, 0, 0.745, 0, 0, -1.22682)
 pixel_size = 0.002
 text = "use joysticks to select colors"
 font = ExtResource("2_a336u")
 font_size = 64
 outline_size = 24
+script = ExtResource("3_tal38")
 
-[node name="Sprite3D" type="Sprite3D" parent="XROrigin3D/XRCamera3D/Label3D"]
+[node name="Sprite3D" type="Sprite3D" parent="XROrigin3D/XRCamera3D/tutorial"]
 transform = Transform3D(0.145, 0, 0, 0, 0.145, 0, 0, 0, 0.145, -1.05208, 0, 0)
 texture = ExtResource("3_xt6ms")
 
-[node name="Sprite3D2" type="Sprite3D" parent="XROrigin3D/XRCamera3D/Label3D"]
+[node name="Sprite3D2" type="Sprite3D" parent="XROrigin3D/XRCamera3D/tutorial"]
 transform = Transform3D(0.145, 0, 0, 0, 0.145, 0, 0, 0, 0.145, 1.06778, 0, 0)
 texture = ExtResource("4_hnhks")
 

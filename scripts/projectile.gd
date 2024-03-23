@@ -9,7 +9,8 @@ const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
 func _ready() -> void:
 	#initial force
-	apply_central_force(direction_*666*2)
+	#apply_central_force(direction_*666*2)
+	apply_central_impulse(direction_*20)
 	decrease_light()
 
 #initial setup

@@ -98,9 +98,12 @@ func _on_input_vector_2_changed(name, value):
 func shoot() -> void:
 	var projectile : Node = projectile_.instantiate()
 	
-	var angler = get_rotation().y
-	angler += deg_to_rad(90)
-	var shoot_direction = Vector3(cos(angler), get_rotation().x, sin(angler) * -1)
+	var angle = get_rotation().y
+	angle += deg_to_rad(90)
+	var shoot_direction = Vector3(cos(angle), get_rotation().x, sin(angle) * -1)
+	print("ddddddddddddddddddddddddddddddd")
+	print(get_rotation().x)
+	print(rad_to_deg(get_rotation().x))
 	projectile.init(shoot_direction, get_rotation(), color_)
 	projectile.set_position(get_position()+get_parent().get_parent().get_position())
 #	projectile.set_rotation_degrees(get_rotation_degrees())

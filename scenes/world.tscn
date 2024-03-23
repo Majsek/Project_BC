@@ -116,8 +116,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522066, 0)
 
 [node name="stats" type="Label3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.896894, 2.40807)
+transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 0, 10, -20)
+pixel_size = 0.0385
 text = "stats_placeholder"
+font_size = 64
+outline_size = 24
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.206396, 0.871552, -0.444745, -0.325722, 0.489807, 0.808699, 0.922662, -0.0220493, 0.384978, -4.77542, 6.91891, 9.15886)

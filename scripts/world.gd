@@ -8,7 +8,10 @@ var enemies_ : Array
 var enemies_killed_last_round_ : int = 0
 var enemies_killed_all_time_ : int = 0
 
-var dmg_done_last_round_ : int = 0
+var dmg_done_last_round_ : int = 0:
+	set(value):
+		dmg_done_last_round_ = value
+		update_stats_label()
 var dmg_done_all_time_ : int = 0
 
 var money_ : int = 1000
@@ -128,6 +131,6 @@ func load_game():
 func update_stats_label():
 	%stats.text = (
 		"Money: " + str(money_) + "\n" +
-		"Enemies killed: " + str(enemies_killed_all_time_) + "\n" +
-		"Damage done: " + str(dmg_done_all_time_))
+		"Enemies killed: " + str(enemies_killed_last_round_) + "\n" +
+		"Damage done: " + str(dmg_done_last_round_))
 

@@ -38,16 +38,19 @@ func _ready():
 func reset_mesh():
 	match name:
 		"edge_2_allowed_cube":
+			initial_lives_ = 1
 			if main_.edge_2_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
 		"edge_3_allowed_cube":
+			initial_lives_ = 1
 			if main_.edge_3_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
 		"edge_4_allowed_cube":
+			initial_lives_ = 1
 			if main_.edge_4_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
 			else:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dl7g3g38rg3gv"]
+[gd_scene load_steps=20 format=3 uid="uid://dl7g3g38rg3gv"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_q1cpw"]
 [ext_resource type="Script" path="res://scripts/floor.gd" id="2_poosd"]
 [ext_resource type="PackedScene" uid="uid://c3donwdgn1s38" path="res://scenes/player.tscn" id="2_q6nst"]
 [ext_resource type="PackedScene" uid="uid://crves8cf8ukat" path="res://scenes/enemy.tscn" id="3_fpd47"]
 [ext_resource type="PackedScene" uid="uid://vd37jqwc1uth" path="res://scenes/control_cube.tscn" id="4_58r8i"]
+[ext_resource type="FontFile" uid="uid://xgy32fq5inad" path="res://DotGothic16-Regular.ttf" id="4_341gc"]
 [ext_resource type="ArrayMesh" uid="uid://cfoe3xo81i70l" path="res://objects/buildings/skyscraper1.1.obj" id="5_cduau"]
 [ext_resource type="ArrayMesh" uid="uid://bdex5i2ohbysw" path="res://objects/buildings/skyscraper2.obj" id="6_e4aek"]
 
@@ -119,6 +120,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 0, 10, -20)
 pixel_size = 0.0385
 text = "stats_placeholder"
+font = ExtResource("4_341gc")
 font_size = 64
 outline_size = 24
 
@@ -207,7 +209,7 @@ mesh = ExtResource("5_cduau")
 skeleton = NodePath("../Skyscraper1")
 
 [node name="start_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.429389, -2)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.529389, -2)
 label_text_ = "PLAY!"
 
 [node name="edge_2_allowed_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]

@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3donwdgn1s38"]
+[gd_scene load_steps=19 format=3 uid="uid://c3donwdgn1s38"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
 [ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
 [ext_resource type="Script" path="res://scripts/left_hand.gd" id="4_m5svs"]
+[ext_resource type="Texture2D" uid="uid://ch6ydknxfplf7" path="res://objects/guns/hue_pointer.png" id="5_8ku8b"]
 [ext_resource type="Texture2D" uid="uid://md2i561sjdad" path="res://objects/guns/pistol1.png" id="5_h85n6"]
+[ext_resource type="ArrayMesh" uid="uid://ce6srii48kwf4" path="res://objects/guns/hue_pointer.obj" id="5_q4sjr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsu0v"]
 resource_name = "palette"
@@ -46,6 +48,9 @@ material = SubResource("StandardMaterial3D_1305j")
 rings = 6
 ring_segments = 4
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rc14"]
+albedo_texture = ExtResource("5_8ku8b")
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_nsi06"]
 resource_local_to_scene = true
 _surfaces = [{
@@ -64,6 +69,9 @@ _surfaces = [{
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3woh1"]
 resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdcrh"]
+albedo_texture = ExtResource("5_8ku8b")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f3bqx"]
 radius = 0.277
@@ -93,6 +101,17 @@ transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.00796321, 0.078, 
 mesh = SubResource("TorusMesh_pdqx8")
 skeleton = NodePath("../../right_hand")
 
+[node name="node_to_be_rotated" type="Node3D" parent="XROrigin3D/right_hand/hue_ring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307232, 0)
+
+[node name="hue_pointer" type="MeshInstance3D" parent="XROrigin3D/right_hand/hue_ring/node_to_be_rotated"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.03, 0, -0.258967)
+transparency = 0.1
+cast_shadow = 0
+mesh = ExtResource("5_q4sjr")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_8rc14")
+
 [node name="left_hand" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
 pose = &"aim"
@@ -108,6 +127,17 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3woh1")
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.008, 0.078, 0.038)
 mesh = SubResource("TorusMesh_pdqx8")
 skeleton = NodePath("../../right_hand")
+
+[node name="node_to_be_rotated" type="Node3D" parent="XROrigin3D/left_hand/hue_ring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307232, 0)
+
+[node name="hue_pointer" type="MeshInstance3D" parent="XROrigin3D/left_hand/hue_ring/node_to_be_rotated"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.03, 0, -0.258967)
+transparency = 0.1
+cast_shadow = 0
+mesh = ExtResource("5_q4sjr")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vdcrh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.311101, 0)

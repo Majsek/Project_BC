@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ce6srii48kwf4"
+path="res://.godot/imported/hue_pointer.obj-85cd8cad0af9d1513c8c3d71356784f2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hue_pointer.obj-85cd8cad0af9d1513c8c3d71356784f2.mesh"]
+
+source_file="res://objects/guns/hue_pointer.obj"
+dest_files=["res://.godot/imported/hue_pointer.obj-85cd8cad0af9d1513c8c3d71356784f2.mesh", "res://.godot/imported/hue_pointer.obj-85cd8cad0af9d1513c8c3d71356784f2.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

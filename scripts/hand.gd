@@ -5,6 +5,7 @@ var color_ : Color:
 	set(value):
 		color_ = value
 		$gun.get_surface_override_material(0).set_albedo(color_)
+		$hue_ring/node_to_be_rotated/hue_pointer.get_surface_override_material(0).set_albedo(color_)
 
 var grabbing_ : bool = false
 var is_right_hand_ : bool
@@ -27,6 +28,11 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") != false:
 		if is_right_hand_:
 			shoot()
+			
+	#TEST rapid fire
+	if Input.is_action_just_pressed("ui_left") != false:
+		if is_right_hand_:
+			rapid_fire()
 	
 	#TEST R restart
 	if Input.is_action_just_pressed("restart") != false:
@@ -46,6 +52,13 @@ func _on_button_pressed(name):
 		"by_button":
 			if !is_right_hand_:
 				get_tree().reload_current_scene()
+			else:
+				rapid_fire()
+				
+func rapid_fire():
+	for i in 30:
+		await get_tree().create_timer(0.08).timeout
+		shoot()
 
 func _on_button_released(name):
 	match name:
@@ -78,7 +91,7 @@ func _on_input_vector_2_changed(name, value):
 #				angle_radians -= PI/2
 				
 				var mapped_value = (angle_degrees / 360.0)
-
+				$hue_ring/node_to_be_rotated.rotation_degrees.x = angle_degrees
 				color_ = Color.from_hsv(mapped_value, 1.0, 1.0, 1.0)
 
 #SHOOT from a gun

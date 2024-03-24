@@ -104,7 +104,7 @@ func spawnEnemy() -> void:
 			#break
 	enemies_.append(enemy)
 	add_child(enemy)
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.1).timeout
 	difficulty_multiplier_ += 0.02
 	spawnEnemy()
 

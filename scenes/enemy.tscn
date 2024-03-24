@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://crves8cf8ukat"]
+[gd_scene load_steps=9 format=3 uid="uid://crves8cf8ukat"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_h4n54"]
 [ext_resource type="ArrayMesh" uid="uid://82dthv0njejx" path="res://objects/racc/racc.obj" id="2_806bi"]
@@ -14,7 +14,7 @@ albedo_texture = ExtResource("3_gytna")
 
 [sub_resource type="Animation" id="Animation_hu83i"]
 resource_name = "enemy_spawn"
-length = 3.6
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -39,17 +39,46 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:axis_lock_linear_y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_owq4w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:axis_lock_linear_y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xs3a3"]
 _data = {
+"RESET": SubResource("Animation_owq4w"),
 "enemy_spawn": SubResource("Animation_hu83i")
 }
 
 [node name="enemy" type="CharacterBody3D"]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -8, 0)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
 collision_layer = 2
-collision_mask = 3
+collision_mask = 0
 script = ExtResource("1_h4n54")
+follow_player_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72868, 0)

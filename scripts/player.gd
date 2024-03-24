@@ -38,7 +38,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_down"):
 		lives_ -=1
 
-## animates environment:fog_density
+#CALCULATES AND ANIMATES ENVIRONMETAL FOG ON lives_ CHANGE
 func decrease_lives_anim() -> void:
 	var animation = %AnimationPlayer.get_animation("fog_density")
 	
@@ -58,6 +58,7 @@ func decrease_lives_anim() -> void:
 	
 	%AnimationPlayer.play("fog_density")
 	
+#ANIMATES ENVIRONMENTAL FOG ON DEATH
 func death_anim() -> void:
 	right_hand_.visible = false
 	left_hand_.visible = false
@@ -151,6 +152,7 @@ func death_anim() -> void:
 	#await get_tree().create_timer(4).timeout
 	main_.end_game()
 
+#CHECKS IF THE HAND IS GRABBING AND PULLING
 func check_grab() -> void:
 	if right_hand_.grabbing_ or left_hand_.grabbing_:
 		grabbing_ = true
@@ -173,8 +175,8 @@ func check_grab() -> void:
 		pulling_ = false
 		first_grabbing_hand_ = null
 		
-		
 #TODO: refactoring => nějaký ify a řádky jsou zbytečný
+#DETECT PULLING AND CALCULATES POSITION OF THE PLAYER
 func detect_pull():
 	if !pulling_:
 		pulling_ = true
@@ -219,7 +221,7 @@ func detect_pull():
 				player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
 			)
 
-##changes position of player and limits it to playable area: <+20xz,-20xz>
+#CHANGES POSITION OF THE PLAYER AND LIMITS IT TO THE PLAYABLE AREA: <+20xz,-20xz>
 func changePos(newPos):
 	##X
 	if (newPos.x > 20):

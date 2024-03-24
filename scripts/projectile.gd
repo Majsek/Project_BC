@@ -13,7 +13,9 @@ func _ready() -> void:
 	apply_central_impulse(direction_*20)
 	decrease_light()
 
-#initial setup
+#INIT
+#- SETS DIRECTION AND ROTATION OF THE PROJECTILE
+#- SETS COLOR OF: MESH, LIGHT, PARTICLES
 func init(direction, rotation, color) -> void:
 	direction_ = direction
 	set_rotation(rotation)
@@ -22,7 +24,7 @@ func init(direction, rotation, color) -> void:
 	$OmniLight3D.set_color(color)
 	$CPUParticles3D.get_mesh().get_material().set_albedo(color)
 	
-#decreases light of the projectile
+#DECREASES LIGHT OF THE PROJECTILE
 func decrease_light() -> void:
 	if $OmniLight3D.light_energy < 0.1:
 		$OmniLight3D.queue_free()
@@ -36,7 +38,7 @@ func decrease_light() -> void:
 	await get_tree().create_timer(0.1).timeout
 	decrease_light()
 
-#contact with shotable
+#SIGNALS CONTACT WITH ENEMY OR CONTROL_CUBE 
 func _on_body_entered(body : Node) -> void:
 	if body is CharacterBody3D or body is StaticBody3D:
 		if body.who() == "enemy" or body.who() == "control_cube":

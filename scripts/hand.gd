@@ -21,6 +21,7 @@ func _ready():
 	color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
 	
 func init() -> void:
+#(init functions are in left_hand.gd and right_hand.gd)
 	pass
 
 func _process(_delta: float) -> void:
@@ -47,8 +48,8 @@ func _process(_delta: float) -> void:
 #TODO: jedna restart funkce ve world.gd
 		get_tree().reload_current_scene()
 		
-#INPUTS
-func _on_button_pressed(name):
+#BUTTON INPUTS
+func _on_button_pressed(name) -> void:
 	if !self.visible:
 		return
 	match name:
@@ -69,19 +70,21 @@ func _on_button_pressed(name):
 			else:
 				rapid_fire()
 				
-func rapid_fire():
+#RAPID FIRE ATTACK
+func rapid_fire() -> void:
 	for i in 30:
 		await get_tree().create_timer(0.08).timeout
 		shoot()
 
-func _on_button_released(name):
+#GRAB RELEASE
+func _on_button_released(name) -> void:
 	match name:
 		"grip_click":
 			grabbing_ = false
 			player_.check_grab()
 
 #COLOR SELECTION
-func _on_input_vector_2_changed(name, value):
+func _on_input_vector_2_changed(name, value) -> void:
 #	print(value)
 	match name:
 		"primary":
@@ -110,7 +113,7 @@ func _on_input_vector_2_changed(name, value):
 				if player_.tutorial_.tutorial_ == 0:
 						player_.tutorial_.tutorial_ = 1
 
-#SHOOT from a gun
+#SHOOT FROM A GUN
 func shoot() -> void:
 	var projectile : Node = projectile_.instantiate()
 	

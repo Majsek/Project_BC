@@ -2,14 +2,17 @@ extends Node3D
 
 var dmg_dealt_
 
+#IMMEDIATELY PLAYS THE SOUND
 func _ready():
 	play_hit_sound()
 
-
+#SETS STRENGTH AND POSITION OF THE AudioStreamPlayers3D
 func init(dmg_dealt, pos):
 	dmg_dealt_ = dmg_dealt
 	position = pos
 
+#RANDOMLY SELECTS SOUNDS ON HIT AND PLAYS THEM (number of sounds depends on dmg_deal_)
+#- AFTER PLAYING KILLS ITSELF
 func play_hit_sound():
 	var hit_sounds_array : Array = [preload("res://audio/hit_sound_F7_wav.tres"), preload("res://audio/hit_sound_G7_wav.tres"), preload("res://audio/hit_sound_H7_wav.tres")]
 	

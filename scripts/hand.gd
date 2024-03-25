@@ -123,7 +123,12 @@ func shoot() -> void:
 	#print("ddddddddddddddddddddddddddddddd")
 	#print(get_rotation().x)
 	#print(rad_to_deg(get_rotation().x))
-	projectile.init(shoot_direction, get_rotation(), color_)
-	projectile.set_position(get_position()+get_parent().get_parent().get_position())
+	projectile.init(shoot_direction, color_)
+	
+	#projectile.set_position(get_position()+get_parent().get_parent().get_position())
+	projectile.position = Vector3(-0.002, 0.038, -0.084)
+	projectile.top_level = true
+	
 #	projectile.set_rotation_degrees(get_rotation_degrees())
-	main_.add_child(projectile)
+	#main_.add_child(projectile)
+	add_child(projectile)

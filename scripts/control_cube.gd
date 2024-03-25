@@ -19,41 +19,41 @@ var color_ : Color:
 		$Label3D.outline_modulate = color_
 
 func _ready():
+	reset_mesh()
 	reset_color()
-	lives_ = initial_lives_
+	
 	if label_text_ == "":
 		$Label3D.text = name
 	else:
 		$Label3D.text = label_text_
 		
-	reset_mesh()
 	match name:
 		"edge_2_allowed_cube":
 			$MeshInstance3D.scale.x *= -1.0
 		"edge_3_allowed_cube":
 			$MeshInstance3D.rotation.z = deg_to_rad(90.0)
-		_:
+	
+	match name:
+		"start_cube":
 			initial_lives_ = 100
-			
-#func spawnAnim():
-	#%AnimationPlayer.play("enemy_spawn")
-	#pass
+		_:
+			initial_lives_ = 1
+
+	lives_ = initial_lives_
+
 func reset_mesh():
 	match name:
 		"edge_2_allowed_cube":
-			initial_lives_ = 1
 			if main_.edge_2_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
 		"edge_3_allowed_cube":
-			initial_lives_ = 1
 			if main_.edge_3_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
 		"edge_4_allowed_cube":
-			initial_lives_ = 1
 			if main_.edge_4_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
 			else:
@@ -100,6 +100,9 @@ func destroy(dmg) -> void:
 		"start_cube":
 			main_.start_game()
 			self.queue_free()
+			
+		"lives_shop_cube":
+			player_.max_lives_ += 1
 		_:
 			match name:
 				"edge_2_allowed_cube":
@@ -111,8 +114,4 @@ func destroy(dmg) -> void:
 			lives_ += 100
 			reset_color()
 			reset_mesh()
-		
 			
-			
-			
-		

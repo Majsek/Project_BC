@@ -16,9 +16,8 @@ func _ready() -> void:
 #INIT
 #- SETS DIRECTION AND ROTATION OF THE PROJECTILE
 #- SETS COLOR OF: MESH, LIGHT, PARTICLES
-func init(direction, rotation, color) -> void:
+func init(direction, color) -> void:
 	direction_ = direction
-	set_rotation(rotation)
 	color_ = color
 	$MeshInstance3D.get_surface_override_material(0).set_albedo(color)
 	$OmniLight3D.set_color(color)

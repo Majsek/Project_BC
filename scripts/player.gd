@@ -4,15 +4,22 @@ extends Node3D
 var right_initial_grab_pos_ : Vector3
 var left_initial_grab_pos_ : Vector3
 
+#LIVES
+var max_lives_ : int = 10:
+	set(value):
+		max_lives_ = value
+		lives_ = max_lives_
+		
 var lives_ : int:
 	set(value):
 		lives_ = value
-		if lives_ > 3:
-			lives_ = 3
+		if lives_ > max_lives_:
+			lives_ = max_lives_
 		elif lives_ <= 0:
 			death_anim()
 		else:
 			decrease_lives_anim()
+
 var player_initial_pos_ : Vector3
 var pulling_ : bool = false
 var grabbing_ : bool = false
@@ -27,7 +34,8 @@ var anim_player_ : AnimationPlayer
 
 func _ready():
 	main_.player_ = self
-	lives_ = 3
+	lives_ = max_lives_
+	decrease_lives_anim()
 
 func _physics_process(delta):
 	if grabbing_:
@@ -42,19 +50,16 @@ func _physics_process(delta):
 func decrease_lives_anim() -> void:
 	var animation = %AnimationPlayer.get_animation("fog_density")
 	
+	var fog_density_change = float(lives_)/float(max_lives_)
+	var fog_density = 0.025 - 0.015 * fog_density_change
+	var volumetric_fog_density = 0.1 - 0.09 * fog_density_change
+	
 	var track_index1 = animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(track_index1, "%WorldEnvironment:environment:fog_density")
 	animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.fog_density)
-	#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
-	animation.track_insert_key(0, 0.5, 0.025 - float(lives_) * 0.005)
-	
-	#var track_index2 = animation.add_track(Animation.TYPE_VALUE)
-	#animation.track_set_path(track_index2, "%WorldEnvironment:environment:volumetric_fog_density")
-	#animation.track_insert_key(0, 0.0, %WorldEnvironment.environment.volumetric_fog_density)
-	#animation.track_insert_key(0, 0.5, 0.07 - float(lives_) * 0.02)
-	
-	%WorldEnvironment.environment.volumetric_fog_density = 0.1 - float(lives_) * 0.03
-	#%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
+	animation.track_insert_key(0, 0.5, fog_density)
+
+	%WorldEnvironment.environment.volumetric_fog_density = volumetric_fog_density
 	
 	%AnimationPlayer.play("fog_density")
 	

@@ -9,8 +9,6 @@ func _ready():
 	redraw()
 
 func redraw():
-	print("Tut")
-	print(tutorial_)
 	match tutorial_:
 		0:
 			self.visible = true

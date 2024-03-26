@@ -5,7 +5,7 @@ var right_initial_grab_pos_ : Vector3
 var left_initial_grab_pos_ : Vector3
 
 #LIVES
-var max_lives_ : int = 10:
+var max_lives_ : int = 3:
 	set(value):
 		max_lives_ = value
 		lives_ = max_lives_

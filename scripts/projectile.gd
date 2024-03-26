@@ -43,7 +43,11 @@ func decrease_light() -> void:
 func _on_body_entered(body : Node) -> void:
 	if body is CharacterBody3D or body is StaticBody3D:
 		if body.who() == "enemy" or body.who() == "control_cube":
+			if body.who() == "enemy":
+				if !main_.running_:
+					return
 			body.hit_by_projectile(color_, position)
 			self.queue_free()
-			
+
+				
 

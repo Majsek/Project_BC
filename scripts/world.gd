@@ -63,14 +63,23 @@ func level_up():
 	shop_cube1.name = shop1
 	shop_cube1.position = Vector3(-1.5, 1.0, -1.5)
 	shop_cube1.get_node("MeshInstance3D").rotation_degrees.z = -90.0
-	add_child(shop_cube1)
+	player_.add_child(shop_cube1)
+	shop_cube1.top_level = true
+	shop_cube1.rotation.x = 0.0
+	shop_cube1.rotation.z = 0.0
+#TODO: dořešit
+	#shop_cube1.position.y = 1.0
 	
 #SHOP CUBE 2
 	var shop_cube2 = shop_cube_.instantiate()
 	shop_cube2.name = shop2
 	shop_cube2.position = Vector3(1.5, 1.0, -1.5)
 	shop_cube2.get_node("MeshInstance3D").rotation_degrees.z = -90.0
-	add_child(shop_cube2)
+	player_.add_child(shop_cube2)
+	shop_cube2.top_level = true
+	shop_cube2.rotation.x = 0.0
+	shop_cube2.rotation.z = 0.0
+	#shop_cube2.position.y = 1.0
 	
 
 #RESUME GAME
@@ -79,7 +88,12 @@ func start_game() -> void:
 	
 	get_tree().call_group("control_cubes", "queue_free")
 	
+	
 	running_ = true
+	for e in enemies_:
+		if e != null:
+			e.follow_player_ = true
+	
 	#%enemy.follow_player_ = true 
 	#%enemy.visible = true
 	await get_tree().create_timer(1).timeout
@@ -105,6 +119,8 @@ func stop_enemies() -> void:
 	for e in enemies_:
 		if e != null:
 			e.follow_player_ = false
+			if e.position.distance_to(player_.position) < 2.0:
+				e.queue_free()
 	
 func _ready():
 	load_game()

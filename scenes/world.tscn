@@ -220,9 +220,3 @@ transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 
 
 [node name="edge_4_allowed_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
 transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 1, 0.7, -0.4)
-
-[node name="lives_shop_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
-transform = Transform3D(-0.1, 0, 1.50996e-08, 0, 0.1, 0, -1.50996e-08, 0, -0.1, -0.04, 0.77, 1.5)
-
-[node name="projectile_strength_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
-transform = Transform3D(-0.1, 0, 1.50996e-08, 0, 0.1, 0, -1.50996e-08, 0, -0.1, -0.34, 0.77, 1.5)

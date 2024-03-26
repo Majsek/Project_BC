@@ -25,7 +25,8 @@ var pulling_ : bool = false
 var grabbing_ : bool = false
 var first_grabbing_hand_ : XRController3D
 
-var projectile_impulse_strength_ : float = 10.0
+#TEST
+var projectile_impulse_strength_ : float = 10.0*10
 
 @onready var main_ : Node3D = $"/root/world"
 @onready var right_hand_ : XRController3D = $XROrigin3D/right_hand
@@ -38,6 +39,8 @@ func _ready():
 	main_.player_ = self
 	lives_ = max_lives_
 	decrease_lives_anim()
+	right_hand_.player_ = self
+	left_hand_.player_ = self
 
 func _physics_process(delta):
 	if grabbing_:
@@ -75,7 +78,7 @@ func death_anim() -> void:
 	
 	self.collision_layer = 0
 	self.collision_mask = 0
-	main_.stop_game()
+	main_.stop_enemies()
 	
 #NOTE: ono to asi neumí bejt interpolovaný a animovaný vůbec, jen po kouscích si to můžu vlastně jakoby animovat sám, musím to nějak vyladit, jestli vůbec chci mít emission, nebo nn
 #TODO je to nějaký sus, asi by to chtělo předělat přímo na timery a nepoužívat animace vůbec v tomhle případě

@@ -4,16 +4,33 @@ extends Node3D
 
 var enemies_ : Array
 
-#SCORE
-var enemies_killed_last_round_ : int = 0
-var enemies_killed_all_time_ : int = 0
+var shop_cubes_ : Array = [
+	"lives_shop_cube",
+	"projectile_strength_shop_cube",
+	]
 
+#SCORE
+var enemies_killed_all_time_ : int = 0
+var enemies_killed_last_round_ : int = 0:
+	set(value):
+		enemies_killed_last_round_ = value
+		xp_ += 1
+		
+
+var xp_ : int = 0:
+	set(value):
+		xp_ = value
+		print(xp_)
+		if xp_ >= 10:
+			level_up()
+			
+var level_ : int = 1
+		
+var dmg_done_all_time_ : int = 0
 var dmg_done_last_round_ : int = 0:
 	set(value):
 		dmg_done_last_round_ = value
 		update_stats_label()
-var dmg_done_all_time_ : int = 0
-
 var money_ : int = 1000
 
 #ALLOWED SPAWN EDGES
@@ -22,15 +39,46 @@ var edge_2_allowed_ = false
 var edge_3_allowed_ = false
 var edge_4_allowed_ = false
 
-var difficulty_multiplier_ : float = 2.0
+var difficulty_multiplier_ : float = 0.5
 
 var interface_ : XRInterface
 var enemy_ : Resource = preload("res://scenes/enemy.tscn")
 var running_ : bool = false
 
+var shop_cube_ : Resource = preload("res://scenes/control_cube.tscn")
+
 const SAVE_PATH = "res://godot_save_config_file.ini"
 
+func level_up():
+	level_ += 1
+	stop_enemies()
+	
+	var shop1 = shop_cubes_.pick_random()
+	var shop2 = shop_cubes_.pick_random()
+	while shop1 == shop2:
+		shop2 = shop_cubes_.pick_random()
+	
+#SHOP CUBE 1
+	var shop_cube1 = shop_cube_.instantiate()
+	shop_cube1.name = shop1
+	shop_cube1.position = Vector3(-1.5, 1.0, -1.5)
+	shop_cube1.get_node("MeshInstance3D").rotation_degrees.z = -90.0
+	add_child(shop_cube1)
+	
+#SHOP CUBE 2
+	var shop_cube2 = shop_cube_.instantiate()
+	shop_cube2.name = shop2
+	shop_cube2.position = Vector3(1.5, 1.0, -1.5)
+	shop_cube2.get_node("MeshInstance3D").rotation_degrees.z = -90.0
+	add_child(shop_cube2)
+	
+
+#RESUME GAME
 func start_game() -> void:
+	xp_ = 0 
+	
+	get_tree().call_group("control_cubes", "queue_free")
+	
 	running_ = true
 	#%enemy.follow_player_ = true 
 	#%enemy.visible = true
@@ -51,7 +99,8 @@ func end_game() -> void:
 	save_game()
 	get_tree().reload_current_scene()
 	
-func stop_game() -> void:
+#STOP ENEMIES FROM MOVING
+func stop_enemies() -> void:
 	running_ = false
 	for e in enemies_:
 		if e != null:

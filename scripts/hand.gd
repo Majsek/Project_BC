@@ -16,11 +16,6 @@ const projectile_ : Resource = preload("res://scenes/projectile.tscn")
 @onready var player_ : Node3D
 
 func _ready():
-	print("player")
-	print(main_)
-	print(main_.player_)
-	print(%player)
-	player_ = %player
 	init()
 #TEST initial color
 	color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
@@ -39,15 +34,12 @@ func _process(_delta: float) -> void:
 	#TEST rapid fire
 	if Input.is_action_just_pressed("ui_left") != false:
 		if is_right_hand_:
-			player_.tutorial_.tutorial_ -= 1
-		#if is_right_hand_:
-			#rapid_fire()
+			rapid_fire()
 			
 	#TEST rapid fire
 	if Input.is_action_just_pressed("ui_right") != false:
 		if is_right_hand_:
-			player_.tutorial_.tutorial_ += 1
-	
+			main_.xp_ += 10
 	#TEST R restart
 	if Input.is_action_just_pressed("restart") != false:
 #TODO: jedna restart funkce ve world.gd

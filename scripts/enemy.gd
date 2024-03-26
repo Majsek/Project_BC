@@ -7,7 +7,14 @@ extends CharacterBody3D
 @export var lives_ : int
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
-@export var follow_player_ : bool = false
+@export var follow_player_ : bool = false:
+#not optimal, but necessary
+	set(value):
+		if main_.running_:
+			follow_player_ = value
+		else:
+			follow_player_ = false
+			
 var initial_color_ : Color
 var color_ : Color:
 	set(value):
@@ -43,7 +50,6 @@ func _physics_process(delta):
 
 
 func spawnAnim():
-	follow_player_ = true
 	#var animation = %AnimationPlayer.get_animation("enemy_spawn")
 	#var track_index1 = animation.add_track(Animation.TYPE_POSITION_3D)
 	#animation.track_set_path(track_index1, $".")

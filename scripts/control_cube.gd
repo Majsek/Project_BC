@@ -19,6 +19,7 @@ var color_ : Color:
 		$Label3D.outline_modulate = color_
 
 func _ready():
+	add_to_group("control_cubes")
 	reset_mesh()
 	reset_color()
 	
@@ -91,20 +92,25 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void
 		var hit_particle : Node = HIT_PARTICLE.instantiate()
 		hit_particle.init(dmg, initial_color_, projectile_pos)
 		main_.add_child(hit_particle)
+		
 func destroy(dmg) -> void:
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
 	hit_particle.init(dmg, initial_color_, position)
 	main_.add_child(hit_particle)
 	
+#LOGIC => what each cube does
 	match name:
 		"start_cube":
 			main_.start_game()
-			self.queue_free()
 			
 		"lives_shop_cube":
 			player_.max_lives_ += 1
-		"projectile_strength_cube":
+			main_.start_game()
+			
+		"projectile_strength_shop_cube":
 			player_.projectile_impulse_strength_ += 1
+			main_.start_game()
+			
 		_:
 			match name:
 				"edge_2_allowed_cube":

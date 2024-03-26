@@ -25,6 +25,8 @@ var pulling_ : bool = false
 var grabbing_ : bool = false
 var first_grabbing_hand_ : XRController3D
 
+var projectile_impulse_strength_ : float = 10.0
+
 @onready var main_ : Node3D = $"/root/world"
 @onready var right_hand_ : XRController3D = $XROrigin3D/right_hand
 @onready var left_hand_ : XRController3D = $XROrigin3D/left_hand

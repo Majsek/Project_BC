@@ -103,6 +103,8 @@ func destroy(dmg) -> void:
 			
 		"lives_shop_cube":
 			player_.max_lives_ += 1
+		"projectile_strength_cube":
+			player_.projectile_impulse_strength_ += 1
 		_:
 			match name:
 				"edge_2_allowed_cube":

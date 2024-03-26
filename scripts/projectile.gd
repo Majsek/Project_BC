@@ -4,13 +4,15 @@ var direction_ : Vector3
 var color_ : Color
 
 @onready var main_ : Node3D = $"/root/world"
+@onready var player_ : Node3D = main_.player_
+@onready var impulse_strength_ : float = player_.projectile_impulse_strength_
 
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
 func _ready() -> void:
 	#initial force
 	#apply_central_force(direction_*666*2)
-	apply_central_impulse(direction_*20)
+	apply_central_impulse(direction_*impulse_strength_)
 	decrease_light()
 
 #INIT

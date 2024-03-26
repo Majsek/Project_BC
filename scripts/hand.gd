@@ -12,10 +12,15 @@ var is_right_hand_ : bool
 
 const projectile_ : Resource = preload("res://scenes/projectile.tscn")
 
-@onready var main_ : Node3D = get_parent().get_parent().get_parent()
-@onready var player_ : Node3D = get_parent().get_parent()
+@onready var main_ : Node3D = $"/root/world"
+@onready var player_ : Node3D
 
 func _ready():
+	print("player")
+	print(main_)
+	print(main_.player_)
+	print(%player)
+	player_ = %player
 	init()
 #TEST initial color
 	color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)

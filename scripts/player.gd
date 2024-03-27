@@ -250,3 +250,5 @@ func _on_body_entered(body):
 		return
 	body.die(0)
 	lives_ -= 1
+
+

@@ -74,11 +74,18 @@ func rapid_fire() -> void:
 		shoot()
 
 #GRAB RELEASE
-func _on_button_released(name) -> void:
+#func _on_button_released(name) -> void:
+	#match name:
+		#"grip_click":
+			#grabbing_ = false
+			#player_.check_grab()
+
+func _on_input_float_changed(name, value):
 	match name:
-		"grip_click":
-			grabbing_ = false
-			player_.check_grab()
+		"grip":
+			if value < 0.3:
+				grabbing_ = false
+				player_.check_grab()
 
 #COLOR SELECTION
 func _on_input_vector_2_changed(name, value) -> void:

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm60au7x53ikj"]
+
+[ext_resource type="PackedScene" uid="uid://vd37jqwc1uth" path="res://scenes/control_cube.tscn" id="1_6en0e"]
+
+[node name="shop" type="Node3D"]
+
+[node name="shop_cube1" parent="." instance=ExtResource("1_6en0e")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.2, 0.8, -2.5)
+
+[node name="shop_cube2" parent="." instance=ExtResource("1_6en0e")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1.2, 0.8, -2.5)

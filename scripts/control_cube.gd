@@ -20,8 +20,8 @@ var color_ : Color:
 
 func _ready():
 	add_to_group("control_cubes")
-	reset_mesh()
 	reset_color()
+	reset_mesh()
 	
 	if label_text_ == "":
 		$Label3D.text = name
@@ -44,24 +44,45 @@ func _ready():
 
 func reset_mesh():
 	match name:
+		"shotgun1":
+			$MeshInstance3D.mesh = preload("res://objects/guns/shotgun1.obj")
+			reset_color(Color.from_hsv(0.5, 0.0, 1.0, 1.0))
+		"charge_gun1":
+			$MeshInstance3D.mesh = preload("res://objects/guns/charge_gun1.obj")
+			reset_color(Color.from_hsv(0.5, 0.0, 1.0, 1.0))
+		"frost_shop_cube":
+			$MeshInstance3D.mesh = preload("res://objects/cubes/frost_cube.obj")
+			reset_color(Color.from_hsv(0.52, 1.0, 1.0, 1.0))
+		"lives_shop_cube":
+			$MeshInstance3D.mesh = preload("res://objects/cubes/plus_hp_cube.obj")
+			reset_color(Color.from_hsv(0.33, 1.0, 1.0, 1.0))
+		"projectile_strength_shop_cube":
+			$MeshInstance3D.mesh = preload("res://objects/cubes/projectile_strength_cube.obj")
+			reset_color(Color.from_hsv(0.15, 1.0, 1.0, 1.0))
+		
 		"edge_2_allowed_cube":
 			if main_.edge_2_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
+				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 1.0))
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
+				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 0.2))
 		"edge_3_allowed_cube":
 			if main_.edge_3_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
+				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 1.0))
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
+				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 0.2))
 		"edge_4_allowed_cube":
 			if main_.edge_4_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
+				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 1.0))
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
+				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 0.2))
 
-func reset_color():
-	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
+func reset_color(initial_color_ : Color = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)):
 	color_ = initial_color_
 	
 func who() -> String:

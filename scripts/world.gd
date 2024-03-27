@@ -7,6 +7,9 @@ var enemies_ : Array
 var shop_cubes_ : Array = [
 	"lives_shop_cube",
 	"projectile_strength_shop_cube",
+	"frost_shop_cube",
+	"shotgun1",
+	"charge_gun1",
 	]
 
 #SCORE
@@ -45,7 +48,7 @@ var interface_ : XRInterface
 var enemy_ : Resource = preload("res://scenes/enemy.tscn")
 var running_ : bool = false
 
-var shop_cube_ : Resource = preload("res://scenes/control_cube.tscn")
+var shop_ : Resource = preload("res://scenes/shop.tscn")
 
 const SAVE_PATH = "res://godot_save_config_file.ini"
 
@@ -58,31 +61,24 @@ func level_up():
 	while shop1 == shop2:
 		shop2 = shop_cubes_.pick_random()
 	
+#SHOP SCENE
+	var shop_scene = shop_.instantiate()
+	#it will get freed on start_game()
+	shop_scene.add_to_group("control_cubes")
+	shop_scene.rotation.y = player_.get_node("XROrigin3D/XRCamera3D").rotation.y
+	
 #SHOP CUBE 1
-	var shop_cube1 = shop_cube_.instantiate()
+	var shop_cube1 = shop_scene.get_node("shop_cube1")
 	shop_cube1.name = shop1
-	shop_cube1.position = Vector3(-1.5, 1.0, -1.5)
-	shop_cube1.get_node("MeshInstance3D").rotation_degrees.z = -90.0
-	player_.add_child(shop_cube1)
-	shop_cube1.rotation.y = player_.get_node("XROrigin3D/XRCamera3D").rotation.y
-	shop_cube1.top_level = true
-	#shop_cube1.rotation.x = 0.0
-	#shop_cube1.rotation.z = 0.0
-#TODO: dořešit
-	shop_cube1.position.y = 1.0
+	#shop_cube1.get_node("MeshInstance3D").rotation_degrees.z = -90.0
 	
 #SHOP CUBE 2
-	var shop_cube2 = shop_cube_.instantiate()
+	var shop_cube2 = shop_scene.get_node("shop_cube2")
 	shop_cube2.name = shop2
-	shop_cube2.position = Vector3(1.5, 1.0, -1.5)
-	shop_cube2.get_node("MeshInstance3D").rotation_degrees.z = -90.0
-	player_.add_child(shop_cube2)
-	shop_cube2.rotation.y = player_.get_node("XROrigin3D/XRCamera3D").rotation.y
-	shop_cube2.top_level = true
-	#shop_cube2.rotation.x = 0.0
-	#shop_cube2.rotation.z = 0.0
+	#shop_cube2.get_node("MeshInstance3D").rotation_degrees.z = -90.0
 	
-	shop_cube2.position.y = 1.0
+	player_.add_child(shop_scene)
+	shop_scene.top_level = true
 	
 
 #RESUME GAME

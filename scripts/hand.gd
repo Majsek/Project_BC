@@ -10,8 +10,6 @@ var color_ : Color:
 var grabbing_ : bool = false
 var is_right_hand_ : bool
 
-const projectile_ : Resource = preload("res://scenes/projectile.tscn")
-
 @onready var main_ : Node3D = $"/root/world"
 @onready var player_ : Node3D
 
@@ -28,7 +26,7 @@ func _process(_delta: float) -> void:
 	#TEST space shoot
 	if Input.is_action_just_pressed("ui_accept") != false:
 		if is_right_hand_:
-			shoot()
+			$gun.shoot()
 		
 		
 	#TEST rapid fire
@@ -51,7 +49,7 @@ func _on_button_pressed(name) -> void:
 		return
 	match name:
 		"trigger_click":
-			shoot()
+			$gun.shoot()
 			if player_.tutorial_.tutorial_ == 1:
 				player_.tutorial_.tutorial_ = 2
 			
@@ -71,7 +69,7 @@ func _on_button_pressed(name) -> void:
 func rapid_fire() -> void:
 	for i in 30:
 		await get_tree().create_timer(0.08).timeout
-		shoot()
+		$gun.shoot()
 
 #GRAB RELEASE
 #func _on_button_released(name) -> void:
@@ -117,22 +115,22 @@ func _on_input_vector_2_changed(name, value) -> void:
 				if player_.tutorial_.tutorial_ == 0:
 						player_.tutorial_.tutorial_ = 1
 
-#SHOOT FROM A GUN
-func shoot() -> void:
-	var projectile : Node = projectile_.instantiate()
-	
-	var angle = get_rotation().y
-	angle += deg_to_rad(90)
-	var shoot_direction = Vector3(cos(angle), get_rotation().x, sin(angle) * -1)
-	#print("ddddddddddddddddddddddddddddddd")
-	#print(get_rotation().x)
-	#print(rad_to_deg(get_rotation().x))
-	projectile.init(shoot_direction, color_)
-	
-	#projectile.set_position(get_position()+get_parent().get_parent().get_position())
-	projectile.position = Vector3(-0.002, 0.038, -0.084)
-	projectile.top_level = true
-	
-#	projectile.set_rotation_degrees(get_rotation_degrees())
-	#main_.add_child(projectile)
-	add_child(projectile)
+##SHOOT FROM A GUN
+#func shoot() -> void:
+	#var projectile : Node = projectile_.instantiate()
+	#
+	#var angle = get_rotation().y
+	#angle += deg_to_rad(90)
+	#var shoot_direction = Vector3(cos(angle), get_rotation().x, sin(angle) * -1)
+	##print("ddddddddddddddddddddddddddddddd")
+	##print(get_rotation().x)
+	##print(rad_to_deg(get_rotation().x))
+	#projectile.init(shoot_direction, color_)
+	#
+	##projectile.set_position(get_position()+get_parent().get_parent().get_position())
+	#projectile.position = Vector3(-0.002, 0.038, -0.084)
+	#projectile.top_level = true
+	#
+##	projectile.set_rotation_degrees(get_rotation_degrees())
+	##main_.add_child(projectile)
+	#add_child(projectile)

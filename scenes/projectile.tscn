@@ -36,6 +36,7 @@ material = SubResource("StandardMaterial3D_y53jk")
 size = Vector3(0.01, 0.01, 0.01)
 
 [node name="projectile" type="RigidBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 collision_layer = 4
 collision_mask = 3
 continuous_cd = true

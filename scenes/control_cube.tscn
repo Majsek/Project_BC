@@ -32,3 +32,12 @@ double_sided = false
 font = ExtResource("4_w7yk4")
 font_size = 144
 outline_size = 24
+
+[node name="description" type="Label3D" parent="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.729618, 0)
+billboard = 2
+double_sided = false
+outline_modulate = Color(0.439216, 0.439216, 0.439216, 1)
+font = ExtResource("4_w7yk4")
+font_size = 74
+outline_size = 24

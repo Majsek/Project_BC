@@ -1,6 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm60au7x53ikj"]
+[gd_scene load_steps=6 format=3 uid="uid://cm60au7x53ikj"]
 
 [ext_resource type="PackedScene" uid="uid://vd37jqwc1uth" path="res://scenes/control_cube.tscn" id="1_6en0e"]
+[ext_resource type="FontFile" uid="uid://xgy32fq5inad" path="res://DotGothic16-Regular.ttf" id="2_ywjw4"]
+
+[sub_resource type="Animation" id="Animation_7t5gv"]
+resource_name = "rainbow_outline"
+length = 2.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:outline_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1.1, 1.5, 1.9, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 1, 1), Color(1, 0, 0.0156863, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q7jni"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:outline_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mijjp"]
+_data = {
+"RESET": SubResource("Animation_q7jni"),
+"rainbow_outline": SubResource("Animation_7t5gv")
+}
 
 [node name="shop" type="Node3D"]
 
@@ -9,3 +48,18 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.2, 0.8, -2.5)
 
 [node name="shop_cube2" parent="." instance=ExtResource("1_6en0e")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1.2, 0.8, -2.5)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69062, -2.5)
+outline_modulate = Color(1, 0, 0, 1)
+text = "LEVEL UP!
+"
+font = ExtResource("2_ywjw4")
+font_size = 64
+outline_size = 24
+
+[node name="levelup_animation_player" type="AnimationPlayer" parent="Label3D"]
+libraries = {
+"": SubResource("AnimationLibrary_mijjp")
+}
+autoplay = "rainbow_outline"

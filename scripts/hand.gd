@@ -40,7 +40,7 @@ func _process(_delta: float) -> void:
 	#TEST rapid fire
 	if Input.is_action_just_pressed("ui_left") != false:
 		if is_right_hand_:
-			rapid_fire()
+			$gun.rapid_fire()
 			
 	#TEST rapid fire
 	if Input.is_action_just_pressed("ui_right") != false:
@@ -72,13 +72,7 @@ func _on_button_pressed(name) -> void:
 			if !is_right_hand_:
 				get_tree().reload_current_scene()
 			else:
-				rapid_fire()
-				
-#RAPID FIRE ATTACK
-func rapid_fire() -> void:
-	for i in 30:
-		await get_tree().create_timer(0.08).timeout
-		$gun.shoot()
+				$gun.rapid_fire()
 
 func _on_button_released(name) -> void:
 	match name:

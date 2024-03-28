@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c3donwdgn1s38"]
+[gd_scene load_steps=25 format=3 uid="uid://c3donwdgn1s38"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
 [ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
@@ -16,6 +16,42 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqfx8"]
 resource_local_to_scene = true
 albedo_texture = ExtResource("8_dvoxg")
+
+[sub_resource type="Animation" id="Animation_18y6p"]
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p10u0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e02kl"]
+_data = {
+"RESET": SubResource("Animation_p10u0"),
+"shoot": SubResource("Animation_18y6p")
+}
 
 [sub_resource type="Gradient" id="Gradient_h8aib"]
 offsets = PackedFloat32Array(0, 0.167, 0.333, 0.5, 0.667, 0.833, 1)
@@ -86,8 +122,13 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_mqfx8")
 script = ExtResource("9_p3fns")
 
+[node name="gun_animation_player" type="AnimationPlayer" parent="XROrigin3D/right_hand/gun"]
+libraries = {
+"": SubResource("AnimationLibrary_e02kl")
+}
+
 [node name="hue_ring" type="MeshInstance3D" parent="XROrigin3D/right_hand"]
-transform = Transform3D(0.04, 0, 0, 0, 0.0305194, -0.0258567, 0, 0.0258567, 0.0305194, -0.00796321, 0.066687, 0.112923)
+transform = Transform3D(0.04, 0, 0, 0, 0.0305194, -0.0258567, 0, 0.0258567, 0.0305194, -0.00796321, 0.0609755, 0.117773)
 mesh = SubResource("TorusMesh_pdqx8")
 skeleton = NodePath("../../right_hand")
 
@@ -114,8 +155,10 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3woh1")
 script = ExtResource("9_p3fns")
 
+[node name="gun_animation_player" type="AnimationPlayer" parent="XROrigin3D/left_hand/gun"]
+
 [node name="hue_ring" type="MeshInstance3D" parent="XROrigin3D/left_hand"]
-transform = Transform3D(0.04, 0, 0, 0, 0.0305194, -0.0258567, 0, 0.0258567, 0.0305194, -0.008, 0.0669973, 0.112557)
+transform = Transform3D(0.04, 0, 0, 0, 0.0305194, -0.0258567, 0, 0.0258567, 0.0305194, -0.008, 0.0612858, 0.117407)
 mesh = SubResource("TorusMesh_pdqx8")
 skeleton = NodePath("../../right_hand")
 

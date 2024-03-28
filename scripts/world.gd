@@ -8,6 +8,7 @@ var shop_cubes_ : Array = [
 	"lives_shop_cube",
 	"projectile_strength_shop_cube",
 	"frost_shop_cube",
+	"rapid_fire_cube",
 	"shotgun",
 	"charge_gun",
 	]
@@ -34,7 +35,6 @@ var dmg_done_last_round_ : int = 0:
 	set(value):
 		dmg_done_last_round_ = value
 		update_stats_label()
-var money_ : int = 1000
 
 #ALLOWED SPAWN EDGES
 var edge_1_allowed_ = true
@@ -108,7 +108,6 @@ func end_game() -> void:
 	enemies_killed_all_time_ += enemies_killed_last_round_
 	dmg_done_all_time_ += dmg_done_last_round_
 	
-	money_ += dmg_done_last_round_
 	save_game()
 	get_tree().reload_current_scene()
 	
@@ -175,26 +174,36 @@ func spawnEnemy() -> void:
 func save_game():
 	var config := ConfigFile.new()
 
-	config.set_value("stats", "money", money_)
 	config.set_value("stats", "enemies_killed", enemies_killed_all_time_)
 	config.set_value("stats", "dmg_done", dmg_done_all_time_)
-
+	
+	config.set_value("settings", "edge_2_allowed_", edge_2_allowed_)
+	config.set_value("settings", "edge_3_allowed_", edge_3_allowed_)
+	config.set_value("settings", "edge_4_allowed_", edge_4_allowed_)
+	
 	print(config.save(SAVE_PATH))
 
 func load_game():
 	var config := ConfigFile.new()
 	config.load(SAVE_PATH)
 
-	if config.get_value("stats", "money") == null:
+	if config.get_value("stats", "enemies_killed") == null:
 		return
-	money_ = config.get_value("stats", "money")
 	enemies_killed_all_time_ = config.get_value("stats", "enemies_killed")
 	dmg_done_all_time_ = config.get_value("stats", "dmg_done")
+	
+	edge_2_allowed_ = config.get_value("settings", "edge_2_allowed_")
+	edge_3_allowed_ = config.get_value("settings", "edge_3_allowed_")
+	edge_4_allowed_ = config.get_value("settings", "edge_4_allowed_")
+	
 	update_stats_label()
 	
 func update_stats_label():
 	%stats.text = (
-		"Money: " + str(money_) + "\n" +
-		"Enemies killed: " + str(enemies_killed_last_round_) + "\n" +
-		"Damage done: " + str(dmg_done_last_round_))
+		"Enemies killed all time: " + str(enemies_killed_all_time_) + "\n" +
+		"Damage done all time: " + str(dmg_done_all_time_) + "\n" +
+		"\n" +
+		"Enemies killed last round: " + str(enemies_killed_last_round_) + "\n" +
+		"Damage done last round: " + str(dmg_done_last_round_)
+		)
 

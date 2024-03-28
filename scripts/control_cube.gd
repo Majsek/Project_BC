@@ -8,6 +8,7 @@ extends StaticBody3D
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
 @export var label_text_ : String
+@export var description_text_ : String
 var initial_color_ : Color
 var color_ : Color:
 	set(value):
@@ -27,6 +28,7 @@ func _ready():
 		$Label3D.text = name
 	else:
 		$Label3D.text = label_text_
+		$Label3D/description.text = description_text_
 		
 	match name:
 		"edge_2_allowed_cube":
@@ -38,7 +40,7 @@ func _ready():
 		"start_cube":
 			initial_lives_ = 100
 		_:
-			initial_lives_ = 1
+			initial_lives_ = 50
 
 	lives_ = initial_lives_
 
@@ -47,19 +49,34 @@ func reset_mesh():
 		"shotgun":
 			$MeshInstance3D.mesh = preload("res://objects/guns/shotgun1.obj")
 			reset_color(Color.from_hsv(0.5, 0.0, 1.0, 1.0))
+			label_text_ = "Shotgun"
+			description_text_ = "-shoots 3x bulets"
 		"charge_gun":
 			$MeshInstance3D.mesh = preload("res://objects/guns/charge_gun1.obj")
 			reset_color(Color.from_hsv(0.5, 0.0, 1.0, 1.0))
+			label_text_ = "Charge gun"
+			description_text_ = "-hold trigger to load, release to fire"
 		"frost_shop_cube":
 			$MeshInstance3D.mesh = preload("res://objects/cubes/frost_cube.obj")
 			reset_color(Color.from_hsv(0.52, 1.0, 1.0, 1.0))
+			label_text_ = "Frostbite"
+			description_text_ = "-drastically slows enemy movement"
 		"lives_shop_cube":
 			$MeshInstance3D.mesh = preload("res://objects/cubes/plus_hp_cube.obj")
 			reset_color(Color.from_hsv(0.33, 1.0, 1.0, 1.0))
+			label_text_ = "HP Booster"
+			description_text_ = "-increases player's maximum health"
 		"projectile_strength_shop_cube":
 			$MeshInstance3D.mesh = preload("res://objects/cubes/projectile_strength_cube.obj")
 			reset_color(Color.from_hsv(0.15, 1.0, 1.0, 1.0))
-		
+			label_text_ = "Velocity Upgrade"
+			description_text_ = "-increases bullet speed"
+		"rapid_fire_cube":
+			$MeshInstance3D.mesh = preload("res://objects/cubes/rapid_fire_cube.obj")
+			reset_color(Color.from_hsv(0.916, 1.0, 1.0, 1.0))
+			label_text_ = "Rapid Fire"
+			description_text_ = "-rapidly autofire for a limited duration"
+			
 		"edge_2_allowed_cube":
 			if main_.edge_2_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
@@ -152,6 +169,9 @@ func destroy(dmg, gun : MeshInstance3D) -> void:
 			player_.projectile_impulse_strength_ += 1
 			main_.start_game()
 			
+		"rapid_fire_cube":
+			main_.start_game()
+			gun.rapid_fire()
 		_:
 			match name:
 				"edge_2_allowed_cube":

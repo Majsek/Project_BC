@@ -35,6 +35,7 @@ func shoot() -> void:
 			projectile1.position = Vector3(-0.002, 0.038, -0.084)
 			projectile1.top_level = true
 			add_child(projectile1)
+			play_gun_anim()
 		"shotgun":
 			var projectile2 : Node = projectile_.instantiate()
 			var projectile3 : Node = projectile_.instantiate()
@@ -53,6 +54,7 @@ func shoot() -> void:
 			add_child(projectile1)
 			add_child(projectile2)
 			add_child(projectile3)
+			play_gun_anim()
 		"charge_gun":
 			load_bullets()
 			if !hand_.trigger_clicking_:
@@ -63,11 +65,14 @@ func shoot() -> void:
 					projectile1.init(shoot_direction, hand_.color_, self)
 					projectile1.position = Vector3(-0.002, 0.038, -0.084)
 					projectile1.top_level = true
+					play_gun_anim()
 					add_child(projectile1)
 					await get_tree().create_timer(0.05).timeout
 				bullets_ = 0
 				shooting_ = false
 
+func play_gun_anim():
+	$gun_animation_player.play("shoot")
 
 func load_bullets():
 	if shooting_:
@@ -81,6 +86,11 @@ func load_bullets():
 	elif !hand_.trigger_clicking_:
 		return
 		
+#RAPID FIRE ATTACK
+func rapid_fire() -> void:
+	for i in 30:
+		await get_tree().create_timer(0.08).timeout
+		shoot()
 		
 	#print("ddddddddddddddddddddddddddddddd")
 	#print(get_rotation().x)

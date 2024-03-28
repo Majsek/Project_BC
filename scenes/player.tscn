@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c3donwdgn1s38"]
+[gd_scene load_steps=27 format=3 uid="uid://c3donwdgn1s38"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
 [ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
@@ -12,45 +12,19 @@
 [ext_resource type="ArrayMesh" uid="uid://cuqjbpg3iquig" path="res://objects/guns/pistol1.1.obj" id="7_gcpi1"]
 [ext_resource type="Texture2D" uid="uid://xh4tstohv4j3" path="res://objects/guns/pistol1.1.png" id="8_dvoxg"]
 [ext_resource type="Script" path="res://scripts/gun.gd" id="9_p3fns"]
+[ext_resource type="Animation" uid="uid://ddtqjhj0n7gf2" path="res://animations/shoot.res" id="10_kbcll"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqfx8"]
 resource_local_to_scene = true
 albedo_texture = ExtResource("8_dvoxg")
 
-[sub_resource type="Animation" id="Animation_18y6p"]
-resource_name = "shoot"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_p10u0"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e02kl"]
 _data = {
 "RESET": SubResource("Animation_p10u0"),
-"shoot": SubResource("Animation_18y6p")
+"shoot": ExtResource("10_kbcll")
 }
 
 [sub_resource type="Gradient" id="Gradient_h8aib"]
@@ -77,6 +51,34 @@ albedo_texture = ExtResource("5_8ku8b")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3woh1"]
 resource_local_to_scene = true
 albedo_texture = ExtResource("8_dvoxg")
+
+[sub_resource type="Animation" id="Animation_m0h4u"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.03)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_66fk2"]
+_data = {
+"RESET": SubResource("Animation_m0h4u"),
+"shoot": ExtResource("10_kbcll")
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdcrh"]
 albedo_texture = ExtResource("5_8ku8b")
@@ -116,7 +118,7 @@ pose = &"aim"
 script = ExtResource("2_5nyhh")
 
 [node name="gun" type="MeshInstance3D" parent="XROrigin3D/right_hand"]
-transform = Transform3D(-6.55671e-09, -2.66225e-15, -0.15, 0, 0.15, -2.66225e-15, 0.15, -1.1637e-22, -6.55671e-09, 0, 0, 0)
+transform = Transform3D(-6.54888e-09, -3.20294e-10, -0.15, -0.00732746, 0.149821, 0, 0.149821, 0.00732746, -6.55671e-09, 0, 0, 0.0111111)
 mesh = ExtResource("7_gcpi1")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_mqfx8")
@@ -127,15 +129,15 @@ libraries = {
 "": SubResource("AnimationLibrary_e02kl")
 }
 
-[node name="hue_ring" type="MeshInstance3D" parent="XROrigin3D/right_hand"]
-transform = Transform3D(0.04, 0, 0, 0, 0.0305194, -0.0258567, 0, 0.0258567, 0.0305194, -0.00796321, 0.0609755, 0.117773)
+[node name="hue_ring" type="MeshInstance3D" parent="XROrigin3D/right_hand/gun"]
+transform = Transform3D(-1.16564e-08, 0.172378, 0.203463, -4.73289e-15, 0.203463, -0.172378, -0.266667, -7.53489e-09, -8.89363e-09, 0.785155, 0.406503, 0.053088)
 mesh = SubResource("TorusMesh_pdqx8")
-skeleton = NodePath("../../right_hand")
+skeleton = NodePath("../..")
 
-[node name="node_to_be_rotated" type="Node3D" parent="XROrigin3D/right_hand/hue_ring"]
+[node name="node_to_be_rotated" type="Node3D" parent="XROrigin3D/right_hand/gun/hue_ring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307232, 0)
 
-[node name="hue_pointer" type="MeshInstance3D" parent="XROrigin3D/right_hand/hue_ring/node_to_be_rotated"]
+[node name="hue_pointer" type="MeshInstance3D" parent="XROrigin3D/right_hand/gun/hue_ring/node_to_be_rotated"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.03, 0, -0.258967)
 transparency = 0.1
 cast_shadow = 0
@@ -149,23 +151,26 @@ pose = &"aim"
 script = ExtResource("4_m5svs")
 
 [node name="gun" type="MeshInstance3D" parent="XROrigin3D/left_hand"]
-transform = Transform3D(-6.55671e-09, -2.66225e-15, -0.15, 0, 0.15, -2.66225e-15, 0.15, -1.1637e-22, -6.55671e-09, 0, 0, 0)
+transform = Transform3D(-6.55671e-09, 0, -0.15, 0, 0.15, 0, 0.15, 0, -6.55671e-09, 0, 0, 0.03)
 mesh = ExtResource("7_gcpi1")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3woh1")
 script = ExtResource("9_p3fns")
 
 [node name="gun_animation_player" type="AnimationPlayer" parent="XROrigin3D/left_hand/gun"]
+libraries = {
+"": SubResource("AnimationLibrary_66fk2")
+}
 
-[node name="hue_ring" type="MeshInstance3D" parent="XROrigin3D/left_hand"]
-transform = Transform3D(0.04, 0, 0, 0, 0.0305194, -0.0258567, 0, 0.0258567, 0.0305194, -0.008, 0.0612858, 0.117407)
+[node name="hue_ring" type="MeshInstance3D" parent="XROrigin3D/left_hand/gun"]
+transform = Transform3D(-1.16564e-08, 0.172378, 0.203463, -4.73289e-15, 0.203463, -0.172378, -0.266667, -7.53489e-09, -8.89363e-09, 0.782715, 0.408572, 0.0533333)
 mesh = SubResource("TorusMesh_pdqx8")
-skeleton = NodePath("../../right_hand")
+skeleton = NodePath("../../../right_hand")
 
-[node name="node_to_be_rotated" type="Node3D" parent="XROrigin3D/left_hand/hue_ring"]
+[node name="node_to_be_rotated" type="Node3D" parent="XROrigin3D/left_hand/gun/hue_ring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307232, 0)
 
-[node name="hue_pointer" type="MeshInstance3D" parent="XROrigin3D/left_hand/hue_ring/node_to_be_rotated"]
+[node name="hue_pointer" type="MeshInstance3D" parent="XROrigin3D/left_hand/gun/hue_ring/node_to_be_rotated"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.03, 0, -0.258967)
 transparency = 0.1
 cast_shadow = 0

@@ -5,7 +5,7 @@ var color_ : Color:
 	set(value):
 		color_ = value
 		$gun.get_surface_override_material(0).set_albedo(color_)
-		$hue_ring/node_to_be_rotated/hue_pointer.get_surface_override_material(0).set_albedo(color_)
+		$gun/hue_ring/node_to_be_rotated/hue_pointer.get_surface_override_material(0).set_albedo(color_)
 
 var grabbing_ : bool = false
 var is_right_hand_ : bool
@@ -112,7 +112,7 @@ func _on_input_vector_2_changed(name, value) -> void:
 #				angle_radians -= PI/2
 				
 				var mapped_value = (angle_degrees / 360.0)
-				$hue_ring/node_to_be_rotated.rotation_degrees.y = -angle_degrees
+				$gun/hue_ring/node_to_be_rotated.rotation_degrees.y = -angle_degrees
 				color_ = Color.from_hsv(mapped_value, 1.0, 1.0, 1.0)
 				
 				if player_.tutorial_.tutorial_ == 0:

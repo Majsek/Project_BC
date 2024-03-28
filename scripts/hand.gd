@@ -9,6 +9,7 @@ var color_ : Color:
 
 var grabbing_ : bool = false
 var is_right_hand_ : bool
+var trigger_clicking_ : bool = false
 
 @onready var main_ : Node3D = $"/root/world"
 @onready var player_ : Node3D
@@ -26,8 +27,15 @@ func _process(_delta: float) -> void:
 	#TEST space shoot
 	if Input.is_action_just_pressed("ui_accept") != false:
 		if is_right_hand_:
+			trigger_clicking_ = true
 			$gun.shoot()
-		
+			
+	if Input.is_action_just_released("ui_accept") != false:
+		if is_right_hand_:
+			trigger_clicking_ = false
+			if $gun.type_ == "charge_gun":
+				$gun.shoot()
+	
 		
 	#TEST rapid fire
 	if Input.is_action_just_pressed("ui_left") != false:
@@ -49,6 +57,7 @@ func _on_button_pressed(name) -> void:
 		return
 	match name:
 		"trigger_click":
+			trigger_clicking_ = true
 			$gun.shoot()
 			if player_.tutorial_.tutorial_ == 1:
 				player_.tutorial_.tutorial_ = 2
@@ -71,12 +80,12 @@ func rapid_fire() -> void:
 		await get_tree().create_timer(0.08).timeout
 		$gun.shoot()
 
-#GRAB RELEASE
-#func _on_button_released(name) -> void:
-	#match name:
-		#"grip_click":
-			#grabbing_ = false
-			#player_.check_grab()
+func _on_button_released(name) -> void:
+	match name:
+		"trigger_click":
+			trigger_clicking_ = false
+			if $gun.type_ == "charge_gun":
+				$gun.shoot()
 
 func _on_input_float_changed(name, value):
 	match name:

@@ -8,8 +8,8 @@ var shop_cubes_ : Array = [
 	"lives_shop_cube",
 	"projectile_strength_shop_cube",
 	"frost_shop_cube",
-	"shotgun1",
-	"charge_gun1",
+	"shotgun",
+	"charge_gun",
 	]
 
 #SCORE
@@ -168,7 +168,7 @@ func spawnEnemy() -> void:
 			#break
 	enemies_.append(enemy)
 	add_child(enemy)
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(2.0).timeout
 	difficulty_multiplier_ += 0.02
 	spawnEnemy()
 

@@ -44,10 +44,10 @@ func _ready():
 
 func reset_mesh():
 	match name:
-		"shotgun1":
+		"shotgun":
 			$MeshInstance3D.mesh = preload("res://objects/guns/shotgun1.obj")
 			reset_color(Color.from_hsv(0.5, 0.0, 1.0, 1.0))
-		"charge_gun1":
+		"charge_gun":
 			$MeshInstance3D.mesh = preload("res://objects/guns/charge_gun1.obj")
 			reset_color(Color.from_hsv(0.5, 0.0, 1.0, 1.0))
 		"frost_shop_cube":
@@ -88,7 +88,7 @@ func reset_color(initial_color_ : Color = Color.from_hsv(randf_range(0,1), 1.0, 
 func who() -> String:
 	return "control_cube"
 
-func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void:
+func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : MeshInstance3D) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
 	var dmg :int
@@ -108,13 +108,13 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void
 	lives_ -= dmg
 	color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
 	if lives_ <= 0:
-		destroy(dmg)
+		destroy(dmg, gun)
 	else:
 		var hit_particle : Node = HIT_PARTICLE.instantiate()
 		hit_particle.init(dmg, initial_color_, projectile_pos)
 		main_.add_child(hit_particle)
 		
-func destroy(dmg) -> void:
+func destroy(dmg, gun : MeshInstance3D) -> void:
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
 	hit_particle.init(dmg, initial_color_, position)
 	main_.add_child(hit_particle)
@@ -124,6 +124,26 @@ func destroy(dmg) -> void:
 		"start_cube":
 			main_.start_game()
 			
+		"shotgun":
+			gun.type_ = "shotgun"
+			main_.shop_cubes_.erase("shotgun")
+			main_.start_game()
+			
+		"charge_gun":
+			gun.type_ = "charge_gun"
+			main_.shop_cubes_.erase("charge_gun")
+			main_.start_game()
+			
+		"frost_shop_cube":
+			main_.start_game()
+			for e in main_.enemies_:
+				if e != null:
+					e.speed_ = 0.1
+			await get_tree().create_timer(8).timeout
+			for e in main_.enemies_:
+				if e != null:
+					e.speed_ = 1.0
+					
 		"lives_shop_cube":
 			player_.max_lives_ += 1
 			main_.start_game()

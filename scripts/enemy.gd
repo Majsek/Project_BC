@@ -24,7 +24,7 @@ var color_ : Color:
 		color_ = value
 		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 
-var speed = 10.0
+var speed_ = 1.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -71,7 +71,7 @@ func followPlayer() -> void:
 #	print(follow_direction)
 	follow_direction.y = 0
 #MOVEMENT SPEED
-	set_velocity(follow_direction * lives_/initial_lives_)
+	set_velocity(follow_direction * lives_/initial_lives_ * speed_)
 	#if follow_direction != Vector3(0,0,0):
 		#move_and_slide()
 	move_and_slide()
@@ -79,7 +79,7 @@ func followPlayer() -> void:
 func who() -> String:
 	return "enemy"
 	
-func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3) -> void:
+func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : MeshInstance3D) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
 	var dmg :int

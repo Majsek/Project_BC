@@ -248,6 +248,9 @@ func changePos(newPos):
 func _on_body_entered(body):
 	if body.who() == "control_cube" || body.who() == "floor":
 		return
+	if body.who() == "enemy":
+		if !main_.running_:
+			return
 	body.die(0)
 	lives_ -= 1
 

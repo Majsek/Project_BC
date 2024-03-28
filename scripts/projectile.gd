@@ -2,6 +2,7 @@ extends RigidBody3D
 
 var direction_ : Vector3
 var color_ : Color
+var gun_ : MeshInstance3D
 
 @onready var main_ : Node3D = $"/root/world"
 @onready var player_ : Node3D = main_.player_
@@ -18,9 +19,10 @@ func _ready() -> void:
 #INIT
 #- SETS DIRECTION AND ROTATION OF THE PROJECTILE
 #- SETS COLOR OF: MESH, LIGHT, PARTICLES
-func init(direction, color) -> void:
+func init(direction, color, gun) -> void:
 	direction_ = direction
 	color_ = color
+	gun_ = gun
 	$MeshInstance3D.get_surface_override_material(0).set_albedo(color)
 	$OmniLight3D.set_color(color)
 	$CPUParticles3D.get_mesh().get_material().set_albedo(color)
@@ -46,7 +48,7 @@ func _on_body_entered(body : Node) -> void:
 			if body.who() == "enemy":
 				if !main_.running_:
 					return
-			body.hit_by_projectile(color_, position)
+			body.hit_by_projectile(color_, position, gun_)
 			self.queue_free()
 
 				

@@ -72,13 +72,15 @@ func shoot() -> void:
 				shooting_ = false
 
 func play_gun_anim():
+	if $gun_animation_player.is_playing():
+		$gun_animation_player.stop()
 	$gun_animation_player.play("shoot")
 
 func load_bullets():
 	if shooting_:
 		return
 	if hand_.trigger_clicking_:
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.15).timeout
 		hand_.trigger_haptic_pulse("load_bullet", 1.0, 1.0, 0.3, 0.3 )
 		bullets_ += 1
 		print(bullets_)

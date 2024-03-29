@@ -31,16 +31,16 @@ func play_hit_sound():
 		2:
 			$audioPlayer1.stream = hit_sounds_array[randi_range(0,2)]
 			$audioPlayer1.play()
-			await get_tree().create_timer(0.02).timeout
+			await get_tree().create_timer(0.03).timeout
 			$audioPlayer2.stream = hit_sounds_array[randi_range(0,2)]
 			$audioPlayer2.play()
 		3:
 			$audioPlayer1.stream = hit_sounds_array[randi_range(0,2)]
 			$audioPlayer1.play()
-			await get_tree().create_timer(0.02).timeout
+			await get_tree().create_timer(0.03).timeout
 			$audioPlayer2.stream = hit_sounds_array[randi_range(0,2)]
 			$audioPlayer2.play()
-			await get_tree().create_timer(0.02).timeout
+			await get_tree().create_timer(0.03).timeout
 			$audioPlayer3.stream = hit_sounds_array[randi_range(0,2)]
 			$audioPlayer3.play()
 	await get_tree().create_timer(1.0).timeout

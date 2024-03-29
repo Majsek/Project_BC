@@ -118,7 +118,7 @@ pose = &"aim"
 script = ExtResource("2_5nyhh")
 
 [node name="gun" type="MeshInstance3D" parent="XROrigin3D/right_hand"]
-transform = Transform3D(-6.54888e-09, -3.20294e-10, -0.15, -0.00732746, 0.149821, 0, 0.149821, 0.00732746, -6.55671e-09, 0, 0, 0.0111111)
+transform = Transform3D(-6.55671e-09, 0, -0.15, 0, 0.15, 0, 0.15, 0, -6.55671e-09, 0, 0, 0)
 mesh = ExtResource("7_gcpi1")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_mqfx8")
@@ -128,6 +128,7 @@ script = ExtResource("9_p3fns")
 libraries = {
 "": SubResource("AnimationLibrary_e02kl")
 }
+speed_scale = 0.9
 
 [node name="hue_ring" type="MeshInstance3D" parent="XROrigin3D/right_hand/gun"]
 transform = Transform3D(-1.16564e-08, 0.172378, 0.203463, -4.73289e-15, 0.203463, -0.172378, -0.266667, -7.53489e-09, -8.89363e-09, 0.785155, 0.406503, 0.053088)
@@ -151,7 +152,7 @@ pose = &"aim"
 script = ExtResource("4_m5svs")
 
 [node name="gun" type="MeshInstance3D" parent="XROrigin3D/left_hand"]
-transform = Transform3D(-6.55671e-09, 0, -0.15, 0, 0.15, 0, 0.15, 0, -6.55671e-09, 0, 0, 0.03)
+transform = Transform3D(-5.42999e-07, 0, -0.15, 0, 0.15, 0, 0.15, 0, -5.42999e-07, 0, 0, 0.03)
 mesh = ExtResource("7_gcpi1")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3woh1")

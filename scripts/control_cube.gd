@@ -99,8 +99,9 @@ func reset_mesh():
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
 				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 0.2))
 
-func reset_color(initial_color_ : Color = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)):
-	color_ = initial_color_
+func reset_color(initial_color : Color = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)):
+	initial_color_ = initial_color
+	color_ = initial_color
 	
 func who() -> String:
 	return "control_cube"

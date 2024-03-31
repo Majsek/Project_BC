@@ -244,6 +244,10 @@ func changePos(newPos):
 	if (newPos.z < -20):
 		newPos.z = -20
 	position = newPos
+	print("----------------")
+	print("position.y")
+	print(position.y)
+	print("----------------")
 		
 func _on_body_entered(body):
 	if body.who() == "control_cube" || body.who() == "floor":

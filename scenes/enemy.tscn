@@ -51,7 +51,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.15, 0.4),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -68,14 +68,14 @@ tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.4),
-"transitions": PackedFloat32Array(1.56917, 2.07053, 1),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1.56917, 1),
 "update": 0,
-"values": [Vector3(0.295, 0.295, 0.295), Vector3(0.1, 0.1, 0.1), Vector3(0.23, 0.23, 0.23)]
+"values": [Vector3(0.295, 0.295, 0.295), Vector3(0.395, 0.395, 0.395)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath(".:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -158,7 +158,7 @@ _data = {
 }
 
 [node name="enemy" type="CharacterBody3D"]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.56602, 0)
 collision_layer = 3
 collision_mask = 2
 script = ExtResource("1_h4n54")

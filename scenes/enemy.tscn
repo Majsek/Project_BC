@@ -11,7 +11,13 @@ height = 3.4715
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_phhk3"]
 resource_local_to_scene = true
 albedo_texture = ExtResource("3_gytna")
+rim = 0.96
+rim_tint = 0.0
+clearcoat_roughness = 1.0
+subsurf_scatter_skin_mode = true
+refraction_scale = -0.49
 grow = true
+distance_fade_max_distance = 0.0
 
 [sub_resource type="Animation" id="Animation_owq4w"]
 length = 0.001
@@ -30,14 +36,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
+tracks/1/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fade_mode")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fade_max_distance")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.295, 0.295, 0.295)]
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_ga6wh"]
@@ -51,12 +69,9 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"spawn_death_particles"
-}, {
 "args": [],
 "method": &"queue_free"
 }]
@@ -64,50 +79,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
+tracks/1/path = NodePath("MeshInstance3D:surface_material_override/0:grow")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1.56917, 1),
-"update": 0,
-"values": [Vector3(0.295, 0.295, 0.295), Vector3(0.395, 0.395, 0.395)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath(".:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.4),
-"transitions": PackedFloat32Array(1.7411, 1.18921, 1),
-"update": 0,
-"values": [0.0, 0.5, 0.8]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MeshInstance3D:surface_material_override/0:grow")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.15),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:surface_material_override/0:grow_amount")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.378929, 0.420448),
+"update": 0,
+"values": [0.0, -1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fade_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.06),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeshInstance3D:surface_material_override/0:grow_amount")
+tracks/4/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fade_max_distance")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.15, 0.4),
-"transitions": PackedFloat32Array(1.93187, 1.8025),
+"times": PackedFloat32Array(0.06, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -2.5]
+"values": [0.0, 20.0]
 }
 
 [sub_resource type="Animation" id="Animation_hu83i"]
@@ -158,7 +173,7 @@ _data = {
 }
 
 [node name="enemy" type="CharacterBody3D"]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0.56602, 0)
+transform = Transform3D(0.334137, 0, 0, 0, 0.334137, 0, 0, 0, 0.334137, 0, 0.56602, 0)
 collision_layer = 3
 collision_mask = 2
 script = ExtResource("1_h4n54")

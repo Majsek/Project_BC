@@ -25,8 +25,6 @@ var color_ : Color:
 		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 
 var speed_ = 1.0
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-#var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var death_dmg_ : int
 
@@ -45,9 +43,9 @@ func _ready():
 	spawnAnim()
 	
 func _physics_process(delta):
-	# Add the gravity.
-#	if not is_on_floor():
-#		velocity.y -= gravity * delta
+	#TEST:
+	if Input.is_action_just_pressed("ui_text_delete"):
+		die(200)
 	followPlayer()
 
 
@@ -115,6 +113,7 @@ func die(dmg) -> void:
 	main_.enemies_killed_last_round_ += 1
 	main_.dmg_done_last_round_ += dmg
 	%AnimationPlayer.play("death")
+	spawn_death_particles()
 	
 func spawn_death_particles():
 	var hit_particle : Node = HIT_PARTICLE.instantiate()

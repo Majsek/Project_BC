@@ -33,8 +33,6 @@ var projectile_impulse_strength_ : float = 10.0
 @onready var left_hand_ : XRController3D = $XROrigin3D/left_hand
 @onready var tutorial_ : Label3D = $XROrigin3D/XRCamera3D/tutorial
 
-var anim_player_ : AnimationPlayer
-
 func _ready():
 	main_.player_ = self
 	lives_ = max_lives_

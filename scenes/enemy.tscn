@@ -69,6 +69,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0.295, 0.295, 0.295), Vector3(0.1, 0.1, 0.1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.7]
+}
 
 [sub_resource type="Animation" id="Animation_hu83i"]
 resource_name = "enemy_spawn"

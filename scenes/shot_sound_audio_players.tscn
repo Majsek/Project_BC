@@ -6,10 +6,10 @@
 script = ExtResource("1_otu7p")
 
 [node name="audioPlayer1" type="AudioStreamPlayer3D" parent="."]
-volume_db = -30.0
+volume_db = -50.0
 
 [node name="audioPlayer2" type="AudioStreamPlayer3D" parent="."]
-volume_db = -30.0
+volume_db = -50.0
 
 [node name="audioPlayer3" type="AudioStreamPlayer3D" parent="."]
-volume_db = -30.0
+volume_db = -50.0

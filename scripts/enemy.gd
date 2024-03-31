@@ -85,12 +85,13 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : M
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
 	var dmg :int
 	
-	if (delta_color1 < 0.2) or (delta_color2  < 0.2):
+	if (delta_color1 < 0.1) or (delta_color2  < 0.1):
 		dmg = 200
-		#print("perfect")
-		player_.lives_ += 1  
+		player_.lives_ += 1 
+	elif (delta_color1 < 0.2) or (delta_color2  < 0.2):
+		dmg = 100 
 	elif (delta_color1 < 0.10) or (delta_color2  < 0.10):
-		dmg = 150
+		dmg = 80
 	elif (delta_color1 < 0.30) or (delta_color2  < 0.30):
 		dmg = 20
 	elif (delta_color1 < 0.50) or (delta_color2  < 0.50):

@@ -10,7 +10,7 @@ func _ready():
 	hit_sound_audio_players.init(amount, position, hp_left_)
 	main_.add_child(hit_sound_audio_players)
 
-func init(dmg_dealt, color, pos, hp_left) -> void:
+func init(dmg_dealt, color, pos, hp_left = 1.0) -> void:
 	amount = dmg_dealt
 	position = pos
 	hp_left_ = hp_left

@@ -26,7 +26,7 @@ func play_hit_sound():
 	else:
 		strength = 1
 	
-	var pitch_scale = 3.0 - hp_left_
+	var pitch_scale = 3.0 - hp_left_ * 2.0
 	
 	$audioPlayer1.pitch_scale = pitch_scale
 	$audioPlayer2.pitch_scale = pitch_scale

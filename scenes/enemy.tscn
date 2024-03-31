@@ -17,6 +17,7 @@ clearcoat_roughness = 1.0
 subsurf_scatter_skin_mode = true
 refraction_scale = -0.49
 grow = true
+grow_amount = -1.0
 distance_fade_max_distance = 0.0
 
 [sub_resource type="Animation" id="Animation_owq4w"]
@@ -107,7 +108,7 @@ tracks/3/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fa
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.06),
+"times": PackedFloat32Array(0, 0.17),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 2]
@@ -119,8 +120,8 @@ tracks/4/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fa
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.06, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.17, 0.4),
+"transitions": PackedFloat32Array(2.14355, 1),
 "update": 0,
 "values": [0.0, 20.0]
 }

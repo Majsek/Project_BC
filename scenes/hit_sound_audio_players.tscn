@@ -6,10 +6,7 @@
 script = ExtResource("1_r4022")
 
 [node name="audioPlayer1" type="AudioStreamPlayer3D" parent="."]
-volume_db = -30.0
 
 [node name="audioPlayer2" type="AudioStreamPlayer3D" parent="."]
-volume_db = -30.0
 
 [node name="audioPlayer3" type="AudioStreamPlayer3D" parent="."]
-volume_db = -30.0

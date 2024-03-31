@@ -21,11 +21,12 @@ var enemies_killed_last_round_ : int = 0:
 		xp_ += 1
 		
 
+var xp_needed_ : int = 10
 var xp_ : int = 0:
 	set(value):
 		xp_ = value
 		print(xp_)
-		if xp_ >= 10:
+		if xp_ >= xp_needed_:
 			level_up()
 			
 var level_ : int = 1
@@ -54,6 +55,7 @@ const SAVE_PATH = "res://godot_save_config_file.ini"
 
 func level_up():
 	level_ += 1
+	xp_needed_ += level_
 	stop_enemies()
 	
 	var shop1 = shop_cubes_.pick_random()

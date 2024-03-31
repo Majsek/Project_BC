@@ -24,12 +24,13 @@ var color_ : Color:
 		color_ = value
 		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 
-var speed_ = 1.0
+var speed_ = 2.0
 
 var death_dmg_ : int
 
 func init(difficulty_multiplier):
 	initial_lives_ = randi_range(90*difficulty_multiplier,100*difficulty_multiplier)
+	speed_ *= difficulty_multiplier
 
 func _ready():
 	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)

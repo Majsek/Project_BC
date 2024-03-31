@@ -70,9 +70,11 @@ func _on_button_pressed(name) -> void:
 		
 		"by_button":
 			if !is_right_hand_:
-				get_tree().reload_current_scene()
+				#get_tree().reload_current_scene()
+				pass
 			else:
-				$gun.rapid_fire()
+				#$gun.rapid_fire()
+				pass
 
 func _on_button_released(name) -> void:
 	match name:

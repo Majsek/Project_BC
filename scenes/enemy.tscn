@@ -16,8 +16,6 @@ rim_tint = 0.0
 clearcoat_roughness = 1.0
 subsurf_scatter_skin_mode = true
 refraction_scale = -0.49
-grow = true
-grow_amount = -1.0
 distance_fade_max_distance = 0.0
 
 [sub_resource type="Animation" id="Animation_owq4w"]
@@ -37,22 +35,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fade_mode")
+tracks/1/path = NodePath("MeshInstance3D:surface_material_override/0:grow")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fade_max_distance")
+tracks/2/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fade_mode")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:surface_material_override/0:distance_fade_max_distance")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -84,10 +94,10 @@ tracks/1/path = NodePath("MeshInstance3D:surface_material_override/0:grow")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0001),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false

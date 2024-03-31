@@ -26,7 +26,7 @@ func play_hit_sound():
 	else:
 		strength = 1
 	
-	var pitch_scale = 3.0 - hp_left_ * 2.0
+	var pitch_scale = 2.0 - hp_left_
 	
 	$audioPlayer1.pitch_scale = pitch_scale
 	$audioPlayer2.pitch_scale = pitch_scale
@@ -39,17 +39,17 @@ func play_hit_sound():
 		2:
 			$audioPlayer1.stream = hit_sounds_array[randi_range(0,2)]
 			$audioPlayer1.play()
-			await get_tree().create_timer(0.03).timeout
-			$audioPlayer2.stream = hit_sounds_array[randi_range(0,2)]
-			$audioPlayer2.play()
+			#await get_tree().create_timer(0.03).timeout
+			#$audioPlayer2.stream = hit_sounds_array[randi_range(0,2)]
+			#$audioPlayer2.play()
 		3:
 			$audioPlayer1.stream = hit_sounds_array[randi_range(0,2)]
 			$audioPlayer1.play()
-			await get_tree().create_timer(0.03).timeout
-			$audioPlayer2.stream = hit_sounds_array[randi_range(0,2)]
-			$audioPlayer2.play()
-			await get_tree().create_timer(0.03).timeout
-			$audioPlayer3.stream = hit_sounds_array[randi_range(0,2)]
-			$audioPlayer3.play()
+			#await get_tree().create_timer(0.03).timeout
+			#$audioPlayer2.stream = hit_sounds_array[randi_range(0,2)]
+			#$audioPlayer2.play()
+			#await get_tree().create_timer(0.03).timeout
+			#$audioPlayer3.stream = hit_sounds_array[randi_range(0,2)]
+			#$audioPlayer3.play()
 	await get_tree().create_timer(1.0).timeout
 	queue_free()

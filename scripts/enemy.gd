@@ -120,4 +120,3 @@ func spawn_death_particles():
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
 	hit_particle.init(death_dmg_, initial_color_, position)
 	main_.add_child(hit_particle)
-	queue_free()

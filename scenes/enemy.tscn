@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://crves8cf8ukat"]
+[gd_scene load_steps=10 format=3 uid="uid://crves8cf8ukat"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_h4n54"]
 [ext_resource type="ArrayMesh" uid="uid://82dthv0njejx" path="res://objects/racc/racc.obj" id="2_806bi"]
@@ -26,10 +26,53 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.295, 0.295, 0.295)]
+}
+
+[sub_resource type="Animation" id="Animation_ga6wh"]
+resource_name = "death"
+length = 0.05
+step = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_death_particles"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.295, 0.295, 0.295), Vector3(0.1, 0.1, 0.1)]
+}
 
 [sub_resource type="Animation" id="Animation_hu83i"]
 resource_name = "enemy_spawn"
-length = 5.0
+length = 3.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -70,11 +113,12 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xs3a3"]
 _data = {
 "RESET": SubResource("Animation_owq4w"),
+"death": SubResource("Animation_ga6wh"),
 "enemy_spawn": SubResource("Animation_hu83i")
 }
 
 [node name="enemy" type="CharacterBody3D"]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -8, 0)
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
 collision_layer = 3
 collision_mask = 2
 script = ExtResource("1_h4n54")

@@ -26,7 +26,9 @@ var color_ : Color:
 
 var speed_ = 1.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+#var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+var death_dmg_ : int
 
 func init(difficulty_multiplier):
 	initial_lives_ = randi_range(90*difficulty_multiplier,100*difficulty_multiplier)
@@ -98,10 +100,10 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : M
 		dmg = 1
 		
 	lives_ -= dmg
-	color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
 	if lives_ <= 0:
 		die(dmg)
 	else:
+		color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
 		var hit_particle : Node = HIT_PARTICLE.instantiate()
 		hit_particle.init(dmg, initial_color_, projectile_pos)
 		main_.add_child(hit_particle)
@@ -109,9 +111,13 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : M
 
 func die(dmg) -> void:
 	follow_player_ = false
-	var hit_particle : Node = HIT_PARTICLE.instantiate()
-	hit_particle.init(dmg, initial_color_, position)
-	main_.add_child(hit_particle)
+	death_dmg_ = dmg
 	main_.enemies_killed_last_round_ += 1
 	main_.dmg_done_last_round_ += dmg
-	self.queue_free()
+	%AnimationPlayer.play("death")
+	
+func spawn_death_particles():
+	var hit_particle : Node = HIT_PARTICLE.instantiate()
+	hit_particle.init(death_dmg_, initial_color_, position)
+	main_.add_child(hit_particle)
+	queue_free()

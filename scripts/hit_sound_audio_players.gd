@@ -1,20 +1,22 @@
 extends Node3D
 
 var dmg_dealt_
+var hp_left_
 
 #IMMEDIATELY PLAYS THE SOUND
 func _ready():
 	play_hit_sound()
 
 #SETS STRENGTH AND POSITION OF THE AudioStreamPlayers3D
-func init(dmg_dealt, pos):
+func init(dmg_dealt, pos, hp_left):
 	dmg_dealt_ = dmg_dealt
 	position = pos
+	hp_left_ = hp_left
 
 #RANDOMLY SELECTS SOUNDS ON HIT AND PLAYS THEM (number of sounds depends on dmg_deal_)
 #- AFTER PLAYING KILLS ITSELF
 func play_hit_sound():
-	var hit_sounds_array : Array = [preload("res://audio/hit_sound_F7_wav.tres"), preload("res://audio/hit_sound_G7_wav.tres"), preload("res://audio/hit_sound_H7_wav.tres")]
+	var hit_sounds_array : Array = [preload("res://audio/hit_sounds/hit_sound_F7_wav.tres"), preload("res://audio/hit_sounds/hit_sound_G7_wav.tres"), preload("res://audio/hit_sounds/hit_sound_H7_wav.tres")]
 	
 	var strength
 	if dmg_dealt_ >= 100:
@@ -23,6 +25,12 @@ func play_hit_sound():
 		strength = 2
 	else:
 		strength = 1
+	
+	var pitch_scale = 3.0 - hp_left_
+	
+	$audioPlayer1.pitch_scale = pitch_scale
+	$audioPlayer2.pitch_scale = pitch_scale
+	$audioPlayer3.pitch_scale = pitch_scale
 	
 	match strength:
 		1:

@@ -35,6 +35,7 @@ func shoot() -> void:
 			projectile1.position = Vector3(-0.002, 0.038, -0.084)
 			projectile1.top_level = true
 			add_child(projectile1)
+			$shot_sound_audio_players.play_shot_sound()
 			play_gun_anim()
 		"shotgun":
 			var projectile2 : Node = projectile_.instantiate()
@@ -54,6 +55,9 @@ func shoot() -> void:
 			add_child(projectile1)
 			add_child(projectile2)
 			add_child(projectile3)
+			$shot_sound_audio_players.play_shot_sound()
+			$shot_sound_audio_players.play_shot_sound()
+			$shot_sound_audio_players.play_shot_sound()
 			play_gun_anim()
 		"charge_gun":
 			load_bullets()
@@ -67,6 +71,7 @@ func shoot() -> void:
 					projectile1.top_level = true
 					play_gun_anim()
 					add_child(projectile1)
+					$shot_sound_audio_players.play_shot_sound()
 					await get_tree().create_timer(0.05).timeout
 				bullets_ = 0
 				shooting_ = false

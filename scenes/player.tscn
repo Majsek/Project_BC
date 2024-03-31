@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c3donwdgn1s38"]
+[gd_scene load_steps=28 format=3 uid="uid://c3donwdgn1s38"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
 [ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://xh4tstohv4j3" path="res://objects/guns/pistol1.1.png" id="8_dvoxg"]
 [ext_resource type="Script" path="res://scripts/gun.gd" id="9_p3fns"]
 [ext_resource type="Animation" uid="uid://ddtqjhj0n7gf2" path="res://animations/shoot.res" id="10_kbcll"]
+[ext_resource type="PackedScene" uid="uid://h1owcl14ci8q" path="res://scenes/shot_sound_audio_players.tscn" id="13_bfr16"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqfx8"]
 resource_local_to_scene = true
@@ -146,6 +147,8 @@ mesh = ExtResource("5_q4sjr")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_8rc14")
 
+[node name="shot_sound_audio_players" parent="XROrigin3D/right_hand/gun" instance=ExtResource("13_bfr16")]
+
 [node name="left_hand" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
 pose = &"aim"
@@ -178,6 +181,8 @@ cast_shadow = 0
 mesh = ExtResource("5_q4sjr")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vdcrh")
+
+[node name="shot_sound_audio_players" parent="XROrigin3D/left_hand/gun" instance=ExtResource("13_bfr16")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.311101, 0)

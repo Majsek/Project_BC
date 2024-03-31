@@ -104,7 +104,7 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : M
 	else:
 		color_ = Color.from_hsv(color_.h,lives_/100.0,color_.v,color_.a)
 		var hit_particle : Node = HIT_PARTICLE.instantiate()
-		hit_particle.init(dmg, initial_color_, projectile_pos)
+		hit_particle.init(dmg, initial_color_, projectile_pos, float(lives_)/float(initial_lives_))
 		main_.add_child(hit_particle)
 		main_.dmg_done_last_round_ += dmg
 
@@ -118,5 +118,5 @@ func die(dmg) -> void:
 	
 func spawn_death_particles():
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
-	hit_particle.init(death_dmg_, initial_color_, position)
+	hit_particle.init(death_dmg_, initial_color_, position, 0.0)
 	main_.add_child(hit_particle)

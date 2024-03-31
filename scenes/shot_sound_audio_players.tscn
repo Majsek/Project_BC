@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh700vaw1afvh"]
+[gd_scene load_steps=2 format=3 uid="uid://h1owcl14ci8q"]
 
-[ext_resource type="Script" path="res://scripts/hit_sound_audio_players.gd" id="1_r4022"]
+[ext_resource type="Script" path="res://scripts/shot_sound_audio_players.gd" id="1_otu7p"]
 
-[node name="hit_sound_audio_players" type="Node3D"]
-script = ExtResource("1_r4022")
+[node name="shot_sound_audio_players" type="Node3D"]
+script = ExtResource("1_otu7p")
 
 [node name="audioPlayer1" type="AudioStreamPlayer3D" parent="."]
 volume_db = -30.0

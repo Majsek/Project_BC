@@ -2,16 +2,21 @@ extends Node3D
 
 var dmg_dealt_
 var hp_left_
+var enemyMelee_ : bool = false
 
 #IMMEDIATELY PLAYS THE SOUND
 func _ready():
-	play_hit_sound()
+	if enemyMelee_:
+		play_melee_sound()
+	else:
+		play_hit_sound()
 
 #SETS STRENGTH AND POSITION OF THE AudioStreamPlayers3D
-func init(dmg_dealt, pos, hp_left):
+func init(dmg_dealt, pos, hp_left, enemyMelee = false):
 	dmg_dealt_ = dmg_dealt
 	position = pos
 	hp_left_ = hp_left
+	enemyMelee_ = enemyMelee
 
 #RANDOMLY SELECTS SOUNDS ON HIT AND PLAYS THEM (number of sounds depends on dmg_deal_)
 #- AFTER PLAYING KILLS ITSELF
@@ -51,5 +56,11 @@ func play_hit_sound():
 			#await get_tree().create_timer(0.03).timeout
 			#$audioPlayer3.stream = hit_sounds_array[randi_range(0,2)]
 			#$audioPlayer3.play()
+	await get_tree().create_timer(1.0).timeout
+	queue_free()
+	
+func play_melee_sound():
+	$audioPlayer1.stream = preload("res://audio/raccoon_sounds/RawrRawr_mp3.tres")
+	$audioPlayer1.play()
 	await get_tree().create_timer(1.0).timeout
 	queue_free()

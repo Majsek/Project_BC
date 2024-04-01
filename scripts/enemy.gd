@@ -109,15 +109,15 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : M
 		main_.add_child(hit_particle)
 		main_.dmg_done_last_round_ += dmg
 
-func die(dmg) -> void:
+func die(dmg, enemyMelee = false) -> void:
 	follow_player_ = false
 	death_dmg_ = dmg
 	main_.enemies_killed_last_round_ += 1
 	main_.dmg_done_last_round_ += dmg
 	%AnimationPlayer.play("death")
-	spawn_death_particles()
+	spawn_death_particles(enemyMelee)
 	
-func spawn_death_particles():
+func spawn_death_particles(enemyMelee = false):
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
-	hit_particle.init(death_dmg_, initial_color_, position, 0.0)
+	hit_particle.init(death_dmg_, initial_color_, position, 0.0, enemyMelee)
 	main_.add_child(hit_particle)

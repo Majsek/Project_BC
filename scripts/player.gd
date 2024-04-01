@@ -253,7 +253,7 @@ func _on_body_entered(body):
 	if body.who() == "enemy":
 		if !main_.running_:
 			return
-	body.die(0)
+	body.die(0, true)
 	lives_ -= 1
 
 

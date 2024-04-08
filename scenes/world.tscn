@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dl7g3g38rg3gv"]
+[gd_scene load_steps=24 format=3 uid="uid://dl7g3g38rg3gv"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_q1cpw"]
 [ext_resource type="Script" path="res://scripts/floor.gd" id="2_poosd"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://vd37jqwc1uth" path="res://scenes/control_cube.tscn" id="4_58r8i"]
 [ext_resource type="FontFile" uid="uid://xgy32fq5inad" path="res://DotGothic16-Regular.ttf" id="4_341gc"]
 [ext_resource type="ArrayMesh" uid="uid://cfoe3xo81i70l" path="res://objects/buildings/skyscraper1.1.obj" id="5_cduau"]
+[ext_resource type="ArrayMesh" uid="uid://qyjx0rspamqq" path="res://objects/buildings/skyscraper1.obj" id="5_svqlb"]
 [ext_resource type="ArrayMesh" uid="uid://bdex5i2ohbysw" path="res://objects/buildings/skyscraper2.obj" id="6_e4aek"]
+[ext_resource type="Texture2D" uid="uid://dwjh87f01hk6" path="res://objects/buildings/skyscraper1.png" id="6_oyqah"]
+[ext_resource type="Texture2D" uid="uid://de8lcwfnu3633" path="res://objects/buildings/skyscraper1.1.png" id="8_rlaso"]
 
 [sub_resource type="Environment" id="Environment_aqajr"]
 reflected_light_source = 2
@@ -79,6 +82,17 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ka38"]
+albedo_color = Color(0.760784, 0.760784, 0.760784, 1)
+albedo_texture = ExtResource("6_oyqah")
+rim_tint = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0yhm"]
+albedo_texture = ExtResource("8_rlaso")
+rim = 0.35
+rim_tint = 1.0
+grow_amount = -14.901
+
 [node name="world" type="Node3D"]
 script = ExtResource("1_q1cpw")
 
@@ -135,71 +149,90 @@ light_energy = 0.262
 transform = Transform3D(-0.889631, -0.113367, 0.442386, 0.454906, -0.305297, 0.836573, 0.0402193, 0.945485, 0.323173, 13.1349, 8.21034, 4.09577)
 light_energy = 0.262
 
+[node name="Skyscraper0" type="MeshInstance3D" parent="."]
+transform = Transform3D(12.5, 0, 0, 0, 12.5, 0, 0, 0, 12.5, 0, -156.252, 0)
+mesh = ExtResource("5_svqlb")
+surface_material_override/0 = SubResource("StandardMaterial3D_2ka38")
+
 [node name="Skyscraper1" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(10, 0, 1.13687e-13, 0, 10, 0, -1.13687e-13, 0, 10, 42.7665, -57.1248, -66.917)
 mesh = ExtResource("5_cduau")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper2" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(10, 0, 1.13687e-13, 0, 10, 0, -1.13687e-13, 0, 10, 120.95, -143.858, -86.5721)
 mesh = ExtResource("6_e4aek")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper3" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, -49.0174, -72.719, -159.667)
 mesh = ExtResource("5_cduau")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper4" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, -166.573, -26.1292, 14.4271)
 mesh = ExtResource("5_cduau")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper5" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, -55.4855, -37.8581, -57.7487)
 mesh = ExtResource("5_cduau")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper6" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, -129.665, -72.719, -21.3415)
 mesh = ExtResource("5_cduau")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper7" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(1.31134e-06, 0, -10, 0, 10, 0, 10, 0, 1.31134e-06, 205.205, -20.1886, 25.1612)
 mesh = ExtResource("5_cduau")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper8" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(10, 0, 2.27374e-13, 0, 10, 0, -2.27374e-13, 0, 10, 184.073, -55.3206, -39.7345)
 mesh = ExtResource("5_cduau")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper9" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(1.31134e-06, 0, -10, 0, 10, 0, 10, 0, 1.31134e-06, 118.409, -78.0079, 81.3794)
 mesh = ExtResource("6_e4aek")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper14" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(1.31134e-06, 0, -10, 0, 10, 0, 10, 0, 1.31134e-06, 66.2713, -89.5398, 181.423)
 mesh = ExtResource("6_e4aek")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper10" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, -121.05, -69.9671, 36.4708)
 mesh = ExtResource("5_cduau")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper11" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, -130.839, -109.098, 116.079)
 mesh = ExtResource("6_e4aek")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper12" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, -29.5354, -124.963, 122.238)
 mesh = ExtResource("5_cduau")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="Skyscraper13" type="MeshInstance3D" parent="." groups=["skyscrapers"]]
 transform = Transform3D(1.31134e-06, 0, -10, 0, 10, 0, 10, 0, 1.31134e-06, 39.4359, -124.963, 122.238)
 mesh = ExtResource("5_cduau")
 skeleton = NodePath("../Skyscraper1")
+surface_material_override/0 = SubResource("StandardMaterial3D_y0yhm")
 
 [node name="start_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1.1, -2)

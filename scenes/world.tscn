@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://de8lcwfnu3633" path="res://objects/buildings/skyscraper1.1.png" id="8_rlaso"]
 
 [sub_resource type="Environment" id="Environment_aqajr"]
+ambient_light_source = 2
+ambient_light_color = Color(0.415686, 0.415686, 0.415686, 1)
 reflected_light_source = 2
 glow_levels/1 = 1.7
 glow_levels/2 = 7.1
@@ -139,15 +141,20 @@ outline_size = 24
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.206396, 0.871552, -0.444745, -0.325722, 0.489807, 0.808699, 0.922662, -0.0220493, 0.384978, -4.77542, 6.91891, 9.15886)
 light_angular_distance = 2.18
+light_bake_mode = 1
 shadow_enabled = true
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.282743, 0.959196, 1.57952e-07, 0.361291, -0.106498, 0.926351, 0.888552, -0.261919, -0.376661, 0, 10.3364, -6.55472)
+visible = false
 light_energy = 0.262
+light_bake_mode = 1
 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.889631, -0.113367, 0.442386, 0.454906, -0.305297, 0.836573, 0.0402193, 0.945485, 0.323173, 13.1349, 8.21034, 4.09577)
+visible = false
 light_energy = 0.262
+light_bake_mode = 1
 
 [node name="Skyscraper0" type="MeshInstance3D" parent="."]
 transform = Transform3D(12.5, 0, 0, 0, 12.5, 0, 0, 0, 12.5, 0, -156.252, 0)

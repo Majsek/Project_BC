@@ -202,17 +202,21 @@ mesh = ExtResource("5_cduau")
 skeleton = NodePath("../Skyscraper1")
 
 [node name="start_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.529389, -2)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1.1, -2)
 label_text_ = "PLAY!"
 
 [node name="edge_2_allowed_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
-transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 1, 0.7, 0.4)
-label_text_ = "Right barricade"
+transform = Transform3D(0.1, 0, -1.33227e-15, 0, 0.1, 0, 1.33227e-15, 0, 0.1, 0.6, 1.1, -2)
+label_text_ = "Right edge spawn"
 
 [node name="edge_3_allowed_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
-transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 1, 0.3, 0)
-label_text_ = "Back barricade"
+transform = Transform3D(0.1, 0, -1.33227e-15, 3.44816e-16, 0.0965926, 0.0258819, 1.28687e-15, -0.0258819, 0.0965926, 0, 0.5, -2)
+label_text_ = "Back edge spawn"
 
 [node name="edge_4_allowed_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
-transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 1, 0.7, -0.4)
-label_text_ = "Left barricade"
+transform = Transform3D(0.1, 0, -1.33227e-15, 0, 0.1, 0, 1.33227e-15, 0, 0.1, -0.6, 1.1, -2)
+label_text_ = "Left edge spawn"
+
+[node name="exit_cube" parent="." groups=["control_cubes"] instance=ExtResource("4_58r8i")]
+transform = Transform3D(0.122873, 0, -0.0860365, 0, 0.15, 0, 0.0860365, 0, 0.122873, 2, 1.82939, -2)
+label_text_ = "Exit Game"

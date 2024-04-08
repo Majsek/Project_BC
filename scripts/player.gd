@@ -214,7 +214,7 @@ func detect_pull():
 	if first_grabbing_hand_ == right_hand_:
 		#TODO: tenhle if je možná zbytečnej
 		if right_hand_.grabbing_:
-			changePos(Vector3(
+			change_pos(Vector3(
 				player_initial_pos_.x+(right_initial_grab_pos_.x-right_hand_.position.x)*10, 
 				0,
 				player_initial_pos_.z+(right_initial_grab_pos_.z-right_hand_.position.z)*10)
@@ -223,25 +223,25 @@ func detect_pull():
 	if first_grabbing_hand_ == left_hand_:
 		#TODO: tenhle if je možná zbytečnej
 		if left_hand_.grabbing_:
-			changePos(Vector3(
+			change_pos(Vector3(
 				player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
 				0,
 				player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
 			)
 
 #CHANGES POSITION OF THE PLAYER AND LIMITS IT TO THE PLAYABLE AREA: <+20xz,-20xz>
-func changePos(newPos):
+func change_pos(new_pos):
 	##X
-	if (newPos.x > 20):
-		newPos.x = 20
-	if (newPos.x < -20):
-		newPos.x = -20
+	if (new_pos.x > 20):
+		new_pos.x = 20
+	if (new_pos.x < -20):
+		new_pos.x = -20
 	##Z
-	if (newPos.z > 20):
-		newPos.z = 20
-	if (newPos.z < -20):
-		newPos.z = -20
-	position = newPos
+	if (new_pos.z > 20):
+		new_pos.z = 20
+	if (new_pos.z < -20):
+		new_pos.z = -20
+	position = new_pos
 	print("----------------")
 	print("position.y")
 	print(position.y)

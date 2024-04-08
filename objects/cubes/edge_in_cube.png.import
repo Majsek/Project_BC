@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8rukgbwm8vo7"
 path.s3tc="res://.godot/imported/edge_in_cube.png-2cd096caca85025e0a8792a7777741b9.s3tc.ctex"
+path.etc2="res://.godot/imported/edge_in_cube.png-2cd096caca85025e0a8792a7777741b9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://objects/cubes/edge_in_cube.png"
-dest_files=["res://.godot/imported/edge_in_cube.png-2cd096caca85025e0a8792a7777741b9.s3tc.ctex"]
+dest_files=["res://.godot/imported/edge_in_cube.png-2cd096caca85025e0a8792a7777741b9.s3tc.ctex", "res://.godot/imported/edge_in_cube.png-2cd096caca85025e0a8792a7777741b9.etc2.ctex"]
 
 [params]
 

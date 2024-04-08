@@ -58,12 +58,16 @@ func _on_button_pressed(name) -> void:
 	match name:
 		"trigger_click":
 			trigger_clicking_ = true
+			if player_.tutorial_.tutorial_ == 0 || player_.tutorial_.tutorial_ == 2:
+				return
 			$gun.shoot()
 			if player_.tutorial_.tutorial_ == 1:
 				player_.tutorial_.tutorial_ = 2
 			
 		"grip_click":
 			grabbing_ = true
+			if player_.tutorial_.tutorial_ == 0 || player_.tutorial_.tutorial_ == 1:
+				return
 			player_.check_grab()
 			if player_.tutorial_.tutorial_ == 2:
 				player_.tutorial_.tutorial_ = 3

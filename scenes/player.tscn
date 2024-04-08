@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
 [ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
 [ext_resource type="FontFile" uid="uid://xgy32fq5inad" path="res://DotGothic16-Regular.ttf" id="2_a336u"]
-[ext_resource type="Script" path="res://scenes/tutorial.gd" id="3_tal38"]
+[ext_resource type="Script" path="res://scripts/tutorial.gd" id="3_tal38"]
 [ext_resource type="Texture2D" uid="uid://biw4o68c30nvl" path="res://vr_prompts/Oculus/Oculus_Right_Stick.png" id="3_xt6ms"]
 [ext_resource type="Texture2D" uid="uid://ciqoolac1kv0c" path="res://vr_prompts/Oculus/Oculus_Left_Stick.png" id="4_hnhks"]
 [ext_resource type="Script" path="res://scripts/left_hand.gd" id="4_m5svs"]

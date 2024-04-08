@@ -39,7 +39,7 @@ var dmg_done_last_round_ : int = 0:
 
 #ALLOWED SPAWN EDGES
 var edge_1_allowed_ = true
-var edge_2_allowed_ = false
+var edge_2_allowed_ = true
 var edge_3_allowed_ = false
 var edge_4_allowed_ = false
 

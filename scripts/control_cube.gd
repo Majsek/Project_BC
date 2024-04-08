@@ -80,24 +80,34 @@ func reset_mesh():
 		"edge_2_allowed_cube":
 			if main_.edge_2_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
-				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 1.0))
+				reset_color(Color.from_hsv(0.0, 1.0, 1.0, 1.0))
+				label_text_ = "Right edge spawn ON"
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
-				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 0.2))
+				reset_color(Color.from_hsv(0.33, 1.0, 1.0, 0.2))
+				label_text_ = "Right edge spawn OFF"
 		"edge_3_allowed_cube":
 			if main_.edge_3_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
-				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 1.0))
+				reset_color(Color.from_hsv(0.0, 1.0, 1.0, 1.0))
+				label_text_ = "Back edge spawn ON"
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
-				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 0.2))
+				reset_color(Color.from_hsv(0.33, 1.0, 1.0, 0.2))
+				label_text_ = "Back edge spawn OFF"
 		"edge_4_allowed_cube":
 			if main_.edge_4_allowed_:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_in_cube.obj")
-				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 1.0))
+				reset_color(Color.from_hsv(0.0, 1.0, 1.0, 1.0))
+				label_text_ = "Left edge spawn ON"
 			else:
 				$MeshInstance3D.mesh = preload("res://objects/cubes/edge_out_cube.obj")
-				reset_color(Color.from_hsv(0.175, 1.0, 1.0, 0.2))
+				reset_color(Color.from_hsv(0.33, 1.0, 1.0, 0.2))
+				label_text_ = "Left edge spawn OFF"
+				
+		"exit_cube":
+			$MeshInstance3D.mesh = preload("res://objects/cubes/exit_cube.obj")
+			reset_color(Color.from_hsv(0.0, 1.0, 1.0, 0.2))
 
 func reset_color(initial_color : Color = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)):
 	initial_color_ = initial_color
@@ -141,6 +151,9 @@ func destroy(dmg, gun : MeshInstance3D) -> void:
 	match name:
 		"start_cube":
 			main_.start_game()
+			
+		"exit_cube":
+			get_tree().quit()
 			
 		"shotgun":
 			gun.type_ = "shotgun"

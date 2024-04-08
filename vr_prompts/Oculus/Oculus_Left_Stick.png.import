@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ciqoolac1kv0c"
 path.s3tc="res://.godot/imported/Oculus_Left_Stick.png-3d01d9564a17a1528b88cc793a8c1279.s3tc.ctex"
+path.etc2="res://.godot/imported/Oculus_Left_Stick.png-3d01d9564a17a1528b88cc793a8c1279.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://vr_prompts/Oculus/Oculus_Left_Stick.png"
-dest_files=["res://.godot/imported/Oculus_Left_Stick.png-3d01d9564a17a1528b88cc793a8c1279.s3tc.ctex"]
+dest_files=["res://.godot/imported/Oculus_Left_Stick.png-3d01d9564a17a1528b88cc793a8c1279.s3tc.ctex", "res://.godot/imported/Oculus_Left_Stick.png-3d01d9564a17a1528b88cc793a8c1279.etc2.ctex"]
 
 [params]
 

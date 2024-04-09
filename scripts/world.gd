@@ -205,6 +205,7 @@ func update_stats_label():
 		"Enemies killed all time: " + str(enemies_killed_all_time_) + "\n" +
 		"Damage done all time: " + str(dmg_done_all_time_) + "\n" +
 		"\n" +
+		"\n" +
 		"Enemies killed last round: " + str(enemies_killed_last_round_) + "\n" +
 		"Damage done last round: " + str(dmg_done_last_round_)
 		)

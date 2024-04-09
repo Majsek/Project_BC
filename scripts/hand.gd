@@ -45,7 +45,7 @@ func _process(_delta: float) -> void:
 	#TEST rapid fire
 	if Input.is_action_just_pressed("ui_right") != false:
 		if is_right_hand_:
-			main_.xp_ += 10
+			main_.xp_ += 1
 	#TEST R restart
 	if Input.is_action_just_pressed("restart") != false:
 #TODO: jedna restart funkce ve world.gd

@@ -1,9 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://c3donwdgn1s38"]
+[gd_scene load_steps=31 format=3 uid="uid://c3donwdgn1s38"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
 [ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
 [ext_resource type="FontFile" uid="uid://xgy32fq5inad" path="res://DotGothic16-Regular.ttf" id="2_a336u"]
+[ext_resource type="StyleBox" uid="uid://bwluo7jsqs8tc" path="res://objects/xp_bar/background.tres" id="2_aakhk"]
 [ext_resource type="Script" path="res://scripts/tutorial.gd" id="3_tal38"]
+[ext_resource type="StyleBox" uid="uid://wc40erbneo8n" path="res://objects/xp_bar/fill.tres" id="3_xouag"]
 [ext_resource type="Texture2D" uid="uid://biw4o68c30nvl" path="res://vr_prompts/Oculus/Oculus_Right_Stick.png" id="3_xt6ms"]
 [ext_resource type="Texture2D" uid="uid://ciqoolac1kv0c" path="res://vr_prompts/Oculus/Oculus_Left_Stick.png" id="4_hnhks"]
 [ext_resource type="Script" path="res://scripts/left_hand.gd" id="4_m5svs"]
@@ -14,6 +16,9 @@
 [ext_resource type="Script" path="res://scripts/gun.gd" id="9_p3fns"]
 [ext_resource type="Animation" uid="uid://ddtqjhj0n7gf2" path="res://animations/shoot.res" id="10_kbcll"]
 [ext_resource type="PackedScene" uid="uid://h1owcl14ci8q" path="res://scenes/shot_sound_audio_players.tscn" id="13_bfr16"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cknbs"]
+viewport_path = NodePath("XROrigin3D/XRCamera3D/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqfx8"]
 resource_local_to_scene = true
@@ -95,6 +100,37 @@ script = ExtResource("1_87gty")
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="SubViewport" type="SubViewport" parent="XROrigin3D/XRCamera3D"]
+transparent_bg = true
+size = Vector2i(1152, 20)
+
+[node name="ProgressBar_left" type="ProgressBar" parent="XROrigin3D/XRCamera3D/SubViewport"]
+offset_left = 10.0
+offset_right = 586.0
+offset_bottom = 27.0
+theme_override_styles/background = ExtResource("2_aakhk")
+theme_override_styles/fill = ExtResource("3_xouag")
+max_value = 10.0
+value = 10.0
+rounded = true
+show_percentage = false
+
+[node name="ProgressBar_right" type="ProgressBar" parent="XROrigin3D/XRCamera3D/SubViewport"]
+offset_left = 566.0
+offset_right = 1142.0
+offset_bottom = 27.0
+theme_override_styles/background = ExtResource("2_aakhk")
+theme_override_styles/fill = ExtResource("3_xouag")
+max_value = 10.0
+value = 10.0
+rounded = true
+fill_mode = 1
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="XROrigin3D/XRCamera3D"]
+transform = Transform3D(0.29, 0, 0, 0, 3.525, 0, 0, 0, 0.175, 0, 1.09118, -0.935826)
+texture = SubResource("ViewportTexture_cknbs")
 
 [node name="tutorial" type="Label3D" parent="XROrigin3D/XRCamera3D"]
 transform = Transform3D(0.745, 0, 0, 0, 0.745, 0, 0, 0, 0.745, 0, 0, -1.22682)

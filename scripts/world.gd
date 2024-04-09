@@ -1,6 +1,8 @@
 extends Node3D
 
 @onready var player_
+@onready var progress_bar_left_ = player_.get_child(0).get_child(0).get_child(0).get_node("ProgressBar_left")
+@onready var progress_bar_right_ = player_.get_child(0).get_child(0).get_child(0).get_node("ProgressBar_right")
 
 var enemies_ : Array
 
@@ -21,10 +23,15 @@ var enemies_killed_last_round_ : int = 0:
 		xp_ += 1
 		
 
-var xp_needed_ : int = 10
+
+var xp_needed_ : int = 10:
+	set(value):
+		xp_needed_ = value
 var xp_ : int = 0:
 	set(value):
 		xp_ = value
+		progress_bar_left_.value = value
+		progress_bar_right_.value = value
 		print(xp_)
 		if xp_ >= xp_needed_:
 			level_up()
@@ -86,11 +93,15 @@ func level_up():
 #RESUME GAME
 func start_game() -> void:
 	xp_ = 0 
+	progress_bar_left_.max_value = xp_needed_
+	progress_bar_right_.max_value = xp_needed_
 	
 	get_tree().call_group("control_cubes", "queue_free")
 	
 	
 	running_ = true
+	
+	
 	for e in enemies_:
 		if e != null:
 			e.follow_player_ = true

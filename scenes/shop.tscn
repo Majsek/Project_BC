@@ -20,7 +20,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_7t5gv"]
 resource_name = "rainbow_outline"
-length = 2.3
+length = 2.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -29,7 +29,7 @@ tracks/0/path = NodePath(".:outline_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.7, 1.1, 1.5, 1.9, 2.3),
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6, 2, 2.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 1, 1), Color(1, 0, 0.0156863, 1)]

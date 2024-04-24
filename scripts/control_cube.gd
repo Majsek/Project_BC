@@ -7,7 +7,10 @@ extends StaticBody3D
 @export var lives_ : int
 const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
-@export var label_text_ : String
+@export var label_text_ : String:
+	set(value):
+		label_text_ = value
+		$Label3D.text = label_text_
 @export var description_text_ : String
 var initial_color_ : Color
 var color_ : Color:
@@ -194,7 +197,7 @@ func destroy(dmg, gun : MeshInstance3D) -> void:
 					main_.edge_3_allowed_ = !main_.edge_3_allowed_
 				"edge_4_allowed_cube":
 					main_.edge_4_allowed_ = !main_.edge_4_allowed_
-			lives_ += 100
+			lives_ = initial_lives_
 			reset_color()
 			reset_mesh()
 			

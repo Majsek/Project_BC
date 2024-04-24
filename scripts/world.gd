@@ -3,6 +3,7 @@ extends Node3D
 @onready var player_
 @onready var progress_bar_left_ = player_.get_child(0).get_child(0).get_child(0).get_node("ProgressBar_left")
 @onready var progress_bar_right_ = player_.get_child(0).get_child(0).get_child(0).get_node("ProgressBar_right")
+@onready var progress_bar_animation_player_ = player_.get_child(0).get_child(0).get_child(0).get_node("ProgressBar_animation_player")
 
 var enemies_ : Array
 
@@ -46,10 +47,31 @@ var dmg_done_last_round_ : int = 0:
 
 #ALLOWED SPAWN EDGES
 var edge_1_allowed_ = true
-var edge_2_allowed_ = true
-var edge_3_allowed_ = false
-var edge_4_allowed_ = false
-
+var edge_2_allowed_:
+	set(value):
+		edge_2_allowed_ = value
+		print("------------2")
+		print(edge_2_allowed_)
+		print(edge_3_allowed_)
+		print(edge_4_allowed_)
+		print("------------")
+var edge_3_allowed_:
+	set(value):
+		edge_3_allowed_ = value
+		print("------------3")
+		print(edge_2_allowed_)
+		print(edge_3_allowed_)
+		print(edge_4_allowed_)
+		print("------------")
+var edge_4_allowed_:
+	set(value):
+		edge_4_allowed_ = value
+		print("------------4")
+		print(edge_2_allowed_)
+		print(edge_3_allowed_)
+		print(edge_4_allowed_)
+		print("------------")
+		
 var difficulty_multiplier_ : float = 0.5
 
 var interface_ : XRInterface
@@ -58,12 +80,13 @@ var running_ : bool = false
 
 var shop_ : Resource = preload("res://scenes/shop.tscn")
 
-const SAVE_PATH = "res://godot_save_config_file.ini"
+const SAVE_PATH = "res://saves/godot_save_config_file.ini"
 
 func level_up():
 	level_ += 1
 	xp_needed_ += level_
 	stop_enemies()
+	progress_bar_animation_player_.play("rainbow_on_level_up")
 	
 	var shop1 = shop_cubes_.pick_random()
 	var shop2 = shop_cubes_.pick_random()
@@ -95,6 +118,7 @@ func start_game() -> void:
 	xp_ = 0 
 	progress_bar_left_.max_value = xp_needed_
 	progress_bar_right_.max_value = xp_needed_
+	progress_bar_animation_player_.play("RESET")
 	
 	get_tree().call_group("control_cubes", "queue_free")
 	
@@ -190,6 +214,9 @@ func save_game():
 	config.set_value("stats", "enemies_killed", enemies_killed_all_time_)
 	config.set_value("stats", "dmg_done", dmg_done_all_time_)
 	
+	config.set_value("stats", "enemies_killed_last_round", enemies_killed_last_round_)
+	config.set_value("stats", "dmg_done_last_round", dmg_done_last_round_)
+	
 	config.set_value("settings", "edge_2_allowed_", edge_2_allowed_)
 	config.set_value("settings", "edge_3_allowed_", edge_3_allowed_)
 	config.set_value("settings", "edge_4_allowed_", edge_4_allowed_)
@@ -201,14 +228,24 @@ func load_game():
 	config.load(SAVE_PATH)
 
 	if config.get_value("stats", "enemies_killed") == null:
+		edge_2_allowed_ = false
+		edge_3_allowed_ = false
+		edge_4_allowed_ = false
+		get_tree().call_group("control_cubes", "reset_mesh")
 		return
+#SCORE
+	#ALL TIME
 	enemies_killed_all_time_ = config.get_value("stats", "enemies_killed")
 	dmg_done_all_time_ = config.get_value("stats", "dmg_done")
+	#LAST ROUND
+	enemies_killed_last_round_ = config.get_value("stats", "enemies_killed_last_round")
+	dmg_done_last_round_ = config.get_value("stats", "dmg_done_last_round")
 	
+#SETTINGS
 	edge_2_allowed_ = config.get_value("settings", "edge_2_allowed_")
 	edge_3_allowed_ = config.get_value("settings", "edge_3_allowed_")
 	edge_4_allowed_ = config.get_value("settings", "edge_4_allowed_")
-	
+	get_tree().call_group("control_cubes", "reset_mesh")
 	update_stats_label()
 	
 func update_stats_label():

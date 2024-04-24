@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c3donwdgn1s38"]
+[gd_scene load_steps=34 format=3 uid="uid://c3donwdgn1s38"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_87gty"]
 [ext_resource type="Script" path="res://scripts/right_hand.gd" id="2_5nyhh"]
@@ -16,6 +16,68 @@
 [ext_resource type="Script" path="res://scripts/gun.gd" id="9_p3fns"]
 [ext_resource type="Animation" uid="uid://ddtqjhj0n7gf2" path="res://animations/shoot.res" id="10_kbcll"]
 [ext_resource type="PackedScene" uid="uid://h1owcl14ci8q" path="res://scenes/shot_sound_audio_players.tscn" id="13_bfr16"]
+
+[sub_resource type="Animation" id="Animation_upeli"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar_left:theme_override_styles/fill:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.243137, 0.501961, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar_right:theme_override_styles/fill:bg_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.243137, 0.501961, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bxxqs"]
+resource_name = "rainbow_on_level_up"
+length = 2.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar_left:theme_override_styles/fill:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 1, 1), Color(1, 0, 0.0166664, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar_right:theme_override_styles/fill:bg_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 1, 0, 1), Color(0, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 1, 1), Color(1, 0, 0.0166664, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ir7v"]
+_data = {
+"RESET": SubResource("Animation_upeli"),
+"rainbow_on_level_up": SubResource("Animation_bxxqs")
+}
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_cknbs"]
 viewport_path = NodePath("XROrigin3D/XRCamera3D/SubViewport")
@@ -112,7 +174,6 @@ offset_bottom = 27.0
 theme_override_styles/background = ExtResource("2_aakhk")
 theme_override_styles/fill = ExtResource("3_xouag")
 max_value = 10.0
-value = 10.0
 rounded = true
 show_percentage = false
 
@@ -123,10 +184,14 @@ offset_bottom = 27.0
 theme_override_styles/background = ExtResource("2_aakhk")
 theme_override_styles/fill = ExtResource("3_xouag")
 max_value = 10.0
-value = 10.0
 rounded = true
 fill_mode = 1
 show_percentage = false
+
+[node name="ProgressBar_animation_player" type="AnimationPlayer" parent="XROrigin3D/XRCamera3D/SubViewport"]
+libraries = {
+"": SubResource("AnimationLibrary_1ir7v")
+}
 
 [node name="Sprite3D" type="Sprite3D" parent="XROrigin3D/XRCamera3D"]
 transform = Transform3D(0.29, 0, 0, 0, 3.525, 0, 0, 0, 0.175, 0, 1.09118, -0.935826)

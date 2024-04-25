@@ -20,7 +20,6 @@ var color_ : Color:
 	set(value):
 		if value.s < 0.4:
 			value.s = 0.4
-		#print(value.s)
 		color_ = value
 		$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
 
@@ -34,13 +33,9 @@ func init(difficulty_multiplier):
 
 func _ready():
 	initial_color_ = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)
-	#initial_color_ = Color.from_hsv(0, 1.0, 1.0, 1.0)
 	color_ = initial_color_
 	lives_ = initial_lives_
 	self.scale *= lives_/80.0
-#	$MeshInstance3D.get_mesh().get_material().set_albedo(color_)
-#	$MeshInstance3D.get_surface_override_material(0).set_albedo(color_)
-	#await get_tree().create_timer(1).timeout
 	spawnAnim()
 	
 func _physics_process(delta):
@@ -49,14 +44,8 @@ func _physics_process(delta):
 		die(200)
 	followPlayer()
 
-
+#PLAYS SPAWN ANIM
 func spawnAnim():
-	#var animation = %AnimationPlayer.get_animation("enemy_spawn")
-	#var track_index1 = animation.add_track(Animation.TYPE_POSITION_3D)
-	#animation.track_set_path(track_index1, $".")
-	#animation.track_insert_key(0, 0.0, -1.0)
-	#animation.track_insert_key(0, 0.6, 0.2)
-	#animation.track_insert_key(0, 0.8, 0.0)
 	%AnimationPlayer.play("enemy_spawn")
 	pass
 	
@@ -69,17 +58,15 @@ func followPlayer() -> void:
 	
 	if !follow_player_:
 		return
-#	print(follow_direction)
 	follow_direction.y = 0
 #MOVEMENT SPEED
 	set_velocity(follow_direction * lives_/initial_lives_ * speed_)
-	#if follow_direction != Vector3(0,0,0):
-		#move_and_slide()
 	move_and_slide()
 		
 func who() -> String:
 	return "enemy"
 	
+#WHEN PROJECTILE HITS THIS ENEMY
 func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : MeshInstance3D) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
@@ -109,6 +96,7 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : M
 		main_.add_child(hit_particle)
 		main_.dmg_done_last_round_ += dmg
 
+#PLAYS DEATH ANIMATION AND DIES
 func die(dmg, enemyMelee = false) -> void:
 	follow_player_ = false
 	death_dmg_ = dmg
@@ -117,6 +105,7 @@ func die(dmg, enemyMelee = false) -> void:
 	%AnimationPlayer.play("death")
 	spawn_death_particles(enemyMelee)
 	
+#SPAWNS DEATH PARTICLES
 func spawn_death_particles(enemyMelee = false):
 	var hit_particle : Node = HIT_PARTICLE.instantiate()
 	hit_particle.init(death_dmg_, initial_color_, position, 0.0, enemyMelee)

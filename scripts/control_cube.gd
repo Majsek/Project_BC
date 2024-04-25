@@ -47,6 +47,7 @@ func _ready():
 
 	lives_ = initial_lives_
 
+#RESETS MESH BASED ON name
 func reset_mesh():
 	match name:
 		"shotgun":
@@ -112,6 +113,7 @@ func reset_mesh():
 			$MeshInstance3D.mesh = preload("res://objects/cubes/exit_cube.obj")
 			reset_color(Color.from_hsv(0.0, 1.0, 1.0, 0.2))
 
+#RESETS COLOR TO INITIAL COLOR (is random if not set)
 func reset_color(initial_color : Color = Color.from_hsv(randf_range(0,1), 1.0, 1.0, 1.0)):
 	initial_color_ = initial_color
 	color_ = initial_color
@@ -119,6 +121,7 @@ func reset_color(initial_color : Color = Color.from_hsv(randf_range(0,1), 1.0, 1
 func who() -> String:
 	return "control_cube"
 
+#WHEN PROJECTILE HITS THIS CUBE
 func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : MeshInstance3D) -> void:
 	var delta_color1 = abs(projectile_color.h - color_.h)
 	var delta_color2 = abs((projectile_color.h+1) - color_.h)
@@ -126,7 +129,7 @@ func hit_by_projectile(projectile_color :Color, projectile_pos :Vector3, gun : M
 	
 	if (delta_color1 < 0.2) or (delta_color2  < 0.2):
 		dmg = 200
-		#print("perfect")
+		#perfect hit
 	elif (delta_color1 < 0.10) or (delta_color2  < 0.10):
 		dmg = 150
 	elif (delta_color1 < 0.30) or (delta_color2  < 0.30):

@@ -12,7 +12,6 @@ const HIT_PARTICLE = preload("res://scenes/hit_particle.tscn")
 
 func _ready() -> void:
 	#initial force
-	#apply_central_force(direction_*666*2)
 	apply_central_impulse(direction_*impulse_strength_)
 	decrease_light()
 
@@ -50,6 +49,4 @@ func _on_body_entered(body : Node) -> void:
 					return
 			body.hit_by_projectile(color_, position, gun_)
 			self.queue_free()
-
-				
 

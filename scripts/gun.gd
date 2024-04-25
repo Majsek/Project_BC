@@ -76,11 +76,13 @@ func shoot() -> void:
 				bullets_ = 0
 				shooting_ = false
 
+#PLAYS SHOOTING ANIMATION
 func play_gun_anim():
 	if $gun_animation_player.is_playing():
 		$gun_animation_player.stop()
 	$gun_animation_player.play("shoot")
 
+#LOADS BULLETS INTO CHARGE GUN
 func load_bullets():
 	if shooting_:
 		return
@@ -88,7 +90,6 @@ func load_bullets():
 		await get_tree().create_timer(0.15).timeout
 		hand_.trigger_haptic_pulse("load_bullet", 1.0, 1.0, 0.3, 0.3 )
 		bullets_ += 1
-		print(bullets_)
 		load_bullets()
 	elif !hand_.trigger_clicking_:
 		return
@@ -98,13 +99,3 @@ func rapid_fire() -> void:
 	for i in 30:
 		await get_tree().create_timer(0.08).timeout
 		shoot()
-		
-	#print("ddddddddddddddddddddddddddddddd")
-	#print(get_rotation().x)
-	#print(rad_to_deg(get_rotation().x))
-	
-	#projectile.set_position(get_position()+get_parent().get_parent().get_position())
-	
-#	projectile.set_rotation_degrees(get_rotation_degrees())
-	#main_.add_child(projectile)
-	

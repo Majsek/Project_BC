@@ -22,8 +22,6 @@ var enemies_killed_last_round_ : int = 0:
 	set(value):
 		enemies_killed_last_round_ = value
 		xp_ += 1
-		
-
 
 var xp_needed_ : int = 10:
 	set(value):
@@ -47,31 +45,10 @@ var dmg_done_last_round_ : int = 0:
 
 #ALLOWED SPAWN EDGES
 var edge_1_allowed_ = true
-var edge_2_allowed_:
-	set(value):
-		edge_2_allowed_ = value
-		print("------------2")
-		print(edge_2_allowed_)
-		print(edge_3_allowed_)
-		print(edge_4_allowed_)
-		print("------------")
-var edge_3_allowed_:
-	set(value):
-		edge_3_allowed_ = value
-		print("------------3")
-		print(edge_2_allowed_)
-		print(edge_3_allowed_)
-		print(edge_4_allowed_)
-		print("------------")
-var edge_4_allowed_:
-	set(value):
-		edge_4_allowed_ = value
-		print("------------4")
-		print(edge_2_allowed_)
-		print(edge_3_allowed_)
-		print(edge_4_allowed_)
-		print("------------")
-		
+var edge_2_allowed_
+var edge_3_allowed_
+var edge_4_allowed_
+
 var difficulty_multiplier_ : float = 0.5
 
 var interface_ : XRInterface
@@ -102,12 +79,10 @@ func level_up():
 #SHOP CUBE 1
 	var shop_cube1 = shop_scene.get_node("shop_cube1")
 	shop_cube1.name = shop1
-	#shop_cube1.get_node("MeshInstance3D").rotation_degrees.z = -90.0
 	
 #SHOP CUBE 2
 	var shop_cube2 = shop_scene.get_node("shop_cube2")
 	shop_cube2.name = shop2
-	#shop_cube2.get_node("MeshInstance3D").rotation_degrees.z = -90.0
 	
 	player_.add_child(shop_scene)
 	shop_scene.top_level = true
@@ -122,24 +97,20 @@ func start_game() -> void:
 	
 	get_tree().call_group("control_cubes", "queue_free")
 	
-	
 	running_ = true
-	
 	
 	for e in enemies_:
 		if e != null:
 			e.follow_player_ = true
 	
-	#%enemy.follow_player_ = true 
-	#%enemy.visible = true
 	await get_tree().create_timer(1).timeout
 	spawnEnemy()
 	
 func end_game() -> void:
-#end screen info
-	print("Raccoons rescued:")
+#end screen console info
+	print("Raccoons killed:")
 	print(enemies_killed_last_round_)
-	print("Cubes collected:")
+	print("Dmg done last round:")
 	print(dmg_done_last_round_)
 	
 	enemies_killed_all_time_ += enemies_killed_last_round_
@@ -165,16 +136,15 @@ func _ready():
 #TEST
 	enemies_.append(%enemy)
 
+#SPAWNS ONE ENEMY AND INCREASES DIFFICULTY MULTIPLIER
 func spawnEnemy() -> void:
 	if running_ == false:
 		return
 	var enemy = enemy_.instantiate()
 	enemy.init(difficulty_multiplier_)
 	
-	
 	while true:
 		var enemy_position
-		
 		var random_on_edge = randf_range(0,0.25)
 		var progress
 		
@@ -198,16 +168,14 @@ func spawnEnemy() -> void:
 			enemy.position = %PathFollow3D.position
 			enemy.position.y = -4.0
 			break
-		
-		#if enemy_position.distance_to(player_.position) > 5:
-			#enemy.position = enemy_position
-			#break
+			
 	enemies_.append(enemy)
 	add_child(enemy)
 	await get_tree().create_timer(2.0).timeout
 	difficulty_multiplier_ += 0.02
 	spawnEnemy()
 
+#SAVES THE GAME (needs "save" folder to work)
 func save_game():
 	var config := ConfigFile.new()
 
@@ -221,7 +189,6 @@ func save_game():
 	config.set_value("settings", "edge_3_allowed_", edge_3_allowed_)
 	config.set_value("settings", "edge_4_allowed_", edge_4_allowed_)
 	
-	print(config.save(SAVE_PATH))
 
 func load_game():
 	var config := ConfigFile.new()

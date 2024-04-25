@@ -18,7 +18,7 @@ func init(dmg_dealt, pos, hp_left, enemyMelee = false):
 	hp_left_ = hp_left
 	enemyMelee_ = enemyMelee
 
-#RANDOMLY SELECTS SOUNDS ON HIT AND PLAYS THEM (number of sounds depends on dmg_deal_)
+#RANDOMLY SELECTS SOUNDS ON HIT AND PLAYS THEM
 #- AFTER PLAYING KILLS ITSELF
 func play_hit_sound():
 	var hit_sounds_array : Array = [preload("res://audio/hit_sounds/hit_sound_F7_wav.tres"), preload("res://audio/hit_sounds/hit_sound_G7_wav.tres"), preload("res://audio/hit_sounds/hit_sound_H7_wav.tres")]

@@ -1,6 +1,5 @@
 extends Node3D
 
-#TODO možná hodit do detect_pull
 var right_initial_grab_pos_ : Vector3
 var left_initial_grab_pos_ : Vector3
 
@@ -25,7 +24,6 @@ var pulling_ : bool = false
 var grabbing_ : bool = false
 var first_grabbing_hand_ : XRController3D
 
-#TEST
 var projectile_impulse_strength_ : float = 10.0
 
 @onready var main_ : Node3D = $"/root/world"
@@ -78,71 +76,18 @@ func death_anim() -> void:
 	self.collision_mask = 0
 	main_.stop_enemies()
 	
-#NOTE: ono to asi neumí bejt interpolovaný a animovaný vůbec, jen po kouscích si to můžu vlastně jakoby animovat sám, musím to nějak vyladit, jestli vůbec chci mít emission, nebo nn
-#TODO je to nějaký sus, asi by to chtělo předělat přímo na timery a nepoužívat animace vůbec v tomhle případě
-#TODO: doladit přesný hodnoty
-	#%WorldEnvironment.environment.fog_density = 0.025
-	%WorldEnvironment.environment.volumetric_fog_density = 0.15
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.2
-	%WorldEnvironment.environment.volumetric_fog_density = 0.2
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.25
-	%WorldEnvironment.environment.volumetric_fog_density = 0.25
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.30
-	%WorldEnvironment.environment.volumetric_fog_density = 0.30
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.35
-	%WorldEnvironment.environment.volumetric_fog_density = 0.35
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.40
-	%WorldEnvironment.environment.volumetric_fog_density = 0.40
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.45
-	%WorldEnvironment.environment.volumetric_fog_density = 0.45
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.50
-	%WorldEnvironment.environment.volumetric_fog_density = 0.50
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.55
-	%WorldEnvironment.environment.volumetric_fog_density = 0.55
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.60
-	%WorldEnvironment.environment.volumetric_fog_density = 0.60
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.65
-	%WorldEnvironment.environment.volumetric_fog_density = 0.65
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.70
-	%WorldEnvironment.environment.volumetric_fog_density = 0.70
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.75
-	%WorldEnvironment.environment.volumetric_fog_density = 0.75
-	await get_tree().create_timer(0.1).timeout
-	#%WorldEnvironment.environment.fog_density = 0.80
-	%WorldEnvironment.environment.volumetric_fog_density = 0.80
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 0.90
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 1.0
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 1.2
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 1.4
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 1.6
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 1.8
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 2.0
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 2.4
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 2.8
-	await get_tree().create_timer(0.1).timeout
-	%WorldEnvironment.environment.volumetric_fog_density = 3.2
-	await get_tree().create_timer(0.1).timeout
+	for i in range(13):
+		%WorldEnvironment.environment.volumetric_fog_density = 0.15 + 0.05 * i
+		await get_tree().create_timer(0.1).timeout
+	for i in range(3):
+		%WorldEnvironment.environment.volumetric_fog_density = 0.8 + 0.1 * i
+		await get_tree().create_timer(0.1).timeout
+	for i in range(4):
+		%WorldEnvironment.environment.volumetric_fog_density = 1.2 + 0.2 * i
+		await get_tree().create_timer(0.1).timeout
+	for i in range(4):
+		%WorldEnvironment.environment.volumetric_fog_density = 2.0 + 0.4 * i
+		await get_tree().create_timer(0.1).timeout
 	%WorldEnvironment.environment.volumetric_fog_density = 3.8
 	await get_tree().create_timer(0.1).timeout
 	%WorldEnvironment.environment.volumetric_fog_density = 4.8
@@ -154,10 +99,6 @@ func death_anim() -> void:
 	%WorldEnvironment.environment.volumetric_fog_density = 20.0
 	await get_tree().create_timer(2.0).timeout
 
-	#print(%WorldEnvironment.environment.fog_density)
-	
-	#%WorldEnvironment.environment.volumetric_fog_density = 0.025 - float(lives_) * 0.005
-	#await get_tree().create_timer(4).timeout
 	main_.end_game()
 
 #CHECKS IF THE HAND IS GRABBING AND PULLING
@@ -183,7 +124,6 @@ func check_grab() -> void:
 		pulling_ = false
 		first_grabbing_hand_ = null
 		
-#TODO: refactoring => nějaký ify a řádky jsou zbytečný
 #DETECT PULLING AND CALCULATES POSITION OF THE PLAYER
 func detect_pull():
 	if !pulling_:
@@ -193,26 +133,8 @@ func detect_pull():
 		right_initial_grab_pos_ = right_hand_.position
 		left_initial_grab_pos_ = left_hand_.position
 
-	##if (right_hand_.position.distance_to(right_initial_grab_pos_) < 0.3):
-	#if first_grabbing_hand_ == right_hand_:
-		##TODO: tenhle if je možná zbytečnej
-		#if right_hand_.grabbing_:
-			#self.position = Vector3(
-				#player_initial_pos_.x+(right_initial_grab_pos_.x-right_hand_.position.x)*10, 
-				#0,
-				#player_initial_pos_.z+(right_initial_grab_pos_.z-right_hand_.position.z)*10)
-	#
-	#if first_grabbing_hand_ == left_hand_:
-		##TODO: tenhle if je možná zbytečnej
-		#if left_hand_.grabbing_:
-			#self.position = Vector3(
-				#player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
-				#0,
-				#player_initial_pos_.z+(left_initial_grab_pos_.z-left_hand_.position.z)*10)
-
-	#if (right_hand_.position.distance_to(right_initial_grab_pos_) < 0.3):
 	if first_grabbing_hand_ == right_hand_:
-		#TODO: tenhle if je možná zbytečnej
+		#TODO: maybe useless if
 		if right_hand_.grabbing_:
 			change_pos(Vector3(
 				player_initial_pos_.x+(right_initial_grab_pos_.x-right_hand_.position.x)*10, 
@@ -221,7 +143,7 @@ func detect_pull():
 			)
 	
 	if first_grabbing_hand_ == left_hand_:
-		#TODO: tenhle if je možná zbytečnej
+		#TODO: maybe useless if
 		if left_hand_.grabbing_:
 			change_pos(Vector3(
 				player_initial_pos_.x+(left_initial_grab_pos_.x-left_hand_.position.x)*10, 
